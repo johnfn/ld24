@@ -2,6 +2,8 @@ package {
   import Util;
 
   public class Character extends MovingEntity {
+    public static var GRAVITY:int = 1;
+
     function Character(x:int, y:int, base:Class) {
       //todo; wiggle room
       super(x, y, C.size, C.size);
@@ -12,12 +14,19 @@ package {
       on("post-update", Hooks.resolveCollisions());
     }
 
+    //TODO: Responsive jumping
+
     override public function update(e:EntityList):void {
       Fathom.camera.follow(this);
-      vel = new Vec(Util.movementVector().x * 8, 3);
+      vel.x = Util.movementVector().x * 8;
+      vel.y += GRAVITY;
 
-      if (Util.movementVector().y) {
-        vel.y -= 10;
+      if (touchingBottom || touchingTop) {
+        vel.y = 0;
+      }
+
+      if (Util.movementVector().y && touchingBottom) {
+        vel.y -= 15;
       }
     }
   }
