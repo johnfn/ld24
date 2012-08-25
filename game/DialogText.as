@@ -1,11 +1,24 @@
 package {
   public class DialogText extends Entity {
-    var text:Text;
-    var prev_mode:int;
-    var dialogsLeft:Array;
+    private var text:Text;
+    private var prev_mode:int;
+    private var dialogsLeft:Array;
+
+    private static const BOX_WIDTH:int = 250;
+    private static const BOX_HEIGHT:int = 50;
+
+    [Embed(source = "../data/dialogbox.png")] static public var DialogClass:Class;
 
     function DialogText(content:String, ...args) {
-      text = new Text(50, 50, content, 200);
+      super(0, 0, 50, 50);
+      fromExternalMC(DialogClass);
+
+      // Stick it right under the inventory box so they don't overlap.
+      set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2 + 25));
+
+      text = new Text(x + 5, y + 8, content, BOX_WIDTH - 10);
+      text.textColor = 0xffffff;
+      addChild(text);
 
       prev_mode = Fathom.currentMode;
       Fathom.currentMode = C.MODE_TEXT;

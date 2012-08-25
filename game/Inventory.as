@@ -30,6 +30,8 @@ package {
       for (var i:int = 0; i < items.length; i++) {
         addChild(items[i]);
       }
+
+        new DialogText("You can only activate " + activated_max + " evolutions at once.");
     }
 
     public function addItem(itemType:int):void {
