@@ -12,6 +12,8 @@ package {
     private static const BOX_WIDTH:int = 150;
     private static const BOX_HEIGHT:int = 50;
 
+    private var selection:int = 0;
+
     public var items:Array = [new InventoryItem(Inventory.ICE), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.BOLT)];
 
     function Inventory() {
@@ -35,7 +37,7 @@ package {
     }
 
     // Called immediately when inventory + items are displayed.
-    private function prepare():void {
+    private function prepareToShow():void {
       Util.assert(items.length <= 6);
 
       for (var i:int = 0; i < items.length; i++) {
@@ -45,19 +47,49 @@ package {
         items[i].set(new Vec(xLoc, yLoc));
         items[i].visible = true;
       }
+
+      items[selection].select();
+    }
+
+    private function prepareToHide():void {
+      for (var i:int = 0; i < items.length; i++) {
+        items[i].visible = false;
+      }
     }
 
     override public function update(e:EntityList):void {
+      // Toggle inventory.
       if (Util.keyRecentlyDown(Util.Key.I)) {
         if (Fathom.currentMode == C.MODE_NORMAL) {
           Fathom.currentMode = C.MODE_INVENTORY;
 
-          prepare();
+          prepareToShow();
         } else {
           Fathom.currentMode = C.MODE_NORMAL;
         }
 
         this.visible = Fathom.currentMode == C.MODE_INVENTORY;
+      }
+
+      if (Fathom.currentMode != C.MODE_INVENTORY) return;
+
+      // Rotate selection.
+      if (Util.keyRecentlyDown(Util.Key.Right) || Util.keyRecentlyDown(Util.Key.Left)) {
+        items[selection].deselect();
+
+        if (Util.keyRecentlyDown(Util.Key.Right)) {
+          selection = (selection + 1) % items.length;
+        }
+
+        if (Util.keyRecentlyDown(Util.Key.Left)) {
+          if (selection == 0) {
+            selection = items.length - 1;
+          } else {
+            selection--;
+          }
+        }
+
+        items[selection].select();
       }
     }
 
@@ -79,6 +111,7 @@ class InventoryItem extends Entity {
   [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
 
   private var selected:Boolean = false;
+  private var itemType:int = -1;
 
   function InventoryItem(itemType:int) {
     super(0, 0, C.size, C.size);
@@ -86,14 +119,17 @@ class InventoryItem extends Entity {
     fromExternalMC(SpritesheetClass, false, [itemType, 0]);
 
     this.visible = false;
+    this.itemType = itemType;
   }
 
   public function select():void {
     this.selected = true;
+    updateExternalMC(SpritesheetClass, false, [itemType, 1]);
   }
 
   public function deselect():void {
     this.selected = false;
+    updateExternalMC(SpritesheetClass, false, [itemType, 0]);
   }
 
   override public function groups():Array {
