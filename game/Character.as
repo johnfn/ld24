@@ -14,14 +14,17 @@ package {
       on("post-update", Hooks.resolveCollisions());
     }
 
-    //TODO: Responsive jumping
-
     override public function update(e:EntityList):void {
       Fathom.camera.follow(this);
       vel.x = Util.movementVector().x * 8;
       vel.y += GRAVITY;
 
       if (touchingBottom || touchingTop) {
+        vel.y = 0;
+      }
+
+      // Stopped holding up?
+      if (vel.y < 0 && Util.movementVector().y >= 0) {
         vel.y = 0;
       }
 
