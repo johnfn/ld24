@@ -9,8 +9,8 @@ package {
   import Color;
 
   public class main extends Sprite {
-
     [Embed(source = "../data/map.png")] static public var MapClass:Class;
+    [Embed(source = "../data/derp.png")] static public var DerpClass:Class;
 
     public function main():void {
       var container:MovieClip = new MovieClip();
@@ -18,19 +18,16 @@ package {
       container.y = 0;
       stage.addChild(container);
 
-      Fathom.initialize(container);
+      //TODO: spritesheet: [0, 0]
 
-      var m:Map = new Map(20, 20, C.size).fromImage(null, {
-        (new Color(255, 255, 255).toString()) : Tile,
-        (new Color(0, 0, 255).toString()) : DialogTrigger,
-        (new Color(0, 0, 200).toString()) : TreasureChest,
-        (new Color(255, 0, 0).toString()) : Monster,
-        (new Color(0, 255, 0).toString()) : Crystal,
-        (new Color(0, 255, 255).toString()) : IceBlock
+      var m:Map = new Map(25, 25, C.size).fromImage(MapClass, {
+        (new Color(0, 0, 0).toString()) : { type: Block, gfx: DerpClass, spritesheet: [0, 0], fixedSize: true }
       });
 
+      Fathom.initialize(container, m);
+
       //var h:HUD = new HUD();
-      //var x:Character = new Character(m, h, 100, 100);
+      var x:Character = new Character(0, 0, MapClass);
     }
   }
 }
