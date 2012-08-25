@@ -97,6 +97,12 @@ package {
       if (Util.keyRecentlyDown(Util.Key.X)) {
         if (items[selection].activated == true || (items[selection].activated == false && activated < activated_max)) {
           items[selection].toggleActivation();
+
+          if (items[selection].activated) {
+            activated++;
+          } else {
+            activated--;
+          }
         } else {
           new DialogText("You can only activate " + activated_max + " evolutions at once.");
         }
@@ -139,6 +145,16 @@ class InventoryItem extends Entity {
 
   public function toggleActivation():void {
     _activated = !_activated;
+
+    if (_activated) {
+      updateExternalMC(SpritesheetClass, false, [itemType, 2]);
+    } else {
+      if (selected) {
+        select();
+      } else {
+        deselect();
+      }
+    }
   }
 
   public function select():void {
@@ -148,7 +164,11 @@ class InventoryItem extends Entity {
 
   public function deselect():void {
     this.selected = false;
-    updateExternalMC(SpritesheetClass, false, [itemType, 0]);
+    if (_activated) {
+      updateExternalMC(SpritesheetClass, false, [itemType, 2]);
+    } else {
+      updateExternalMC(SpritesheetClass, false, [itemType, 0]);
+    }
   }
 
   override public function groups():Array {
