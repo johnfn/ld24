@@ -21,6 +21,7 @@ package {
     function Inventory() {
       super(0, 0, 150, 50);
       fromExternalMC(InventoryClass);
+      addDropShadow();
 
       // stick in middle, assuming w==h==50.
       set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2));
@@ -30,8 +31,6 @@ package {
       for (var i:int = 0; i < items.length; i++) {
         addChild(items[i]);
       }
-
-        new DialogText("You can only activate " + activated_max + " evolutions at once.");
     }
 
     public function addItem(itemType:int):void {
@@ -96,7 +95,7 @@ package {
         items[selection].select();
       }
 
-      if (Util.keyRecentlyDown(Util.Key.X)) {
+      if (Util.keyRecentlyDown(Util.Key.Z)) {
         if (items[selection].activated == true || (items[selection].activated == false && activated < activated_max)) {
           items[selection].toggleActivation();
 

@@ -12,6 +12,7 @@ package {
     function DialogText(content:String, ...args) {
       super(0, 0, 50, 50);
       fromExternalMC(DialogClass);
+      addDropShadow();
 
       // Stick it right under the inventory box so they don't overlap.
       set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2 + 25));
@@ -27,9 +28,11 @@ package {
     }
 
     override public function update(e:EntityList):void {
-      if (Util.keyRecentlyDown(Util.Key.X)) {
+      if (Util.keyRecentlyDown(Util.Key.Z)) {
         if (dialogsLeft.length == 0) {
           this.destroy();
+
+          Fathom.currentMode = prev_mode;
         }
       }
     }
