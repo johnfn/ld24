@@ -18,8 +18,20 @@ package {
       on("post-update", Hooks.resolveCollisions());
     }
 
+    private function setCameraFocus():void {
+      var focus:Vec = this.clone();
+      if (this.scaleX > 0) {
+        focus.x += 50;
+      } else {
+        focus.x -= 50;
+      }
+
+      Fathom.camera.follow(focus);
+    }
+
     override public function update(e:EntityList):void {
-      Fathom.camera.follow(this);
+      setCameraFocus();
+
       vel.x = Util.movementVector().x * 8;
       vel.y += GRAVITY;
 
@@ -35,6 +47,9 @@ package {
       if (Util.movementVector().y && touchingBottom) {
         vel.y -= 15;
       }
+
+      if (Util.movementVector().x > 0) this.scaleX = 1;
+      if (Util.movementVector().x < 0) this.scaleX = -1;
 
       Hooks.onLeaveMap(this, mapRef, leftMap);
     }
