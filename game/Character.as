@@ -4,10 +4,14 @@ package {
   public class Character extends MovingEntity {
     public static var GRAVITY:int = 1;
 
-    function Character(x:int, y:int, base:Class) {
+    private var mapRef:Map;
+
+    function Character(x:int, y:int, base:Class, mapRef:Map) {
       //todo; wiggle room
       super(x, y, C.size, C.size);
       fromExternalMC(base, false, [0, 0]);
+
+      this.mapRef = mapRef;
 
       on("pre-update", Hooks.platformerLike(this));
 
@@ -31,6 +35,13 @@ package {
       if (Util.movementVector().y && touchingBottom) {
         vel.y -= 15;
       }
+
+      Hooks.onLeaveMap(this, mapRef, leftMap);
+    }
+
+    private function leftMap():void {
+      Hooks.loadNewMap(this, mapRef)();
+      Fathom.camera.snapTo(this);
     }
   }
 }
