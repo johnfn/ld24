@@ -8,6 +8,7 @@ package {
   import Map;
   import Color;
 
+  [SWF(backgroundColor="0x000000")]
   public class main extends Sprite {
     [Embed(source = "../data/map.png")] static public var MapClass:Class;
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
