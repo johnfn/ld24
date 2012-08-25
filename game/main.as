@@ -27,11 +27,11 @@ package {
 
       Fathom.initialize(container, m);
 
-
       Fathom.camera.setEaseSpeed(10);
 
       //var h:HUD = new HUD();
       var x:Character = new Character(40, 40, MapClass);
+      var i:Inventory = new Inventory();
     }
   }
 }
