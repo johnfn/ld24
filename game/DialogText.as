@@ -4,21 +4,29 @@ package {
     private var prev_mode:int;
     private var dialogsLeft:Array;
 
+    private var profPic:Entity;
+
     private static const BOX_WIDTH:int = 250;
     private static const BOX_HEIGHT:int = 50;
 
     [Embed(source = "../data/dialogbox.png")] static public var DialogClass:Class;
+    [Embed(source = "../data/portraits.png")] static public var PortraitsClass:Class;
 
     function DialogText(content:String, ...args) {
       super(0, 0, 50, 50);
+      profPic = new Entity().fromExternalMC(PortraitsClass, false, [2, 0]);
+      addChild(profPic);
+
       fromExternalMC(DialogClass);
       addDropShadow();
 
       // Stick it right under the inventory box so they don't overlap.
       set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2 + 25));
+      profPic.set(this.clone().add(new Vec(10, 20)));
 
-      text = new Text(x + 5, y + 8, content, BOX_WIDTH - 10);
+      text = new Text(x + 45, y + 8, content, BOX_WIDTH - 40);
       text.textColor = 0xffffff;
+
       addChild(text);
 
       prev_mode = Fathom.currentMode;
