@@ -15,6 +15,10 @@ package {
     override public function update(e:EntityList):void {
       Fathom.camera.follow(this);
       vel = new Vec(Util.movementVector().x * 8, 3);
+
+      if (Util.movementVector().y) {
+        vel.y -= 10;
+      }
     }
   }
 }

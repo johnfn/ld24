@@ -1,2 +1,2 @@
 #!/bin/bash
-make --always-make -C ~/code/game1/game && open  ~/code/game1/game/main.swf
+make --always-make -C ../ && open  ../main.swf
