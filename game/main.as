@@ -22,7 +22,7 @@ package {
       //TODO: spritesheet: [0, 0]
 
       var m:Map = new Map(25, 25, C.size).fromImage(MapClass, {
-        (new Color(0, 0, 0).toString()) : { type: Block, gfx: SpritesheetClass, spritesheet: [1, 2], fixedSize: true, roundEdges: true }
+        (new Color(0, 0, 0).toString()) : { type: Block, gfx: SpritesheetClass, spritesheet: [1, 2], fixedSize: true, roundOutEdges: true }
       });
 
       Fathom.initialize(container, m);
