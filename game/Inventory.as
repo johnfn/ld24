@@ -13,6 +13,8 @@ package {
     private static const BOX_HEIGHT:int = 50;
 
     private var selection:int = 0;
+    private var activated:int = 0;
+    private var activated_max:int = 2;
 
     public var items:Array = [new InventoryItem(Inventory.ICE), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.BOLT)];
 
@@ -91,6 +93,14 @@ package {
 
         items[selection].select();
       }
+
+      if (Util.keyRecentlyDown(Util.Key.X)) {
+        if (items[selection].activated == true || (items[selection].activated == false && activated < activated_max)) {
+          items[selection].toggleActivation();
+        } else {
+          new DialogText("You can only activate " + activated_max + " evolutions at once.");
+        }
+      }
     }
 
     override public function modes():Array {
@@ -110,8 +120,13 @@ package {
 class InventoryItem extends Entity {
   [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
 
+  private var _activated:Boolean = false;
   private var selected:Boolean = false;
   private var itemType:int = -1;
+
+  public function get activated():Boolean {
+    return _activated;
+  }
 
   function InventoryItem(itemType:int) {
     super(0, 0, C.size, C.size);
@@ -120,6 +135,10 @@ class InventoryItem extends Entity {
 
     this.visible = false;
     this.itemType = itemType;
+  }
+
+  public function toggleActivation():void {
+    _activated = !_activated;
   }
 
   public function select():void {
