@@ -4,6 +4,9 @@ package {
   import flash.display.MovieClip;
   import flash.display.Sprite;
   import flash.events.Event;
+  import flash.text.TextField;
+  import flash.filters.DropShadowFilter;
+  import flash.text.TextFormat;
 
   import Entity;
   import Hooks;
@@ -13,6 +16,8 @@ package {
   [SWF(backgroundColor="#00000000", width="500", height="500", frameRate="30", wmode="transparent")]
   public class main extends Sprite {
     [Embed(source = "../data/map.png")] static public var MapClass:Class;
+
+    public static var MainObj:main;
 
     var scrollBG:ScrollingBackground;
 
@@ -28,8 +33,38 @@ package {
       scrollBG.y = -Fathom.camera.y;
     }
 
+    public function showEndGameScreen():void {
+      trace("Called");
+
+      var eg = new C.EndGameClass();
+      var c:MovieClip = new MovieClip();
+      c.addChild(eg);
+      c.scaleX = 2;
+      c.scaleY = 2;
+
+      stage.addChild(c);
+
+      var finaltext:TextField = new TextField();
+      finaltext.text = "You turn into Godzilla. You win by default!";
+      finaltext.wordWrap = true;
+      finaltext.x = 40;
+      finaltext.y = 200;
+      finaltext.width = 200;
+      finaltext.filters = [new DropShadowFilter(1.0, 45, 0, 1, 0, 0, 1)];
+      finaltext.textColor = 0xffffff;
+      finaltext.selectable = false;
+
+      var newFormat:TextFormat = new TextFormat();
+      newFormat.size = 16;
+      newFormat.font = "Arial";
+      finaltext.setTextFormat(newFormat);
+
+      stage.addChild(finaltext);
+    }
+
     public function main():void {
       addBG();
+      MainObj = this;
 
       var container:MovieClip = new MovieClip();
       container.x = 0;

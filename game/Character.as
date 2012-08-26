@@ -88,8 +88,14 @@ package {
       xAction = "";
     }
 
-    private function fadeToBlack():void {
-      //TODO. blabla show godzilla pic or something. THE END.
+    private var blackFadeCount:int = 0;
+
+    private function fadeToBlack(e:Event):void {
+      if (blackFadeCount == 0) {
+        main.MainObj.showEndGameScreen();
+      }
+
+      ++blackFadeCount;
     }
 
     private function endGame():void {

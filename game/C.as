@@ -7,6 +7,7 @@ package {
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
 
     [Embed(source = "../data/Character.png")] static public var CharacterClass:Class;
+    [Embed(source = "../data/ROAR.png")] static public var EndGameClass:Class;
 
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.
