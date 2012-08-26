@@ -107,13 +107,17 @@ package {
       }
 
       // Stopped holding up?
-      if (vel.y < 0 && Util.movementVector().y >= 0) {
+      //if (vel.y < 0 && Util.movementVector().y >= 0) {
+      //  vel.y = 0;
+      //}
+
+      if (vel.y < 0 && !Util.keyIsDown(Util.Key.Z)) {
         vel.y = 0;
       }
 
-      if (Util.movementVector().y && touchingBottom) {
-        vel.y -= 15;
-      }
+      //if (Util.movementVector().y && touchingBottom) {
+      //  vel.y -= 15;
+      //}
 
       if (Util.movementVector().x > 0) this.scaleX = 1;
       if (Util.movementVector().x < 0) this.scaleX = -1;
@@ -129,7 +133,7 @@ package {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
         case FREEZE: trace("You do nothing!"); break;
-        case JUMP: trace("You jormp!"); break;
+        case JUMP: vel.y -= 15; break;
         case ENERGIZE: trace("You jormp!"); break;
         case SMASH: trace("You jormp!"); break;
         case SHOOT: trace("You jormp!"); break;
