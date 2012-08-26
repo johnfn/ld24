@@ -30,7 +30,7 @@ package {
             }
 
             if (whichMap.equals(new Vec(0, 25))) {
-                response = C.firstBoltEv;
+                response = C.firstAirEv;
                 itemType = Inventory.AIR;
             }
 

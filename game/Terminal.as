@@ -35,6 +35,10 @@ package {
     	}
     }
 
+    public function notDead():Boolean {
+        return !totallyDead;
+    }
+
     public override function groups():Array {
         return super.groups().concat("non-blocking");
     }

@@ -52,11 +52,19 @@ package {
           return;
         }
 
-        new DialogText(C.consoleCrusher);
+        var didSomething:Boolean = false;
 
         for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
+          if (currentlyTouching("Terminal")[i].notDead()) {
+            didSomething = true;
+          }
+
           currentlyTouching("Terminal")[i].activate();
           currentlyTouching("Terminal")[i].useGate();
+        }
+
+        if (didSomething) {
+          new DialogText(C.consoleCrusher);
         }
       }
     }
