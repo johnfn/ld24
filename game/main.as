@@ -24,6 +24,8 @@ package {
 
     private function scroll(e:Event):void {
       scrollBG.move(1, 0);
+      scrollBG.x = -Fathom.camera.x;
+      scrollBG.y = -Fathom.camera.y;
     }
 
     public function main():void {

@@ -57,7 +57,7 @@ package
 		{
 			canvas.clear();
 			canvas.beginBitmapFill(scrollingBitmap, matrix, true, true);
-			canvas.drawRect(0,0,stage.stageWidth, stage.stageHeight);
+			canvas.drawRect(0,0,scrollingBitmap.width, scrollingBitmap.height);
 		}
 
 		public function get dx():Number { return matrix.tx; }
