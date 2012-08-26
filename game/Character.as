@@ -67,7 +67,7 @@ package {
 
     public function setXAction():void {
       if (canEvol && currentlyTouching("Professor").length) {
-        xAction = "Evolve!";
+        xAction = "Ask Prof. to evolve you.";
         return;
       }
 

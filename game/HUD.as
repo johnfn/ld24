@@ -32,9 +32,25 @@ package {
     }
 
     override public function update(e:EntityList):void {
+        var inv:Inventory = Fathom.entities.one("Inventory") as Inventory;
+
     	t.text = c.getActionString();
 
-        xText.text = c.xAction;
+        if (Fathom.currentMode == C.MODE_INVENTORY) {
+            if (inv.currentCardSelected()) {
+                t.text = "Deselect this card.";
+            } else {
+                t.text = "Select this card.";
+            }
+        }
+
+        if (Fathom.currentMode == C.MODE_INVENTORY) {
+            xText.text = "Done."
+        } else if (Fathom.currentMode == C.MODE_TEXT) {
+            xText.text = "";
+        } else {
+            xText.text = c.xAction;
+        }
 
         xButton.raiseToTop();
         xText.raiseToTop();

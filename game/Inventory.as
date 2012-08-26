@@ -179,6 +179,10 @@ package {
       }
     }
 
+    public function currentCardSelected():Boolean {
+      return items[selection].activated;
+    }
+
     private function isIceAirCombo():Boolean {
       if (activated_max != 2) return false;
 
