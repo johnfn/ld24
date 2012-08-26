@@ -108,10 +108,12 @@ package {
       }
 
       if (evolutions.length == 2) {
-        if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.ICE)) {
+        if (evolutions.contains(Inventory.BOLT) && evolutions.contains(Inventory.ICE)) {
           currentAction = SMASH;
         } else if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.BOLT)) {
           currentAction = SHOOT;
+        } else if (evolutions.contains(Inventory.ICE) && evolutions.contains(Inventory.AIR)) {
+          // Er,,,,,,,,
         } else {
           currentAction = FLY;
         }
@@ -328,13 +330,21 @@ package {
       addChild(b);
     }
 
+    private function doSmash():void {
+      var blox:EntityList = currentlyTouching("SmashBlock");
+
+      for (var i:int = 0; i < blox.length; i++) {
+        blox[i].destroy();
+      }
+    }
+
     private function doAction():void {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
         case FREEZE: isFreezing = !isFreezing; break;
         case JUMP: vel.y -= 10; break;
         case ENERGIZE: energize(); break;
-        case SMASH: trace("You jormp!"); break;
+        case SMASH: doSmash(); break;
         case SHOOT: fireBolt(); break;
         case FLY: break;
         case TALK_PROF: dispatchProfDialog(mapRef.getTopLeftCorner()); break;
