@@ -16,7 +16,7 @@ package {
     private var activated:int = 0;
     private var activated_max:int = 2;
 
-    public var items:Array = [new InventoryItem(Inventory.ICE), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.BOLT)];
+    public var items:Array = [];
 
     function Inventory() {
       super(0, 0, 150, 50);
@@ -36,6 +36,7 @@ package {
     public function addItem(itemType:int):void {
       var newItem:InventoryItem = new InventoryItem(itemType);
 
+      items.push(newItem);
       addChild(newItem);
     }
 
@@ -51,7 +52,9 @@ package {
         items[i].visible = true;
       }
 
-      items[selection].select();
+      if (items.length > 0) {
+        items[selection].select();
+      }
     }
 
     private function prepareToHide():void {
