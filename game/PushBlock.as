@@ -2,6 +2,7 @@ package {
   public class PushBlock extends MovingEntity {
     private var type:int;
     private const SIZE:int = C.size;
+    private var startingLoc:Vec;
 
     private static var crushedConsole:Boolean = false;
 
@@ -11,6 +12,14 @@ package {
       on("pre-update", Hooks.decel());
       on("pre-update", Hooks.platformerLike(this));
       on("post-update", Hooks.resolveCollisions());
+    }
+
+    public function rememberLoc():void {
+      startingLoc = this.clone();
+    }
+
+    public function resetLoc():void {
+      this.set(startingLoc);
     }
 
     private function handleProfsComp():void {
@@ -24,6 +33,10 @@ package {
       (Fathom.entities.one("Character") as Character).fixedProfsComp = true;
 
       new DialogText(C.profConCrush);
+    }
+
+    override public function groups():Array {
+      return super.groups().concat("remember-loc");
     }
 
     override public function update(e:EntityList):void {
