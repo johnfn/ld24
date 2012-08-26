@@ -263,13 +263,14 @@ package {
         } else {
           new DialogText(C.withTwoAirs);
 
+          inventory.removeItem(Inventory.AIR);
           inventory.incMaxActivation();
         }
 
         return;
       }
 
-      new DialogText(["Woopwoop"]);
+      new DialogText(["Well, what are you waiting for? Try it out!"]);
     }
 
     private function fly():void {

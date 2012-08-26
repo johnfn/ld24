@@ -41,6 +41,15 @@ package {
       return result;
     }
 
+    public function removeItem(which:int):void {
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].itemType == which) {
+          items.splice(i, 1);
+          return;
+        }
+      }
+    }
+
     public function incMaxActivation():void {
       activated_max++;
     }
