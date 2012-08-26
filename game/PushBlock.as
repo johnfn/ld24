@@ -23,7 +23,6 @@ package {
     }
 
     private function handleProfsComp():void {
-      trace("handling")
       for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
         currentlyTouching("Terminal")[i].activate();
       }
@@ -47,9 +46,8 @@ package {
       if (this.vel.x < 0.1 || this.vel.x > -0.1) this.vel.x = 0;
 
       if (this.currentlyTouching("Terminal").length && !PushBlock.crushedConsole) {
-        PushBlock.crushedConsole = true;
-
         if (Fathom.mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
+          PushBlock.crushedConsole = true;
           handleProfsComp();
           return;
         }

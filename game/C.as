@@ -1,7 +1,7 @@
 package {
   public class C {
     public static var size:int = 25;
-    public static var DEBUG:Boolean = true;
+    public static var DEBUG:Boolean = false;
 
     // Graphics.
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
@@ -94,6 +94,8 @@ package {
                                            , "PROF Oh!"
                                            , "PROF I didn't see you there."
                                            , "YOU ..?"
+                                           , "PROF I mean learn more."
+                                           , "YOU Uh, ok."
                                            , "PROF Well, get going then."
                                            ];
 
@@ -102,6 +104,15 @@ package {
                                            , "YOU Um."
                                            , "PROF Sorry, I don't take calls from telemarketers."
         				                           , "STARZ The person on the other side of the line hangs up."
+                                           ];
+
+
+    public static var nothingThere:Array=  [ "YOU Now I can finally open this dumb box I saw earlier!"
+                                           , "YOU ."
+                                           , "YOU .."
+                                           , "YOU ..."
+                                           , "STARZ There's nothing inside!"
+                                           , "YOU This game sucks!"
                                            ];
 
     public static var consoleCrusher:Array=[ "YOU Oh my God!"
