@@ -5,6 +5,7 @@ package {
 
     private var xButton:Entity;
     private var xText:Text;
+    private var arrowKeys:Text;
 
     function HUD(c:Character) {
     	super(0, 0, 150, 50);
@@ -26,9 +27,16 @@ package {
         xText.addGroups("no-camera");
         xText.textColor = 0xffffff;
 
+        arrowKeys = new Text(xButton.x, xButton.y + 30, "Arrow keys to cycle back/forth.", 200);
+        arrowKeys.addGroups("no-camera");
+        arrowKeys.textColor = 0xffffff;
+
+        arrowKeys.visible = false;
+
         //TODO Uber Hack!
         Fathom.container.addChild(xText);
         Fathom.container.addChild(t);
+        Fathom.container.addChild(arrowKeys);
     }
 
     override public function update(e:EntityList):void {
@@ -43,6 +51,8 @@ package {
                 t.text = "Select this card.";
             }
         }
+
+        arrowKeys.visible = Fathom.currentMode == C.MODE_INVENTORY;
 
         if (Fathom.currentMode == C.MODE_INVENTORY) {
             xText.text = "Done."
