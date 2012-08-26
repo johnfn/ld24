@@ -21,7 +21,7 @@ package {
 
             if (whichMap.equals(new Vec(25, 25))) {
                 response = C.firstIceEv;
-                itemType = Inventory.Ice;
+                itemType = Inventory.ICE;
             }
 
             if (whichMap.equals(new Vec(175, 25))) {

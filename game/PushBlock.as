@@ -23,6 +23,7 @@ package {
     }
 
     private function handleProfsComp():void {
+      trace("handling")
       for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
         currentlyTouching("Terminal")[i].activate();
       }

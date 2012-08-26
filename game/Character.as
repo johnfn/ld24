@@ -337,7 +337,7 @@ package {
               gates[i].destroy();
             }
 
-            new DialogText(["Seems about halfway there. It needs something else though!", "Looks like it got rid of some locks.", "And there's a crate up there, not that that could be helpful in any way."]);
+            new DialogText(["That did something!", "It seems about halfway there. It needs something else though!", "Looks like it got rid of some locks.", "And there's a crate up there, not that that could be helpful in any way."]);
 
             energizedTheProfsComp = true;
           } else {

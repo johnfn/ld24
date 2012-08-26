@@ -1,7 +1,7 @@
 package {
   public class C {
     public static var size:int = 25;
-    public static var DEBUG:Boolean = false;
+    public static var DEBUG:Boolean = true;
 
     // Graphics.
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
@@ -87,7 +87,14 @@ package {
                                            , "PROF You don't need more help."
                                            ];
 
-    public static var wishICouldFixThatTerminal:Array=[ "PROF Man. I wish I could fix that terminal outside."
+    public static var wishICouldFixThatTerminal:Array=[
+                                            "PROF They say if you combine all 3 card types, something incrdible happens!"
+                                           , "PROF I wish that terminal outside worked, so I could look up a walkthrough..."
+                                           , "YOU Huh?"
+                                           , "PROF Oh!"
+                                           , "PROF I didn't see you there."
+                                           , "YOU ..?"
+                                           , "PROF Well, get going then."
                                            ];
 
     public static var whosThat:Array=      [ "STARZ Ring ring ring..."
@@ -174,7 +181,7 @@ package {
     									  , "PROF When you're standing near me, press X."
     									  , "PROF That will open up the evolve screen."
     									  , "PROF You navigate it with the arrow keys, and select with Z."
-    									  , "PROF You can choose 1 or 2 cards to use to evolve yourself."
+    									  , "PROF You can choose a card to use to evolve yourself."
     									  , "PROF After you hit Z to quit, I'll do some mad science and you'll get the new ability!"
 				                          , "YOU I have NO IDEA what you just said."
                                           ];
