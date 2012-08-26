@@ -31,8 +31,8 @@ package {
     function Character(x:int, y:int, base:Class, mapRef:Map, i:Inventory) {
       //todo; wiggle room
       super(x, y, C.size, C.size);
-      fromExternalMC(base, false, [0, 0]);
-      setMCOffset(-C.size / 2, 0);
+      fromExternalMC(base, false, [0, 0], true);
+      setMCOffset(12, 0);
 
       this.mapRef = mapRef;
 
@@ -154,12 +154,22 @@ package {
       Fathom.camera.follow(focus);
     }
 
+    private function pushBlocks():void {
+      var blox:EntityList = currentlyTouching("PushBlock");
+
+      for (var i:int = 0; i < blox.length; i++) {
+        blox[i].vel.x = this.vel.x;
+      }
+    }
+
     override public function update(e:EntityList):void {
       setCameraFocus();
       setXAction();
 
       vel.x = Util.movementVector().x * 8;
       vel.y += GRAVITY;
+
+      pushBlocks();
 
       if (touchingBottom || touchingTop) {
         vel.y = 0;
