@@ -215,6 +215,8 @@ package {
       setXAction();
       killEasterEggs();
 
+      raiseToTop();
+
       vel.x = Util.movementVector().x * 8;
       vel.y += GRAVITY;
 
