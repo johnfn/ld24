@@ -8,6 +8,7 @@ package {
     private var inventory:Inventory;
 
     public static var NOTHING:int = 0;
+    public static var GRANTAPOTAMUS:int = -1;
     public static var FREEZE:int = 1;
     public static var JUMP:int = 2;
     public static var ENERGIZE:int = 3;
@@ -26,6 +27,7 @@ package {
       //todo; wiggle room
       super(x, y, C.size, C.size);
       fromExternalMC(base, false, [0, 0]);
+      setMCOffset(-C.size / 2, 0);
 
       this.mapRef = mapRef;
 
@@ -201,9 +203,11 @@ package {
     // Not the harry potter item.
     private function fireBolt():void {
       var b:Bolt = new Bolt();
+      var dir:int = scaleX * -1;
+
       b.fromExternalMC(C.SpritesheetClass, false, [4, 4]);
-      b.set(this);
-      b.vel = new Vec(3, 0);
+      b.set(this).add(new Vec(-25 * dir, -5));
+      b.vel = new Vec(-3 * dir, 0);
       addChild(b);
     }
 

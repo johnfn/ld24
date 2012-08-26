@@ -5,20 +5,33 @@ package {
 
     function Bolt(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);
+
+      on("pre-update", Hooks.platformerLike(this));
+
+      on("post-update", Hooks.resolveCollisions());
     }
 
-    override public function collides(e:Entity):Boolean {
-    	if (e.groups().contains("Character") || e.groups().contains("non-blocking")) {
-    		return false;
-    	}
-
-    	if (super.collides(e)) {
+    override public function update(e:EntityList):void {
+    	if (currentlyBlocking().length) {
     		this.destroy();
-    		trace(e);
-    		return true;
     	}
 
-    	return false;
+    	if (currentlyTouching("Terminal").length) {
+    		var terms:EntityList = currentlyTouching("Terminal");
+
+    		if (terms.length == 0) return;
+
+    		for (var i:int = 0; i < terms.length; i++) {
+    			terms[i].activate();
+    			terms[i].useGate();
+    		}
+
+    		this.destroy();
+    	}
+    }
+
+    override public function groups():Array {
+      return super.groups().concat("non-blocking");
     }
   }
 }
