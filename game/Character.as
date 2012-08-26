@@ -15,6 +15,7 @@ package {
     public static var SHOOT:int = 5;
     public static var FLY:int = 6;
     public static var TALK_PROF:int = 7;
+    public static var USE_TERMINAL:int = 8;
 
     private var flyingPower:int = 0;
     private var isFreezing:Boolean = false;
@@ -91,6 +92,12 @@ package {
         currentAction = TALK_PROF;
       }
 
+      if (currentlyTouching("Terminal").length) {
+        if (currentlyTouching("Terminal")[0].isActivated) {
+          currentAction = USE_TERMINAL;
+        }
+      }
+
       switch(currentAction) {
         case NOTHING: return "Nothing";
         case FREEZE: return isFreezing ? "Stop Freezing" : "Freeze";
@@ -100,6 +107,7 @@ package {
         case SHOOT: return "Shoot";
         case FLY: return "Fly";
         case TALK_PROF: return "Talk";
+        case USE_TERMINAL: return "Use";
         default: return "BUGGY";
       }
     }
@@ -151,7 +159,7 @@ package {
         checkHoldActions();
       }
 
-      for (var i = 0; isFreezing && i < currentlyTouching("Block").length; i++) {
+      for (var i:int = 0; isFreezing && i < currentlyTouching("Block").length; i++) {
         currentlyTouching("Block")[i].freezeOver();
       }
     }
@@ -178,16 +186,29 @@ package {
       }
     }
 
+    private function energize():void {
+      for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
+        currentlyTouching("Terminal")[i].activate();
+      }
+    }
+
+    private function useTerminal():void {
+      for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
+        currentlyTouching("Terminal")[i].useGate();
+      }
+    }
+
     private function doAction():void {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
         case FREEZE: isFreezing = !isFreezing; break;
         case JUMP: vel.y -= 15; break;
-        case ENERGIZE: trace("You jormp!"); break;
+        case ENERGIZE: energize(); break;
         case SMASH: trace("You jormp!"); break;
         case SHOOT: trace("You jormp!"); break;
         case FLY: break;
         case TALK_PROF: dispatchProfDialog(mapRef.getTopLeftCorner()); break;
+        case USE_TERMINAL: useTerminal(); break;
         default: trace("o krap"); break;
       }
     }
