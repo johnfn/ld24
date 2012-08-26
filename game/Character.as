@@ -225,7 +225,7 @@ package {
         }
       }
 
-      new DialogText(C.dismissiveProf)
+      new DialogText(C.wishICouldFixThatTerminal)
 
     }
 
@@ -248,14 +248,39 @@ package {
     }
 
     private function energize():void {
+      var used:Boolean = false;
+
       for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
         currentlyTouching("Terminal")[i].activate();
+        used = true;
+      }
+
+      if (used) {
+        new DialogText(["The terminal turned on!"]);
       }
     }
 
+    private var examinedItBefore:Boolean = false;
+
     private function useTerminal():void {
+      var used:Boolean = false;
+
+      if (mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
+        if (!examinedItBefore) {
+          new DialogText(C.theTerminalWorks);
+          examinedItBefore = true;
+        } else {
+          new DialogText(["YOU Better stay away for now."]);
+        }
+        return; //dont kill his comp :p
+      }
+
       for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
         currentlyTouching("Terminal")[i].useGate();
+      }
+
+      if (used) {
+        new DialogText(["The terminal turned on!"]);
       }
     }
 

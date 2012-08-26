@@ -21,6 +21,32 @@ package {
 				                           , "YOU Too bad the prof isn't nearby."
 				                           ];
 
+  public static var theTerminalWorks:Array = [ "YOU The Prof's computer is back in working order."
+                                             , "YOU I wonder if he has anything embarrassing on here."
+                                             , "YOU ..."
+                                             , "YOU OH MY GOD!"
+                                             , "YOU Internet Explorer?!"
+                                             , "YOU ..."
+                                             , "YOU In COMIC SANS???"
+                                             , "PROF Hey! What are you doing with my terminal?!"
+                                             , "YOU Whoops. Uh... How did you know I was out here?"
+                                             , "PROF You were talking to yourself the whole time."
+                                             , "YOU Derp."
+                                             ];
+
+  public static var firstBoltEv:Array = [  "YOU Hey, this card looks like electricity!"
+                                         , "YOU Man, this would have been a MUCH better idea than crushing consoles with crates."
+                                         , "YOU Wait a minute."
+                                         , "YOU This was hidden behind a console machine I needed to turn on."
+                                         , "YOU How did they get it back there in the first place??"
+                                         , "YOU I"
+                                         , "YOU N"
+                                         , "YOU C"
+                                         , "YOU E"
+                                         , "YOU P"
+                                         , "YOU T"
+                                         , "YOU Wait this is stupid."]
+
     public static var firstTalkProf:Array =[ "YOU Hello!"
 	    		                           , "PROF What can I do for you, my boy?"
 				                           , "YOU Um."
@@ -46,11 +72,14 @@ package {
                                            , "PROF You don't need more help."
                                            ];
 
+    public static var wishICouldFixThatTerminal:Array=[ "PROF Man. I wish I could fix that terminal outside."
+                                           ];
+
     public static var whosThat:Array=      [ "STARZ Ring ring ring..."
                                            , "PROF Who is this?"
                                            , "YOU Um."
                                            , "PROF Sorry, I don't take calls from telemarketers."
-				                           , "STARZ The person on the other side of the line hangs up."
+        				                           , "STARZ The person on the other side of the line hangs up."
                                            ];
 
     public static var consoleCrusher:Array=[ "YOU Oh my God!"
@@ -65,7 +94,7 @@ package {
                                            , "YOU Uh."
                                            , "PROF If you find a card, come talk to me."
                                            , "PROF Otherwise, I'm busy!"
-				                           , "STARZ Click."
+        				                           , "STARZ Click."
                                            ];
 
     public static var firstEvolProf:Array=[ "PROF Ah, an evolution card."

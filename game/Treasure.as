@@ -24,6 +24,11 @@ package {
                 itemType = Inventory.AIR;
             }
 
+            if (whichMap.equals(new Vec(175, 25))) {
+                response = C.firstBoltEv;
+                itemType = Inventory.BOLT;
+            }
+
     		this.destroy();
 
             (Fathom.entities.one("Inventory") as Inventory).addItem(itemType);
