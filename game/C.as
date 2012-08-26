@@ -60,7 +60,7 @@ package {
 				                           , "PROF You're right."
 				                           , "PROF That is literally the dumbest thing I've heard all day."
 				                           , "PROF ..."
-				                           , "PROF Let me help you out."
+				                           , "PROF Here, let me help you out."
 				                           , "STARZ Got the *jumper*!"
 				                           , "PROF That'll allow you to jump with the X key."
 				                           , "YOU What the heck is a X key?."
@@ -83,6 +83,19 @@ package {
                                            ];
 
     public static var consoleCrusher:Array=[ "YOU Oh my God!"
+                                           , "YOU I crushed the console with that block!"
+                                           , "YOU WHY AM I SO DUMB?!?"
+                                           , "YOU Actually, that looked like it worked somehow."
+                                           , "YOU Yay :D"
+                                           ];
+
+    public static var profConCrush:Array = [ "STARZ You've earned the achievement: CONSOLE M-M-MONSTERKILL"//CRUSH ALL THE CONSOLES!"
+                                           , "STARZ Just kidding. There are no achievements in this game."
+                                           , "YOU WHY DO I KEEP DOING THIS?"
+                                           , "STARZ The console flickers to life!"
+                                           , "YOU AND WHY DOES IT KEEP WORKING?!?"]
+
+    public static var coolThingFromProf:Array=[ ""
                                            , "YOU I crushed the console with that block!"
                                            , "YOU WHY AM I SO DUMB?!?"
                                            , "YOU Actually, that looked like it worked."

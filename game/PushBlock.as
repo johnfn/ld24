@@ -13,6 +13,19 @@ package {
       on("post-update", Hooks.resolveCollisions());
     }
 
+    private function handleProfsComp():void {
+      for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
+        currentlyTouching("Terminal")[i].activate();
+      }
+
+      // Hacks? Where we're going, we don't need hacks.
+      //
+      // ... because the codebase is one huge hack.
+      (Fathom.entities.one("Character") as Character).fixedProfsComp = true;
+
+      new DialogText(C.profConCrush);
+    }
+
     override public function update(e:EntityList):void {
       this.vel.x *= 0.9;
       this.vel.y = 6;
@@ -21,6 +34,11 @@ package {
 
       if (this.currentlyTouching("Terminal").length && !PushBlock.crushedConsole) {
         PushBlock.crushedConsole = true;
+
+        if (Fathom.mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
+          handleProfsComp();
+          return;
+        }
 
         new DialogText(C.consoleCrusher);
 

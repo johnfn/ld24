@@ -4,6 +4,8 @@ package {
     private const SIZE:int = C.size;
     private var isFrozen:Boolean = false;
 
+    public var profsCompEnergized:Boolean = false;
+
     function Block(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);
     }

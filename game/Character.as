@@ -6,8 +6,10 @@ package {
 
     private var mapRef:Map;
     private var inventory:Inventory;
+
     public var xAction:String = "";
 
+    public var fixedProfsComp:Boolean = false;
     public var hasJumper:Boolean = C.DEBUG;
     public var canEvol:Boolean = C.DEBUG;
 
@@ -225,8 +227,14 @@ package {
         }
       }
 
-      new DialogText(C.wishICouldFixThatTerminal)
+      if (!fixedProfsComp) {
+        new DialogText(C.wishICouldFixThatTerminal)
+        return;
+      }
 
+      if (inventory.getMaxActivated() == 1) {
+        new DialogText(C.coolThingFromProf);
+      }
     }
 
     private function fly():void {
@@ -247,8 +255,30 @@ package {
       }
     }
 
+    private var energizedTheProfsComp:Boolean = false;
+
     private function energize():void {
       var used:Boolean = false;
+
+      // Prof's comp is a special case.
+      if (mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
+        if (currentlyTouching("Terminal").length) {
+          if (!energizedTheProfsComp) {
+            var gates:EntityList = Fathom.entities.get("Gate");
+
+            for (var i:int = 0; i < gates.length; i++) {
+              gates[i].destroy();
+            }
+
+            new DialogText(["Seems about halfway there. It needs something else though!", "Looks like it got rid of some locks.", "And there's a crate up there, not that that could be helpful in any way."]);
+
+            energizedTheProfsComp = true;
+          } else {
+            new DialogText(["Nah, more power isn't helping. It needs a kick somehow."]);
+          }
+        }
+        return;
+      }
 
       for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
         currentlyTouching("Terminal")[i].activate();
@@ -264,6 +294,8 @@ package {
 
     private function useTerminal():void {
       var used:Boolean = false;
+
+      //Prof's comp.
 
       if (mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
         if (!examinedItBefore) {

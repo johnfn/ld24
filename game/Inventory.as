@@ -14,7 +14,7 @@ package {
 
     private var selection:int = 0;
     private var activated:int = 0;
-    private var activated_max:int = 2;
+    private var activated_max:int = 1;
 
     public var items:Array = [new InventoryItem(Inventory.BOLT), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.ICE)];//new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR)];
 
@@ -27,6 +27,15 @@ package {
       set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2));
 
       this.visible = false;
+    }
+
+    public function incMaxActivation(val:int):void {
+      activated_max++;
+      Util.assert(activated_max == 2);
+    }
+
+    public function getMaxActivated():int {
+      return activated_max;
     }
 
     public function addItem(itemType:int):void {
@@ -133,7 +142,7 @@ package {
             activated--;
           }
         } else {
-          new DialogText(["You can only activate " + activated_max + " evolutions at once."]);
+          new DialogText(["You can only activate " + activated_max + " evolution" + (activated_max > 1 ? "s" : "") + " at once."]);
         }
       }
     }
