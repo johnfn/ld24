@@ -1,13 +1,11 @@
 package {
   public class HUD extends Entity {
-    [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
-
     private var t:Text;
     private var c:Character;
 
     function HUD(c:Character) {
     	super(0, 0, 150, 50);
-    	fromExternalMC(SpritesheetClass, false, [5, 3]);
+    	fromExternalMC(C.SpritesheetClass, false, [5, 3]);
 
     	set(new Vec(20, 20));
     	t = new Text(20 + 28, 20, "Do stuff", 200);

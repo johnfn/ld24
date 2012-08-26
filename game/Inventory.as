@@ -128,8 +128,6 @@ package {
 }
 
 class InventoryItem extends Entity {
-  [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
-
   private var _activated:Boolean = false;
   private var selected:Boolean = false;
   private var _itemType:int = -1;
@@ -141,7 +139,7 @@ class InventoryItem extends Entity {
   function InventoryItem(itemType:int) {
     super(0, 0, C.size, C.size);
 
-    fromExternalMC(SpritesheetClass, false, [itemType, 0]);
+    fromExternalMC(C.SpritesheetClass, false, [itemType, 0]);
 
     this.visible = false;
     this.itemType = itemType;
@@ -159,7 +157,7 @@ class InventoryItem extends Entity {
     _activated = !_activated;
 
     if (_activated) {
-      updateExternalMC(SpritesheetClass, false, [itemType, 2]);
+      updateExternalMC(C.SpritesheetClass, false, [itemType, 2]);
     } else {
       if (selected) {
         select();
@@ -171,15 +169,15 @@ class InventoryItem extends Entity {
 
   public function select():void {
     this.selected = true;
-    updateExternalMC(SpritesheetClass, false, [itemType, 1]);
+    updateExternalMC(C.SpritesheetClass, false, [itemType, 1]);
   }
 
   public function deselect():void {
     this.selected = false;
     if (_activated) {
-      updateExternalMC(SpritesheetClass, false, [itemType, 2]);
+      updateExternalMC(C.SpritesheetClass, false, [itemType, 2]);
     } else {
-      updateExternalMC(SpritesheetClass, false, [itemType, 0]);
+      updateExternalMC(C.SpritesheetClass, false, [itemType, 0]);
     }
   }
 
