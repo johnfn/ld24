@@ -42,7 +42,7 @@ package {
     }
 
     public function removeItem(which:int):void {
-      for (var i = 0; i < items.length; i++) {
+      for (var i:int = 0; i < items.length; i++) {
         if (items[i].itemType == which) {
           items.splice(i, 1);
           return;

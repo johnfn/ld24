@@ -14,7 +14,6 @@ package {
     	t = new Text(20 + 28, 20, "Do stuff", 200);
     	t.addGroups("no-camera");
     	t.textColor = 0xffffff;
-    	addChild(t);
 
     	this.c = c;
 
@@ -26,13 +25,20 @@ package {
         xText = new Text(xButton.x + 28, xButton.y, "Do stuff", 200);
         xText.addGroups("no-camera");
         xText.textColor = 0xffffff;
-        addChild(xText);
+
+        //TODO Uber Hack!
+        Fathom.container.addChild(xText);
+        Fathom.container.addChild(t);
     }
 
     override public function update(e:EntityList):void {
     	t.text = c.getActionString();
 
         xText.text = c.xAction;
+
+        xButton.raiseToTop();
+        xText.raiseToTop();
+        t.raiseToTop();
 
         if (xText.text == "") {
             xText.visible = false;
@@ -41,6 +47,10 @@ package {
             xText.visible = true;
             xButton.visible = true;
         }
+    }
+
+    override public function depth():int {
+        return 5000;
     }
 
     override public function collides(e:Entity):Boolean {
