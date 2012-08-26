@@ -16,6 +16,7 @@ package {
     public static var FLY:int = 6;
     public static var TALK_PROF:int = 7;
 
+    private var flyingPower:int = 0;
     private var isFreezing:Boolean = false;
 
     public var currentAction:int = NOTHING;
@@ -146,13 +147,35 @@ package {
         doAction();
       }
 
-      for (var i = 0; i < currentlyTouching("Block").length; i++) {
+      if (Util.keyIsDown(Util.Key.Z)) {
+        checkHoldActions();
+      }
+
+      for (var i = 0; isFreezing && i < currentlyTouching("Block").length; i++) {
         currentlyTouching("Block")[i].freezeOver();
       }
     }
 
     private function dispatchProfDialog(whichMap:Vec):void {
       new DialogText("YOU Hello!", "PROF Sup?");
+    }
+
+    private function fly():void {
+      if (touchingBottom) {
+        flyingPower = 60;
+      } else {
+        flyingPower--;
+        if (flyingPower > 0) {
+          this.vel.y = -7;
+        }
+      }
+    }
+
+    // Actions you have to hold down the key to do.
+    private function checkHoldActions():void {
+      switch (currentAction) {
+        case FLY: fly(); break;
+      }
     }
 
     private function doAction():void {
@@ -163,7 +186,7 @@ package {
         case ENERGIZE: trace("You jormp!"); break;
         case SMASH: trace("You jormp!"); break;
         case SHOOT: trace("You jormp!"); break;
-        case FLY: trace("You jormp!"); break;
+        case FLY: break;
         case TALK_PROF: dispatchProfDialog(mapRef.getTopLeftCorner()); break;
         default: trace("o krap"); break;
       }
