@@ -14,6 +14,7 @@ package {
     public static var SMASH:int = 4;
     public static var SHOOT:int = 5;
     public static var FLY:int = 6;
+    public static var TALK_PROF:int = 7;
 
     public var currentAction:int = NOTHING;
 
@@ -73,6 +74,12 @@ package {
         }
       }
 
+      // Context-specific
+
+      if (currentlyTouching("Professor").length) {
+        currentAction = TALK_PROF;
+      }
+
       switch(currentAction) {
         case NOTHING: return "Nothing";
         case FREEZE: return "Freeze";
@@ -81,6 +88,7 @@ package {
         case SMASH: return "Smash";
         case SHOOT: return "Shoot";
         case FLY: return "Fly";
+        case TALK_PROF: return "Talk";
         default: return "BUGGY";
       }
     }
@@ -129,6 +137,10 @@ package {
       }
     }
 
+    private function dispatchProfDialog(whichMap:Vec):void {
+      new DialogText("YOU Hello!", "PROF Sup?");
+    }
+
     private function doAction():void {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
@@ -138,6 +150,7 @@ package {
         case SMASH: trace("You jormp!"); break;
         case SHOOT: trace("You jormp!"); break;
         case FLY: trace("You jormp!"); break;
+        case TALK_PROF: dispatchProfDialog(mapRef.getTopLeftCorner()); break;
         default: trace("o krap"); break;
       }
     }

@@ -12,7 +12,7 @@ package {
     [Embed(source = "../data/dialogbox.png")] static public var DialogClass:Class;
     [Embed(source = "../data/portraits.png")] static public var PortraitsClass:Class;
 
-    function DialogText(content:String, ...args) {
+    function DialogText(...args) {
       super(0, 0, 50, 50);
       profPic = new Entity().fromExternalMC(PortraitsClass, false, [2, 0]);
       addChild(profPic);
@@ -24,9 +24,8 @@ package {
       set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2 + 25));
       profPic.set(this.clone().add(new Vec(10, 20)));
 
-      text = new Text(x + 45, y + 8, content, BOX_WIDTH - 40);
+      text = new Text(x + 45, y + 8, "", BOX_WIDTH - 40);
       text.textColor = 0xffffff;
-
       addChild(text);
 
       prev_mode = Fathom.currentMode;
@@ -36,6 +35,24 @@ package {
 
       text.addGroups("no-camera");
       profPic.addGroups("no-camera");
+
+      nextDialog();
+    }
+
+    private function nextDialog():void {
+      var nextText:String = dialogsLeft.shift();
+
+      if (nextText.indexOf("YOU") != -1) {
+        profPic.updateExternalMC(PortraitsClass, false, [2, 0]);
+        nextText = nextText.split("YOU ").join("");
+      }
+
+      if (nextText.indexOf("PROF") != -1) {
+        profPic.updateExternalMC(PortraitsClass, false, [0, 0]);
+        nextText = nextText.split("PROF ").join("");
+      }
+
+      text.text = nextText;
     }
 
     override public function groups():Array {
@@ -50,6 +67,8 @@ package {
           trace("going back to", prev_mode);
 
           Fathom.currentMode = prev_mode;
+        } else {
+          nextDialog();
         }
       }
     }
