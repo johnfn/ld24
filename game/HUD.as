@@ -65,6 +65,7 @@ package {
         xButton.raiseToTop();
         xText.raiseToTop();
         t.raiseToTop();
+        arrowKeys.raiseToTop();
 
         if (xText.text == "") {
             xText.visible = false;

@@ -39,7 +39,7 @@ package {
                 updateExternalMC(C.SpritesheetClass, false, [3, 0]);
                 gone = true;
 
-                // Exit early so we don't give him anything.
+                // Exit early so we don't give him anything. trolololol
                 return false;
             }
 
