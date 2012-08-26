@@ -53,6 +53,13 @@ package {
 				                           , "STARZ The person on the other side of the line hangs up."
                                            ];
 
+    public static var consoleCrusher:Array=[ "YOU Oh my God!"
+                                           , "YOU I crushed the console with that block!"
+                                           , "YOU WHY AM I SO DUMB?!?"
+                                           , "YOU Actually, that looked like it worked."
+                                           , "YOU Yay :D"
+                                           ];
+
     public static var whatNow:Array=      [ "STARZ Ring ring ring..."
                                            , "PROF What now?"
                                            , "YOU Uh."
