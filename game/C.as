@@ -21,6 +21,12 @@ package {
       				                           , "YOU Too bad the prof isn't nearby."
       				                           ];
 
+  public static var eggy:Array = [ "ZILLA Wow, you found it!"
+                                 , "ZILLA I am seriously impressed."
+                                 , "ZILLA Allow me to revert back to my normal form as to avoid spoilers..."
+                                 , "STARZ Screenshot this and show it to your friends!"
+                                 ];
+
   public static var theTerminalWorks:Array = [ "YOU The Prof's computer is back in working order."
                                              , "YOU I wonder if he has anything embarrassing on here."
                                              , "YOU ..."
@@ -47,8 +53,12 @@ package {
                                          , "YOU T"
                                          , "YOU Wait this is stupid."]
 
-    public static var firstAirEv:Array = [  "YOU Hey, this card looks like electricity!"
-                                           , "YOU Man, this would have been a MUCH better idea than crushing consoles with crates."
+    public static var firstAirEv:Array = [ "YOU Hey, an Air card!"
+                                         , "YOU I think that's all the card types."
+                                         , "YOU Guess I'm done with the game now."
+                                         , "STARZ Nope."
+                                         ];
+
     public static var firstTalkProf:Array =[ "YOU Hello!"
 	    		                           , "PROF What can I do for you, my boy?"
 				                           , "YOU Um."

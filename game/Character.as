@@ -166,9 +166,19 @@ package {
       }
     }
 
+    private function killEasterEggs():void {
+      if (currentlyTouching("EasterEgg").length) {
+        var egg:EasterEgg = currentlyTouching("EasterEgg")[0];
+        egg.destroy();
+
+        new DialogText(C.eggy);
+      }
+    }
+
     override public function update(e:EntityList):void {
       setCameraFocus();
       setXAction();
+      killEasterEggs();
 
       vel.x = Util.movementVector().x * 8;
       vel.y += GRAVITY;
@@ -177,6 +187,10 @@ package {
 
       if (touchingBottom || touchingTop) {
         vel.y = 0;
+      }
+
+      if (touchingBottom) {
+        flyingPower = 60;
       }
 
       // Stopped holding up?
@@ -241,13 +255,9 @@ package {
     }
 
     private function fly():void {
-      if (touchingBottom) {
-        flyingPower = 60;
-      } else {
-        flyingPower--;
-        if (flyingPower > 0) {
-          this.vel.y = -7;
-        }
+      flyingPower--;
+      if (flyingPower > 0) {
+        this.vel.y = -7;
       }
     }
 

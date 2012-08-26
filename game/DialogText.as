@@ -17,6 +17,7 @@ package {
 
       super(0, 0, 50, 50);
       profPic = new Entity().fromExternalMC(PortraitsClass, false, [2, 0]);
+
       addChild(profPic);
       visible = true;
 
@@ -58,6 +59,11 @@ package {
       if (nextText.indexOf("STARZ") != -1) {
         profPic.updateExternalMC(PortraitsClass, false, [1, 0]);
         nextText = nextText.split("STARZ ").join("");
+      }
+
+      if (nextText.indexOf("ZILLA") != -1) {
+        profPic.updateExternalMC(PortraitsClass, false, [3, 0]);
+        nextText = nextText.split("ZILLA ").join("");
       }
 
       text.text = nextText;
