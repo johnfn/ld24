@@ -68,7 +68,10 @@ package {
 
           prepareToShow();
         } else {
+          trace("hiding");
           Fathom.currentMode = C.MODE_NORMAL;
+
+          prepareToHide();
         }
 
         this.visible = Fathom.currentMode == C.MODE_INVENTORY;
@@ -129,7 +132,7 @@ class InventoryItem extends Entity {
 
   private var _activated:Boolean = false;
   private var selected:Boolean = false;
-  private var itemType:int = -1;
+  private var _itemType:int = -1;
 
   public function get activated():Boolean {
     return _activated;
@@ -142,6 +145,14 @@ class InventoryItem extends Entity {
 
     this.visible = false;
     this.itemType = itemType;
+  }
+
+  public function get itemType():int {
+    return _itemType;
+  }
+
+  public function set itemType(v:int):void {
+    _itemType = v;
   }
 
   public function toggleActivation():void {

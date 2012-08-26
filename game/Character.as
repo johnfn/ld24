@@ -5,8 +5,9 @@ package {
     public static var GRAVITY:int = 1;
 
     private var mapRef:Map;
+    private var inventory:Inventory;
 
-    function Character(x:int, y:int, base:Class, mapRef:Map) {
+    function Character(x:int, y:int, base:Class, mapRef:Map, i:Inventory) {
       //todo; wiggle room
       super(x, y, C.size, C.size);
       fromExternalMC(base, false, [0, 0]);
@@ -16,6 +17,20 @@ package {
       on("pre-update", Hooks.platformerLike(this));
 
       on("post-update", Hooks.resolveCollisions());
+
+      this.inventory = i;
+    }
+
+    public function getEvolutions():Array {
+      var result:Array = [];
+
+      for (var i:int = 0; i < inventory.items.length; i++) {
+        if (inventory.items[i].activated) {
+          result.push(inventory.items[i].itemType);
+        }
+      }
+
+      return result;
     }
 
     private function setCameraFocus():void {
