@@ -29,6 +29,18 @@ package {
       this.visible = false;
     }
 
+    public function countNumOf(type:int):int {
+      var result:int = 0;
+
+      for (var i:int = 0; i < items.length; i++) {
+        if (items[i].itemType == type) {
+          result++;
+        }
+      }
+
+      return result;
+    }
+
     public function incMaxActivation():void {
       activated_max++;
     }

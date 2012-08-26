@@ -131,6 +131,35 @@ package {
         				                           , "STARZ Click."
                                            ];
 
+    public static var newStuff:Array=      [ "PROF Hey, if you can fetch me an Air card, I might be able to make you something neat."
+                                           ];
+
+    public static var withOneAir:Array=    [ "PROF Hey, can I have your Air card?"
+                                           , "YOU No way!"
+                                           , "YOU It's my only one."
+                                           , "YOU I like big jumps."
+                                           , "YOU Maybe if I find another one."
+                                           , "PROF All this I do for you... Fine, okay."
+                                           ];
+
+    public static var withTwoAirs:Array=   [ "PROF Ooh, you have two Airs now! Now you have to give me one!"
+                                           , "YOU But I really like flying..."
+                                           , "PROF Oh come on."
+                                           , "YOU Fine."
+                                           , "STARZ Lost 1 *Air* card."
+                                           , "PROF And here you are."
+                                           , "STARZ Got the *3X EVOLVER*!!!"
+                                           , "YOU Awesome!"
+                                           , "YOU Now I can finally see what all three cards combined are!"
+                                           , "PROF It's just..."
+                                           , "YOU Hm?"
+                                           , "PROF The more cards you combine, the larger the chance you could evolve into Godzilla."
+                                           , "YOU Come on. There's no way that could happen. This is Ludum Dare, not some Japanese horror."
+                                           , "PROF What's Ludum Dare?"
+                                           , "YOU Huh? Hoodlum what?"
+                                           , "PROF Never mind. Give it a spin!"
+                                           ];
+
     public static var firstEvolProf:Array=[ "PROF Ah, an evolution card."
     									  , "PROF Let me help you out with that."
     									  , "PROF When you're standing near me, press X."

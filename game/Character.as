@@ -136,7 +136,7 @@ package {
       switch(currentAction) {
         case NOTHING: return "Nothing";
         case FREEZE: return isFreezing ? "Stop Freezing" : "Freeze";
-        case JUMP: return "Jump";
+        case JUMP: return "Big Jump";
         case ENERGIZE: return "Energize";
         case SMASH: return "Smash";
         case SHOOT: return "Shoot";
@@ -251,7 +251,25 @@ package {
       if (inventory.getMaxActivated() == 1) {
         new DialogText(C.coolThingFromProf);
         inventory.incMaxActivation();
+        return;
       }
+
+      if (inventory.getMaxActivated() == 2) {
+        var numAirs:int = inventory.countNumOf(Inventory.AIR);
+        if (numAirs == 0) {
+          new DialogText(C.newStuff);
+        } else if (numAirs == 1) {
+          new DialogText(C.withOneAir);
+        } else {
+          new DialogText(C.withTwoAirs);
+
+          inventory.incMaxActivation();
+        }
+
+        return;
+      }
+
+      new DialogText(["Woopwoop"]);
     }
 
     private function fly():void {
