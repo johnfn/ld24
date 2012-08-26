@@ -162,6 +162,13 @@ package {
             activated--;
           }
 
+          if (isIceAirCombo()) {
+            items[selection].toggleActivation();
+            activated--;
+
+            new DialogText(C.dontDoThat);
+          }
+
           if (activated_max == 3) {
             Fathom.camera.shake(-1, activated * 3);
           }
@@ -170,6 +177,27 @@ package {
           new DialogText(["You can only activate " + activated_max + " evolution" + (activated_max > 1 ? "s" : "") + " at once."]);
         }
       }
+    }
+
+    private function isIceAirCombo():Boolean {
+      if (activated_max != 2) return false;
+
+      var hasIce:Boolean = false;
+      var hasAir:Boolean = false;
+
+      for (var i:int = 0; i < items.length; i++) {
+        if (items[i].activated) {
+          if (items[i].itemType == Inventory.ICE) {
+            hasIce = true;
+          }
+
+          if (items[i].itemType == Inventory.AIR) {
+            hasAir = true;
+          }
+        }
+      }
+
+      return (hasIce && hasAir);
     }
 
     override public function modes():Array {

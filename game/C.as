@@ -134,6 +134,12 @@ package {
     public static var newStuff:Array=      [ "PROF Hey, if you can fetch me an Air card, I might be able to make you something neat."
                                            ];
 
+    public static var dontDoThat:Array=    [ "PROF Hey, what are you doing?!"
+                                           , "YOU Um."
+                                           , "YOU Combining ice and air?"
+                                           , "PROF Yeah.. don't do that."
+                                           ];
+
     public static var withOneAir:Array=    [ "PROF Hey, can I have your Air card?"
                                            , "YOU No way!"
                                            , "YOU It's my only one."
