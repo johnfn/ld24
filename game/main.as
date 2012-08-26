@@ -30,6 +30,7 @@ package {
       //var h:HUD = new HUD();
       var x:Character = new Character(40, 40, MapClass, m);
       var i:Inventory = new Inventory();
+      var h:HUD       = new HUD();
     }
   }
 }
