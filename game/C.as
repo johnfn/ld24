@@ -106,7 +106,9 @@ package {
                                            , "YOU Sweet!"
                                            , "PROF But beware! There is a small but non-negligible change that you may evolve into Godzilla."
                                            , "YOU What?"
-                                           , "PROF Oh, don't worry about it."
+                                           , "PROF Don't worry about it."
+                                           , "YOU HUH??"
+                                           , "PROF I'm sure it'll never happen."
                                            ];
 
     public static var whatNow:Array=      [ "STARZ Ring ring ring..."

@@ -29,9 +29,8 @@ package {
       this.visible = false;
     }
 
-    public function incMaxActivation(val:int):void {
+    public function incMaxActivation():void {
       activated_max++;
-      Util.assert(activated_max == 2);
     }
 
     public function getMaxActivated():int {

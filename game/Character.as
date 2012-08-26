@@ -9,7 +9,7 @@ package {
 
     public var xAction:String = "";
 
-    public var fixedProfsComp:Boolean = false;
+    public var fixedProfsComp:Boolean = C.DEBUG;
     public var hasJumper:Boolean = C.DEBUG;
     public var canEvol:Boolean = C.DEBUG;
 
@@ -234,6 +234,7 @@ package {
 
       if (inventory.getMaxActivated() == 1) {
         new DialogText(C.coolThingFromProf);
+        inventory.incMaxActivation();
       }
     }
 
