@@ -21,7 +21,7 @@ package {
 
             if (whichMap.equals(new Vec(25, 25))) {
                 response = C.firstIceEv;
-                itemType = Inventory.AIR;
+                itemType = Inventory.Ice;
             }
 
             if (whichMap.equals(new Vec(175, 25))) {
@@ -31,7 +31,7 @@ package {
 
             if (whichMap.equals(new Vec(0, 25))) {
                 response = C.firstBoltEv;
-                itemType = Inventory.BOLT;
+                itemType = Inventory.AIR;
             }
 
             (Fathom.entities.one("Inventory") as Inventory).addItem(itemType);
