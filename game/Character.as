@@ -16,6 +16,8 @@ package {
     public static var FLY:int = 6;
     public static var TALK_PROF:int = 7;
 
+    private var isFreezing:Boolean = false;
+
     public var currentAction:int = NOTHING;
 
     function Character(x:int, y:int, base:Class, mapRef:Map, i:Inventory) {
@@ -42,6 +44,12 @@ package {
       }
 
       return result;
+    }
+
+    private function handleFreezing():void {
+      if (currentAction != FREEZE) {
+        isFreezing = false;
+      }
     }
 
     public function getActionString():String {
@@ -74,6 +82,8 @@ package {
         }
       }
 
+      handleFreezing();
+
       // Context-specific
 
       if (currentlyTouching("Professor").length) {
@@ -82,7 +92,7 @@ package {
 
       switch(currentAction) {
         case NOTHING: return "Nothing";
-        case FREEZE: return "Freeze";
+        case FREEZE: return isFreezing ? "Stop Freezing" : "Freeze";
         case JUMP: return "Jump";
         case ENERGIZE: return "Energize";
         case SMASH: return "Smash";
@@ -135,6 +145,10 @@ package {
       if (Util.keyRecentlyDown(Util.Key.Z)) {
         doAction();
       }
+
+      for (var i = 0; i < currentlyTouching("Block").length; i++) {
+        currentlyTouching("Block")[i].freezeOver();
+      }
     }
 
     private function dispatchProfDialog(whichMap:Vec):void {
@@ -144,7 +158,7 @@ package {
     private function doAction():void {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
-        case FREEZE: trace("You do nothing!"); break;
+        case FREEZE: isFreezing = !isFreezing; break;
         case JUMP: vel.y -= 15; break;
         case ENERGIZE: trace("You jormp!"); break;
         case SMASH: trace("You jormp!"); break;
