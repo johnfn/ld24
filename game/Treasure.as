@@ -34,6 +34,11 @@ package {
                 itemType = Inventory.AIR;
             }
 
+            if (whichMap.equals(new Vec(175, 0))) {
+                response = C.secondAirEv;
+                itemType = Inventory.AIR;
+            }
+
             (Fathom.entities.one("Inventory") as Inventory).addItem(itemType);
 
             // Make opened treasure chest.

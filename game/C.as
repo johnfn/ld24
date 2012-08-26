@@ -65,6 +65,13 @@ package {
                                          , "STARZ Nope."
                                          ];
 
+    public static var secondAirEv:Array =[ "YOU Hey, it's..."
+                                         , "YOU Another air card."
+                                         , "YOU ..."
+                                         , "YOU That's cool I guess."
+                                         , "YOU I mean I already have one but..."
+                                         ];
+
     public static var firstTalkProf:Array =[ "YOU Hello!"
 	    		                           , "PROF What can I do for you, my boy?"
 				                           , "YOU Um."
