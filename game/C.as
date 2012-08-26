@@ -1,7 +1,7 @@
 package {
   public class C {
     public static var size:int = 25;
-    public static var DEBUG:Boolean = true;//false;
+    public static var DEBUG:Boolean = true;
 
     // Graphics.
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;

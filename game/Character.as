@@ -397,10 +397,14 @@ package {
     }
 
     private function doSmash():void {
-      var blox:EntityList = currentlyTouching("SmashBlock");
+      var blox:EntityList = Fathom.entities.get("SmashBlock");
 
       for (var i:int = 0; i < blox.length; i++) {
-        blox[i].destroy();
+        var dist:int = Math.abs(blox[i].x - this.x) + Math.abs(blox[i].y - this.y);
+
+         if (dist < 40) {
+          blox[i].destroy();
+         }
       }
     }
 
