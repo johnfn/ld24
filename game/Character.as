@@ -7,6 +7,16 @@ package {
     private var mapRef:Map;
     private var inventory:Inventory;
 
+    public static var NOTHING:int = 0;
+    public static var FREEZE:int = 1;
+    public static var JUMP:int = 2;
+    public static var ENERGIZE:int = 3;
+    public static var SMASH:int = 4;
+    public static var SHOOT:int = 5;
+    public static var FLY:int = 6;
+
+    public var currentAction:int = NOTHING;
+
     function Character(x:int, y:int, base:Class, mapRef:Map, i:Inventory) {
       //todo; wiggle room
       super(x, y, C.size, C.size);
@@ -31,6 +41,48 @@ package {
       }
 
       return result;
+    }
+
+    public function getActionString():String {
+      var evolutions:Array = getEvolutions();
+      currentAction = NOTHING;
+
+      var action:String = "Nothing";
+
+      if (evolutions.length == 1) {
+        if (evolutions.contains(Inventory.ICE)) {
+          currentAction = FREEZE;
+        }
+
+        if (evolutions.contains(Inventory.AIR)) {
+          currentAction = JUMP;
+        }
+
+        if (evolutions.contains(Inventory.BOLT)) {
+          currentAction = ENERGIZE;
+        }
+      }
+
+      if (evolutions.length == 2) {
+        if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.BOLT)) {
+          currentAction = SMASH;
+        } else if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.ICE)) {
+          currentAction = SHOOT;
+        } else {
+          currentAction = FLY;
+        }
+      }
+
+      switch(currentAction) {
+        case NOTHING: return "Nothing";
+        case FREEZE: return "Freeze";
+        case JUMP: return "Jump";
+        case ENERGIZE: return "Energize";
+        case SMASH: return "Smash";
+        case SHOOT: return "Shoot";
+        case FLY: return "Fly";
+        default: return "BUGGY";
+      }
     }
 
     private function setCameraFocus():void {
@@ -67,6 +119,23 @@ package {
       if (Util.movementVector().x < 0) this.scaleX = -1;
 
       Hooks.onLeaveMap(this, mapRef, leftMap);
+
+      if (Util.keyRecentlyDown(Util.Key.Z)) {
+        doAction();
+      }
+    }
+
+    private function doAction():void {
+      switch(currentAction) {
+        case NOTHING: trace("You do nothing!"); break;
+        case FREEZE: trace("You do nothing!"); break;
+        case JUMP: trace("You jormp!"); break;
+        case ENERGIZE: trace("You jormp!"); break;
+        case SMASH: trace("You jormp!"); break;
+        case SHOOT: trace("You jormp!"); break;
+        case FLY: trace("You jormp!"); break;
+        default: trace("o krap"); break;
+      }
     }
 
     private function leftMap():void {

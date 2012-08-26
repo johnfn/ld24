@@ -16,39 +16,8 @@ package {
     	this.c = c;
     }
 
-    private function getActionString():String {
-    	var evolutions:Array = c.getEvolutions();
-    	var action:String = "Nothing";
-
-    	if (evolutions.length == 1) {
-    		if (evolutions.contains(Inventory.ICE)) {
-    			action = "Freeze";
-    		}
-
-    		if (evolutions.contains(Inventory.AIR)) {
-    			action = "Jump";
-    		}
-
-    		if (evolutions.contains(Inventory.BOLT)) {
-    			action = "Energize";
-    		}
-    	}
-
-    	if (evolutions.length == 2) {
-    		if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.BOLT)) {
-    			action = "Smash"
-    		} else if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.ICE)) {
-    			action = "Shoot Ice"
-    		} else {
-    			action = "Fly";
-    		}
-    	}
-
-    	return action;
-    }
-
     override public function update(e:EntityList):void {
-    	t.text = getActionString();
+    	t.text = c.getActionString();
     }
 
     override public function collides(e:Entity):Boolean {
