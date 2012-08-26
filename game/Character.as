@@ -87,6 +87,17 @@ package {
       xAction = "";
     }
 
+    private function fadeToBlack() {
+      //TODO. blabla show godzilla pic or something. THE END.
+    }
+
+    private function endGame():void {
+      Fathom.camera.stopAllEvents();
+      Fathom.currentMode = 4; // nonexistent mode. or does its use here mean that it actually exists..? Philosophy with 13h to go on LD. And no sleep.
+
+      Fathom.container.addEventListener(Event.ENTER_FRAME, fadeToBlack);
+    }
+
     public function getActionString():String {
       var evolutions:Array = getEvolutions();
       currentAction = NOTHING;
@@ -117,6 +128,10 @@ package {
         } else {
           currentAction = FLY;
         }
+      }
+
+      if (evolutions.length == 3) {
+        endGame();
       }
 
       handleFreezing();

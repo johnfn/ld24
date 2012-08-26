@@ -14,7 +14,7 @@ package {
 
     private var selection:int = 0;
     private var activated:int = 0;
-    private var activated_max:int = C.DEBUG ? 2 : 1;
+    private var activated_max:int = C.DEBUG ? 3 : 1;
 
     public var items:Array = [new InventoryItem(Inventory.BOLT), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.ICE)];//new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR)];
 
@@ -161,6 +161,11 @@ package {
           } else {
             activated--;
           }
+
+          if (activated_max == 3) {
+            Fathom.camera.shake(-1, activated * 3);
+          }
+
         } else {
           new DialogText(["You can only activate " + activated_max + " evolution" + (activated_max > 1 ? "s" : "") + " at once."]);
         }
