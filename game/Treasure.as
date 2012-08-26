@@ -15,7 +15,7 @@ package {
     		this.destroy();
 
     		new DialogText("Oh cool, an air ... evolution ... thing ..? I don't know how to use it.")
-    		new Entity().fromExternalMC(C.SpritesheetClass, false, [3, 0]).ignoreCollisions();
+    		new Entity().fromExternalMC(C.SpritesheetClass, false, [3, 0]).ignoreCollisions().set(this);
 
     		// Make opened treasure chest.
             gone = true;

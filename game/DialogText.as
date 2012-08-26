@@ -33,6 +33,13 @@ package {
       Fathom.currentMode = C.MODE_TEXT;
 
       dialogsLeft = args;
+
+      text.addGroups("no-camera");
+      profPic.addGroups("no-camera");
+    }
+
+    override public function groups():Array {
+      return super.groups().concat("no-camera");
     }
 
     override public function update(e:EntityList):void {
