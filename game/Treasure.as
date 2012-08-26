@@ -34,6 +34,15 @@ package {
                 itemType = Inventory.AIR;
             }
 
+            if (whichMap.equals(new Vec(25, 0))) {
+                new DialogText(C.nothingThere);
+                updateExternalMC(C.SpritesheetClass, false, [3, 0]);
+                gone = true;
+
+                // Exit early so we don't give him anything.
+                return false;
+            }
+
             if (whichMap.equals(new Vec(175, 0))) {
                 response = C.secondAirEv;
                 itemType = Inventory.AIR;
