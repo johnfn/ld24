@@ -2,6 +2,8 @@ package {
   import flash.display.Sprite;
   import flash.utils.setTimeout;
   import flash.display.MovieClip;
+  import flash.display.Sprite;
+  import flash.events.Event;
 
   import Entity;
   import Hooks;
@@ -12,7 +14,21 @@ package {
   public class main extends Sprite {
     [Embed(source = "../data/map.png")] static public var MapClass:Class;
 
+    var scrollBG:ScrollingBackground;
+
+    private function addBG():void {
+      scrollBG = new ScrollingBackground();
+      addChild(scrollBG);
+      addEventListener(Event.ENTER_FRAME, scroll);
+    }
+
+    private function scroll(e:Event):void {
+      scrollBG.move(1, 0);
+    }
+
     public function main():void {
+      addBG();
+
       var container:MovieClip = new MovieClip();
       container.x = 0;
       container.y = 0;
@@ -40,5 +56,13 @@ package {
       var c:Character = new Character(2 * 25 + 2, 5 * 25, C.CharacterClass, m, i);
       var h:HUD       = new HUD(c);
     }
+  }
+}
+
+class ScrollingBackground extends ScrollingLayer {
+  [Embed(source = "../data/bg.png")] static public var BGClass:Class;
+  private var bitmapClass:Class
+  public function ScrollingBackground() {
+    scrollingBitmap = new BGClass().bitmapData;
   }
 }
