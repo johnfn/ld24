@@ -1,5 +1,7 @@
 package {
   import Util;
+  import flash.events.Event;
+  import flash.display.MovieClip;
 
   public class Character extends MovingEntity {
     public static var GRAVITY:int = 1;
@@ -87,7 +89,7 @@ package {
       xAction = "";
     }
 
-    private function fadeToBlack() {
+    private function fadeToBlack():void {
       //TODO. blabla show godzilla pic or something. THE END.
     }
 
@@ -95,7 +97,7 @@ package {
       Fathom.camera.stopAllEvents();
       Fathom.currentMode = 4; // nonexistent mode. or does its use here mean that it actually exists..? Philosophy with 13h to go on LD. And no sleep.
 
-      Fathom.container.addEventListener(Event.ENTER_FRAME, fadeToBlack);
+      Fathom.container.mc.addEventListener(Event.ENTER_FRAME, fadeToBlack);
     }
 
     public function getActionString():String {
@@ -386,7 +388,7 @@ package {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
         case FREEZE: isFreezing = !isFreezing; break;
-        case JUMP: vel.y -= 10; break;
+        case JUMP: vel.y -= 20; break;
         case ENERGIZE: energize(); break;
         case SMASH: doSmash(); break;
         case SHOOT: fireBolt(); break;

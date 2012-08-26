@@ -30,7 +30,7 @@ package {
         (new Color(100, 100, 100).toString()) : { type: Terminal, gfx: C.SpritesheetClass, spritesheet: [3, 3], fixedSize: true },
         (new Color(101, 101, 101).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: [5, 4], fixedSize: true },
         (new Color(102, 102, 102).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: [6, 4], fixedSize: true }
-      }).startingCorner(new Vec(4, 0));
+      }).startingCorner(new Vec(1, 0));
 
       Fathom.initialize(container, m);
 

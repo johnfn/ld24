@@ -34,14 +34,12 @@ package {
                 itemType = Inventory.BOLT;
             }
 
-    		this.destroy();
-
             (Fathom.entities.one("Inventory") as Inventory).addItem(itemType);
 
-    		new Entity().fromExternalMC(C.SpritesheetClass, false, [3, 0]).ignoreCollisions().set(this);
+            // Make opened treasure chest.
+    		updateExternalMC(C.SpritesheetClass, false, [3, 0]);
             new DialogText(response);
 
-    		// Make opened treasure chest.
             gone = true;
     		return false;
     	}
