@@ -14,20 +14,22 @@ package {
     	if (e.groups().contains("Character") && super.collides(e) && !gone) {
             var whichMap:Vec = Fathom.mapRef.getTopLeftCorner();
 
-            var response:String = "Oh GOD HOW DID YOU FIND THIS.";
+            trace(whichMap);
+
+            var response:Array = ["Oh GOD HOW DID YOU FIND THIS."];
             var itemType:int = Inventory.ICE;
 
-            if (whichMap.equals(new Vec(0, 0))) {
-                response = "Oh cool, an air ... evolution ... thing ..? I don't know how to use it."
+            if (whichMap.equals(new Vec(25, 0))) {
+                response = C.firstAirEv;
                 itemType = Inventory.AIR;
             }
 
     		this.destroy();
 
-    		new DialogText(response);
             (Fathom.entities.one("Inventory") as Inventory).addItem(itemType);
 
     		new Entity().fromExternalMC(C.SpritesheetClass, false, [3, 0]).ignoreCollisions().set(this);
+            new DialogText(response);
 
     		// Make opened treasure chest.
             gone = true;

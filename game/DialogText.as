@@ -12,10 +12,13 @@ package {
     [Embed(source = "../data/dialogbox.png")] static public var DialogClass:Class;
     [Embed(source = "../data/portraits.png")] static public var PortraitsClass:Class;
 
-    function DialogText(...args) {
+    function DialogText(args:Array) {
+      args = args.slice(); //clone array so we dont destroy it.
+
       super(0, 0, 50, 50);
       profPic = new Entity().fromExternalMC(PortraitsClass, false, [2, 0]);
       addChild(profPic);
+      visible = true;
 
       fromExternalMC(DialogClass);
       addDropShadow();
@@ -50,6 +53,11 @@ package {
       if (nextText.indexOf("PROF") != -1) {
         profPic.updateExternalMC(PortraitsClass, false, [0, 0]);
         nextText = nextText.split("PROF ").join("");
+      }
+
+      if (nextText.indexOf("STARZ") != -1) {
+        profPic.updateExternalMC(PortraitsClass, false, [1, 0]);
+        nextText = nextText.split("STARZ ").join("");
       }
 
       text.text = nextText;

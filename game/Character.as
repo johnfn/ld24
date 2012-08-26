@@ -6,6 +6,10 @@ package {
 
     private var mapRef:Map;
     private var inventory:Inventory;
+    public var xAction:String = "";
+
+    public var hasJumper:Boolean = false;
+    public var canEvol:Boolean = false;
 
     public static var NOTHING:int = 0;
     public static var GRANTAPOTAMUS:int = -1;
@@ -20,6 +24,7 @@ package {
 
     private var flyingPower:int = 0;
     private var isFreezing:Boolean = false;
+    private var usedDblJump:Boolean = false;
 
     public var currentAction:int = NOTHING;
 
@@ -53,6 +58,28 @@ package {
     private function handleFreezing():void {
       if (currentAction != FREEZE) {
         isFreezing = false;
+      }
+    }
+
+    public function setXAction():void {
+      if (canEvol && currentlyTouching("Professor").length) {
+        xAction = "Evolve!";
+        return;
+      }
+
+      if (currentlyTouching("Telephone").length) {
+        if (canEvol) {
+          xAction = "Call Prof. and Evolve!"
+        } else {
+          xAction = "Use Phone";
+        }
+
+        return;
+      }
+
+      if (touchingBottom && hasJumper) {
+        xAction = "Jump";
+        return;
       }
     }
 
@@ -127,6 +154,7 @@ package {
 
     override public function update(e:EntityList):void {
       setCameraFocus();
+      setXAction();
 
       vel.x = Util.movementVector().x * 8;
       vel.y += GRAVITY;
@@ -140,13 +168,14 @@ package {
       //  vel.y = 0;
       //}
 
-      if (vel.y < 0 && !Util.keyIsDown(Util.Key.Z)) {
+      if (vel.y < 0 && !(Util.keyIsDown(Util.Key.X) || Util.keyIsDown(Util.Key.Z))) {
         vel.y = 0;
       }
 
-      //if (Util.movementVector().y && touchingBottom) {
-      //  vel.y -= 15;
-      //}
+      if (hasJumper && Util.keyIsDown(Util.Key.X) && touchingBottom) {
+        vel.y -= 15;
+        usedDblJump = false;
+      }
 
       if (Util.movementVector().x > 0) this.scaleX = 1;
       if (Util.movementVector().x < 0) this.scaleX = -1;
@@ -167,7 +196,25 @@ package {
     }
 
     private function dispatchProfDialog(whichMap:Vec):void {
-      new DialogText("YOU Hello!", "PROF Sup?");
+      if (!hasJumper) {
+        new DialogText(C.firstTalkProf);
+        hasJumper = true;
+        return;
+      }
+
+      if (!canEvol) {
+        if (hasJumper && inventory.items.length == 0) {
+          new DialogText(C.dismissiveProf)
+          return;
+        } else {
+          new DialogText(C.firstEvolProf);
+          canEvol = true;
+          return;
+        }
+      }
+
+      new DialogText(C.dismissiveProf)
+
     }
 
     private function fly():void {
@@ -215,7 +262,7 @@ package {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
         case FREEZE: isFreezing = !isFreezing; break;
-        case JUMP: vel.y -= 15; break;
+        case JUMP: vel.y -= 10; break;
         case ENERGIZE: energize(); break;
         case SMASH: trace("You jormp!"); break;
         case SHOOT: fireBolt(); break;

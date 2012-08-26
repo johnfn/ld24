@@ -64,20 +64,41 @@ package {
     }
 
     override public function update(e:EntityList):void {
+
       // Toggle inventory.
-      if (Util.keyRecentlyDown(Util.Key.I)) {
-        if (Fathom.currentMode == C.MODE_NORMAL) {
-          Fathom.currentMode = C.MODE_INVENTORY;
 
-          prepareToShow();
-        } else {
-          trace("hiding");
-          Fathom.currentMode = C.MODE_NORMAL;
+      if (Util.keyRecentlyDown(Util.Key.X)) {
+        var hasAccess:Boolean = false;
+        var ch:Character = (Fathom.entities.one("Character") as Character);
 
-          prepareToHide();
+        if (ch.currentlyTouching("Telephone").length) {
+          if (ch.canEvol) {
+            hasAccess = true;
+          } else {
+            if (ch.hasJumper) {
+              new DialogText(C.whatNow);
+            } else {
+              new DialogText(C.whosThat);
+            }
+            hasAccess = false;
+          }
         }
 
-        this.visible = Fathom.currentMode == C.MODE_INVENTORY;
+        hasAccess = hasAccess || ch.currentlyTouching("Professor").length;
+
+        if (hasAccess) {
+          if (Fathom.currentMode == C.MODE_NORMAL) {
+            Fathom.currentMode = C.MODE_INVENTORY;
+
+            prepareToShow();
+          } else {
+            Fathom.currentMode = C.MODE_NORMAL;
+
+            prepareToHide();
+          }
+
+          this.visible = Fathom.currentMode == C.MODE_INVENTORY;
+        }
       }
 
       if (Fathom.currentMode != C.MODE_INVENTORY) return;
@@ -111,7 +132,7 @@ package {
             activated--;
           }
         } else {
-          new DialogText("You can only activate " + activated_max + " evolutions at once.");
+          new DialogText(["You can only activate " + activated_max + " evolutions at once."]);
         }
       }
     }
