@@ -50,6 +50,7 @@ package {
 
         items[i].set(new Vec(xLoc, yLoc));
         items[i].visible = true;
+        items[i].raiseToTop();
       }
 
       if (items.length > 0) {

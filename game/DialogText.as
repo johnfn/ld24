@@ -72,8 +72,6 @@ package {
         if (dialogsLeft.length == 0) {
           this.destroy();
 
-          trace("going back to", prev_mode);
-
           Fathom.currentMode = prev_mode;
         } else {
           nextDialog();

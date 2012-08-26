@@ -8,8 +8,8 @@ package {
     private var inventory:Inventory;
     public var xAction:String = "";
 
-    public var hasJumper:Boolean = false;
-    public var canEvol:Boolean = false;
+    public var hasJumper:Boolean = C.DEBUG;
+    public var canEvol:Boolean = C.DEBUG;
 
     public static var NOTHING:int = 0;
     public static var GRANTAPOTAMUS:int = -1;
@@ -77,10 +77,12 @@ package {
         return;
       }
 
-      if (touchingBottom && hasJumper) {
+      if (hasJumper) {
         xAction = "Jump";
         return;
       }
+
+      xAction = "";
     }
 
     public function getActionString():String {

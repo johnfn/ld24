@@ -32,7 +32,6 @@ package {
     	t.text = c.getActionString();
 
         xText.text = c.xAction;
-        trace(xText.text);
 
         if (xText.text == "") {
             xText.visible = false;

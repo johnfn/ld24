@@ -1,6 +1,7 @@
 package {
   public class C {
     public static var size:int = 25;
+    public static var DEBUG:Boolean = true;
 
     // Graphics.
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
@@ -10,10 +11,15 @@ package {
     public static var MODE_INVENTORY:int = 1;
     public static var MODE_TEXT:int      = 2;
 
-    public static var firstAirEv:Array = [   "YOU Oh cool, an air ... evolution ... thing ..?"
+    /*public static var firstAirEv:Array = [   "YOU Oh cool, an air ... evolution ... thing ..?"
 	    		                           , "YOU I heard about these on TV!"
 				                           , "YOU But I don't know how to use them."
-				                           , "YOU I'll hold onto it just in case."];
+				                           , "YOU I'll hold onto it just in case."];*/
+
+	public static var firstIceEv:Array =   [ "YOU Hmm, this card looks like ice."
+	    		                           , "YOU I wonder what it does?"
+				                           , "YOU Too bad the prof isn't nearby."
+				                           ];
 
     public static var firstTalkProf:Array =[ "YOU Hello!"
 	    		                           , "PROF What can I do for you, my boy?"

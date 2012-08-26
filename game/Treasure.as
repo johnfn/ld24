@@ -19,8 +19,8 @@ package {
             var response:Array = ["Oh GOD HOW DID YOU FIND THIS."];
             var itemType:int = Inventory.ICE;
 
-            if (whichMap.equals(new Vec(25, 0))) {
-                response = C.firstAirEv;
+            if (whichMap.equals(new Vec(25, 25))) {
+                response = C.firstIceEv;
                 itemType = Inventory.AIR;
             }
 
