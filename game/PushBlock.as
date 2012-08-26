@@ -13,7 +13,7 @@ package {
 
     override public function update(e:EntityList):void {
       this.vel.x *= 0.9;
-      this.vel.y = 3;
+      this.vel.y = 6;
 
       if (this.vel.x < 0.1 || this.vel.x > -0.1) this.vel.x = 0;
     }

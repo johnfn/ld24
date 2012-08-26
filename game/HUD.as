@@ -21,6 +21,7 @@ package {
         xButton = new Entity().fromExternalMC(C.SpritesheetClass, false, [8, 3]);
         xButton.set(this.clone().add(new Vec(0, 30)));
         xButton.addGroups("no-camera");
+        xButton.ignoreCollisions();
 
         xText = new Text(xButton.x + 28, xButton.y, "Do stuff", 200);
         xText.addGroups("no-camera");
