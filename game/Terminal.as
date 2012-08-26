@@ -24,12 +24,15 @@ package {
 	    }
     }
 
-    // TODO: Remove the gate.
     public function useGate():void {
     	updateExternalMC(C.SpritesheetClass, false, [3, 3]);
     	totallyDead = true;
 
-    	trace("Opengate");
+    	var gates:EntityList = Fathom.entities.get("Gate");
+
+    	for (var i:int = 0; i < gates.length; i++) {
+    		gates[i].destroy();
+    	}
     }
 
     public override function groups():Array {
