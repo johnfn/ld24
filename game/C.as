@@ -95,11 +95,18 @@ package {
                                            , "STARZ The console flickers to life!"
                                            , "YOU AND WHY DOES IT KEEP WORKING?!?"]
 
-    public static var coolThingFromProf:Array=[ ""
-                                           , "YOU I crushed the console with that block!"
-                                           , "YOU WHY AM I SO DUMB?!?"
-                                           , "YOU Actually, that looked like it worked."
+    public static var coolThingFromProf:Array=[ "PROF Hey, thanks for fixing my Terminal!"
+                                           , "YOU Uh, 'Fixed', sure."
+                                           , "PROF Because I'm feeling generous... "
+                                           , "PROF I'll allow you to see a prototype of something I've been working on recently."
+                                           , "STARZ Got the *2X EVOLVER*!!"
                                            , "YOU Yay :D"
+                                           , "YOU What's it do?"
+                                           , "PROF It lets you combine two cards, for super evolution potential!!!"
+                                           , "YOU Sweet!"
+                                           , "PROF But beware! There is a small but non-negligible change that you may evolve into Godzilla."
+                                           , "YOU What?"
+                                           , "PROF Oh, don't worry about it."
                                            ];
 
     public static var whatNow:Array=      [ "STARZ Ring ring ring..."
