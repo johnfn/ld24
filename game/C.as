@@ -17,9 +17,9 @@ package {
 				                           , "YOU I'll hold onto it just in case."];*/
 
 	public static var firstIceEv:Array =   [ "YOU Hmm, this card looks like ice."
-	    		                           , "YOU I wonder what it does?"
-				                           , "YOU Too bad the prof isn't nearby."
-				                           ];
+    	    		                           , "YOU I wonder what it does?"
+      				                           , "YOU Too bad the prof isn't nearby."
+      				                           ];
 
   public static var theTerminalWorks:Array = [ "YOU The Prof's computer is back in working order."
                                              , "YOU I wonder if he has anything embarrassing on here."
@@ -47,6 +47,8 @@ package {
                                          , "YOU T"
                                          , "YOU Wait this is stupid."]
 
+    public static var firstAirEv:Array = [  "YOU Hey, this card looks like electricity!"
+                                           , "YOU Man, this would have been a MUCH better idea than crushing consoles with crates."
     public static var firstTalkProf:Array =[ "YOU Hello!"
 	    		                           , "PROF What can I do for you, my boy?"
 				                           , "YOU Um."
