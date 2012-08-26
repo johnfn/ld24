@@ -16,7 +16,6 @@ package {
     public var canEvol:Boolean = C.DEBUG;
 
     public static var NOTHING:int = 0;
-    public static var GRANTAPOTAMUS:int = -1;
     public static var FREEZE:int = 1;
     public static var JUMP:int = 2;
     public static var ENERGIZE:int = 3;
