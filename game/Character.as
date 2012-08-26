@@ -75,9 +75,9 @@ package {
       }
 
       if (evolutions.length == 2) {
-        if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.BOLT)) {
+        if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.ICE)) {
           currentAction = SMASH;
-        } else if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.ICE)) {
+        } else if (evolutions.contains(Inventory.AIR) && evolutions.contains(Inventory.BOLT)) {
           currentAction = SHOOT;
         } else {
           currentAction = FLY;
@@ -198,6 +198,15 @@ package {
       }
     }
 
+    // Not the harry potter item.
+    private function fireBolt():void {
+      var b:Bolt = new Bolt();
+      b.fromExternalMC(C.SpritesheetClass, false, [4, 4]);
+      b.set(this);
+      b.vel = new Vec(3, 0);
+      addChild(b);
+    }
+
     private function doAction():void {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
@@ -205,7 +214,7 @@ package {
         case JUMP: vel.y -= 15; break;
         case ENERGIZE: energize(); break;
         case SMASH: trace("You jormp!"); break;
-        case SHOOT: trace("You jormp!"); break;
+        case SHOOT: fireBolt(); break;
         case FLY: break;
         case TALK_PROF: dispatchProfDialog(mapRef.getTopLeftCorner()); break;
         case USE_TERMINAL: useTerminal(); break;
