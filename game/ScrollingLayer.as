@@ -20,9 +20,7 @@ package
 		protected var canvas:Graphics;
 		protected var matrix:Matrix;
 
-		public function ScrollingLayer()
-		{
-
+		public function ScrollingLayer() {
 			addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 

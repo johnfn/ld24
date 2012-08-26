@@ -9,6 +9,9 @@ package {
     [Embed(source = "../data/Character.png")] static public var CharacterClass:Class;
     [Embed(source = "../data/ROAR.png")] static public var EndGameClass:Class;
 
+    [Embed(source = "../data/bg.png")] static public var BGClass1:Class;
+    [Embed(source = "../data/bgstars.png")] static public var BGClass2:Class;
+
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.
     public static var MODE_INVENTORY:int = 1;
