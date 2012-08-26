@@ -392,7 +392,7 @@ package {
 
       b.fromExternalMC(C.SpritesheetClass, false, [4, 4]);
       b.set(this).add(new Vec(-25 * dir, -5));
-      b.vel = new Vec(-3 * dir, 0);
+      b.vel = new Vec(-9 * dir, 0);
       addChild(b);
     }
 
