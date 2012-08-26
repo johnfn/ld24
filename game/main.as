@@ -34,8 +34,6 @@ package {
     }
 
     public function showEndGameScreen():void {
-      trace("Called");
-
       var eg = new C.EndGameClass();
       var c:MovieClip = new MovieClip();
       c.addChild(eg);
@@ -43,6 +41,10 @@ package {
       c.scaleY = 2;
 
       stage.addChild(c);
+
+      var newFormat:TextFormat = new TextFormat();
+      newFormat.size = 16;
+      newFormat.font = "Arial";
 
       var finaltext:TextField = new TextField();
       finaltext.text = "You turn into Godzilla. You win by default!";
@@ -53,13 +55,20 @@ package {
       finaltext.filters = [new DropShadowFilter(1.0, 45, 0, 1, 0, 0, 1)];
       finaltext.textColor = 0xffffff;
       finaltext.selectable = false;
-
-      var newFormat:TextFormat = new TextFormat();
-      newFormat.size = 16;
-      newFormat.font = "Arial";
       finaltext.setTextFormat(newFormat);
-
       stage.addChild(finaltext);
+
+      var text2:TextField = new TextField();
+      text2.text = "Later you terrorize Tokyo just for the heck of it.";
+      text2.wordWrap = true;
+      text2.x = 40;
+      text2.y = 400;
+      text2.width = 400;
+      text2.filters = [new DropShadowFilter(1.0, 45, 0, 1, 0, 0, 1)];
+      text2.textColor = 0xffffff;
+      text2.selectable = false;
+      stage.addChild(text2);
+      text2.setTextFormat(newFormat);
     }
 
     public function main():void {

@@ -2,6 +2,7 @@ package {
   import Util;
   import flash.events.Event;
   import flash.display.MovieClip;
+  import flash.display.Shape;
 
   public class Character extends MovingEntity {
     public static var GRAVITY:int = 1;
@@ -89,9 +90,21 @@ package {
     }
 
     private var blackFadeCount:int = 0;
+    private var blackFader:Shape;
 
     private function fadeToBlack(e:Event):void {
       if (blackFadeCount == 0) {
+        blackFader = new Shape();
+        blackFader.graphics.beginFill(0x000000, 1.0);
+        blackFader.graphics.drawRect(0, 0, 1000,1000);
+        blackFader.graphics.endFill();
+
+        Fathom.container.mc.addChild(blackFader);
+      }
+
+      blackFader.alpha = Math.min(blackFadeCount / 100, 1);
+
+      if (blackFadeCount == 150) {
         main.MainObj.showEndGameScreen();
       }
 
