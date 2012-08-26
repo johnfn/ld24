@@ -14,5 +14,9 @@ package {
 	    	isFrozen = true;
 	    }
     }
+
+    public function frozen():Boolean {
+      return isFrozen;
+    }
   }
 }

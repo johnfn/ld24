@@ -157,8 +157,8 @@ package {
     private function pushBlocks():void {
       var blox:EntityList = currentlyTouching("PushBlock");
 
-      for (var i:int = 0; i < blox.length; i++) {
-        blox[i].vel.x = this.vel.x;
+      for (var i:int = 0; isFreezing && i < blox.length; i++) {
+        blox[i].vel.x = vel.x;
       }
     }
 

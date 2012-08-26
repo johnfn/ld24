@@ -27,22 +27,19 @@ package {
       set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2));
 
       this.visible = false;
-
-      for (var i:int = 0; i < items.length; i++) {
-        addChild(items[i]);
-      }
     }
 
     public function addItem(itemType:int):void {
       var newItem:InventoryItem = new InventoryItem(itemType);
 
       items.push(newItem);
-      addChild(newItem);
     }
 
     // Called immediately when inventory + items are displayed.
     private function prepareToShow():void {
       Util.assert(items.length <= 6);
+
+      this.raiseToTop();
 
       for (var i:int = 0; i < items.length; i++) {
         var xLoc:int = this.x + 10 + i * C.size;
@@ -68,8 +65,11 @@ package {
 
       // Toggle inventory.
 
-      if (Util.keyRecentlyDown(Util.Key.X)) {
+      if (Util.keyRecentlyDown(Util.Key.X) || (Util.keyRecentlyDown(Util.Key.C) && C.DEBUG)) {
         var hasAccess:Boolean = false;
+
+        hasAccess = hasAccess || (C.DEBUG && Util.keyRecentlyDown(Util.Key.C));
+
         var ch:Character = (Fathom.entities.one("Character") as Character);
 
         if (ch.currentlyTouching("Telephone").length) {
