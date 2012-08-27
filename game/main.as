@@ -35,13 +35,13 @@ package {
 
     private function scroll(e:Event):void {
       if (m.getTopLeftCorner().y == 0) {
-        scrollBG.move(1, 0);
+        scrollBG.move(.3, 0);
         scrollBG.x = -Fathom.camera.x;
         scrollBG.y = -Fathom.camera.y;
         scrollBG.visible = true;
         scrollBG2.visible = false;
       } else {
-        scrollBG2.move(1, 0);
+        scrollBG2.move(.3, 0);
         scrollBG2.x = -Fathom.camera.x;
         scrollBG2.y = -Fathom.camera.y;
         scrollBG.visible = false;
@@ -108,7 +108,7 @@ package {
         (new Color(100, 100, 100).toString()) : { type: Terminal, gfx: C.SpritesheetClass, spritesheet: [3, 3], fixedSize: true },
         (new Color(101, 101, 101).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: [5, 4], fixedSize: true },
         (new Color(102, 102, 102).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: [6, 4], fixedSize: true }
-      }).startingCorner(new Vec(1, 0));
+      }).startingCorner(new Vec(0, 0));
 
       Fathom.initialize(container, m);
 
