@@ -3,7 +3,7 @@ package {
     import flash.media.Sound;
 
     public static var size:int = 25;
-    public static var DEBUG:Boolean = false;
+    public static var DEBUG:Boolean = true;
 
     // Graphics.
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;

@@ -341,13 +341,6 @@ package {
       }
     }
 
-    // Actions you have to hold down the key to do.
-    private function checkHoldActions():void {
-      switch (currentAction) {
-        case FLY: fly(); break;
-      }
-    }
-
     private var energizedTheProfsComp:Boolean = false;
 
     private function energize():void {
@@ -444,11 +437,19 @@ package {
       }
     }
 
+    // Actions you have to hold down the key to do.
+    private function checkHoldActions():void {
+      switch (currentAction) {
+        case FLY: fly(); break;
+        case JUMP: if (touchingBottom) { vel.y -= 20; C.jumpSound.play(); } break;
+      }
+    }
+
     private function doAction():void {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
         case FREEZE: isFreezing = !isFreezing; break;
-        case JUMP: vel.y -= 20; C.jumpSound.play(); break;
+        case JUMP: break;
         case ENERGIZE: energize(); break;
         case SMASH: doSmash(); break;
         case SHOOT: fireBolt(); break;
