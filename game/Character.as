@@ -30,6 +30,8 @@ package {
     private var isFreezing:Boolean = false;
     private var usedDblJump:Boolean = false;
 
+    private var lastOnGround = 0;
+
     public var currentAction:int = NOTHING;
 
     function Character(x:int, y:int, base:Class, mapRef:Map, i:Inventory) {
@@ -210,12 +212,25 @@ package {
       }
     }
 
+    private function landSnd():void {
+      if (touchingBottom) {
+        if (lastOnGround > 5) {
+          C.hitSound.play();
+        }
+
+        lastOnGround = 0;
+      } else {
+        lastOnGround++;
+      }
+    }
+
     override public function update(e:EntityList):void {
       setCameraFocus();
       setXAction();
       killEasterEggs();
 
       raiseToTop();
+      landSnd();
 
       vel.x = Util.movementVector().x * 8;
       vel.y += GRAVITY;

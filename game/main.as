@@ -20,8 +20,8 @@ package {
     public static var MainObj:main;
     private var m:Map;
 
-    var scrollBG:ScrollingBackground;
-    var scrollBG2:ScrollingBackgroundBottom; // Lower
+    private var scrollBG:ScrollingBackground;
+    private var scrollBG2:ScrollingBackgroundBottom; // Lower
 
     private function addBG():void {
       scrollBG = new ScrollingBackground();
