@@ -121,6 +121,8 @@ package {
       Fathom.container.mc.addEventListener(Event.ENTER_FRAME, fadeToBlack);
     }
 
+    private var everSeenIceB4:Boolean = false;
+
     public function getActionString():String {
       var evolutions:Array = getEvolutions();
       currentAction = NOTHING;
@@ -130,13 +132,18 @@ package {
       if (evolutions.length == 1) {
         if (evolutions.contains(Inventory.ICE)) {
           currentAction = FREEZE;
+
+          if (!everSeenIceB4) {
+            new DialogText(["Ice! This might make blocks slippery and easier to push."])
+            everSeenIceB4 = true;
+          }
         }
 
         if (evolutions.contains(Inventory.AIR)) {
           currentAction = JUMP;
         }
 
-        if (evolutions.contains(Inventory.BOLT)) {
+        if (evolutions.contains(Inventory.BOLT) && currentlyTouching("Terminal").length) {
           currentAction = ENERGIZE;
         }
       }

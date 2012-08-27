@@ -84,7 +84,7 @@ package {
       }
 
       if (items.length > 0) {
-        items[selection].select();
+        selection = 0;
       }
     }
 

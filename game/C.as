@@ -154,7 +154,8 @@ package {
                                            , "STARZ Just kidding. There are no achievements in this game."
                                            , "YOU WHY DO I KEEP DOING THIS?"
                                            , "STARZ The console flickers to life!"
-                                           , "YOU AND WHY DOES IT KEEP WORKING?!?"]
+                                           , "YOU AND WHY DOES IT KEEP WORKING?!?"
+                                           , "YOU I guess I should talk to the Prof."]
 
     public static var coolThingFromProf:Array=[ "PROF Hey, thanks for fixing my Terminal!"
                                            , "YOU Uh, 'Fixed', sure."
@@ -165,7 +166,7 @@ package {
                                            , "YOU What's it do?"
                                            , "PROF It lets you combine two cards, for super evolution potential!!!"
                                            , "YOU Sweet!"
-                                           , "PROF But beware! There is a small but non-negligible change that you may evolve into Godzilla."
+                                           , "PROF But beware! There is a small but non-negligible chance that you may evolve into Godzilla."
                                            , "YOU What?"
                                            , "PROF Don't worry about it."
                                            , "YOU HUH??"
