@@ -245,6 +245,7 @@ package {
 
       if (hasJumper && Util.keyIsDown(Util.Key.X) && touchingBottom) {
         vel.y -= 15;
+        C.jumpSound.play();
         usedDblJump = false;
       }
 
@@ -398,6 +399,8 @@ package {
       b.set(this).add(new Vec(-25 * dir, -5));
       b.vel = new Vec(-9 * dir, 0);
       addChild(b);
+
+      C.shootSound.play();
     }
 
     private function doSmash():void {

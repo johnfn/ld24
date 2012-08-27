@@ -14,6 +14,8 @@ package {
     	if (e.groups().contains("Character") && super.collides(e) && !gone) {
             var whichMap:Vec = Fathom.mapRef.getTopLeftCorner();
 
+            C.powerupSound.play();
+
             trace(whichMap);
 
             var response:Array = ["Oh GOD HOW DID YOU FIND THIS."];
