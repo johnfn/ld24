@@ -25,6 +25,7 @@ package {
     public static var FLY:int = 6;
     public static var TALK_PROF:int = 7;
     public static var USE_TERMINAL:int = 8;
+    public static var EXAMINE_TERMINAL:int = 9;
 
     private var flyingPower:int = 0;
     private var isFreezing:Boolean = false;
@@ -167,6 +168,8 @@ package {
       if (currentlyTouching("Terminal").length) {
         if (currentlyTouching("Terminal")[0].isActivated) {
           currentAction = USE_TERMINAL;
+        } else if (currentAction != ENERGIZE) {
+          currentAction = EXAMINE_TERMINAL;
         }
       }
 
@@ -180,6 +183,7 @@ package {
         case FLY: return "Fly";
         case TALK_PROF: return "Talk";
         case USE_TERMINAL: return "Use";
+        case EXAMINE_TERMINAL: return "Examine";
         default: return "BUGGY";
       }
     }
@@ -381,17 +385,27 @@ package {
 
     private var examinedItBefore:Boolean = false;
 
+    private function examineTerminal():void {
+      if (mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
+        new DialogText(["YOU The Professor's own computer."])
+      } else {
+        new DialogText(C.normalTerminal);
+      }
+    }
+
     private function useTerminal():void {
       var used:Boolean = false;
 
       //Prof's comp.
 
       if (mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
-        if (!examinedItBefore) {
-          new DialogText(C.theTerminalWorks);
-          examinedItBefore = true;
-        } else {
-          new DialogText(["YOU Better stay away for now."]);
+        if (fixedProfsComp) {
+          if (!examinedItBefore) {
+            new DialogText(C.theTerminalWorks);
+            examinedItBefore = true;
+          } else {
+            new DialogText(["YOU Better stay away for now."]);
+          }
         }
         return; //dont kill his comp :p
       }
@@ -434,13 +448,14 @@ package {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
         case FREEZE: isFreezing = !isFreezing; break;
-        case JUMP: vel.y -= 20; break;
+        case JUMP: vel.y -= 20; C.jumpSound.play(); break;
         case ENERGIZE: energize(); break;
         case SMASH: doSmash(); break;
         case SHOOT: fireBolt(); break;
         case FLY: break;
         case TALK_PROF: dispatchProfDialog(mapRef.getTopLeftCorner()); break;
         case USE_TERMINAL: useTerminal(); break;
+        case EXAMINE_TERMINAL: examineTerminal(); break;
         default: trace("o krap"); break;
       }
     }

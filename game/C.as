@@ -47,6 +47,10 @@ package {
                                  , "STARZ Screenshot this and show it to your friends!"
                                  ];
 
+  public static var normalTerminal:Array  = [ "YOU An unpowered terminal."
+                                            , "YOU I hope no one drops a crate on it."
+                                            ];
+
   public static var theTerminalWorks:Array = [ "YOU The Prof's computer is back in working order."
                                              , "YOU I wonder if he has anything embarrassing on here."
                                              , "YOU ..."
