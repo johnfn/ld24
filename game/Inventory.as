@@ -44,6 +44,10 @@ package {
     public function removeItem(which:int):void {
       for (var i:int = 0; i < items.length; i++) {
         if (items[i].itemType == which) {
+          if (items[i].activated) {
+            activated--;
+          }
+
           items.splice(i, 1);
           return;
         }

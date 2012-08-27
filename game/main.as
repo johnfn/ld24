@@ -36,14 +36,14 @@ package {
     private function scroll(e:Event):void {
       if (m.getTopLeftCorner().y == 0) {
         scrollBG.move(.3, 0);
-        scrollBG.x = -Fathom.camera.x;
-        scrollBG.y = -Fathom.camera.y;
+        scrollBG.x = -Fathom.camera.x * 15/20;
+        scrollBG.y = -Fathom.camera.y * 15/20;
         scrollBG.visible = true;
         scrollBG2.visible = false;
       } else {
         scrollBG2.move(.3, 0);
-        scrollBG2.x = -Fathom.camera.x;
-        scrollBG2.y = -Fathom.camera.y;
+        scrollBG2.x = -Fathom.camera.x * 15/20;
+        scrollBG2.y = -Fathom.camera.y * 15/20;
         scrollBG.visible = false;
         scrollBG2.visible = true;
       }
