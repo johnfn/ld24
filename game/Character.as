@@ -134,7 +134,7 @@ package {
           currentAction = FREEZE;
 
           if (!everSeenIceB4) {
-            new DialogText(["Ice! This might make blocks slippery and easier to push."])
+            //new DialogText(["Ice! This might make blocks slippery and easier to push."])
             everSeenIceB4 = true;
           }
         }
@@ -269,7 +269,7 @@ package {
         vel.y = 0;
       }
 
-      if (hasJumper && Util.keyIsDown(Util.Key.X) && touchingBottom) {
+      if (hasJumper && Util.keyIsDown(Util.Key.X) && touchingBottom && vel.y > -5) {
         vel.y -= 15;
         C.jumpSound.play();
         usedDblJump = false;
@@ -448,7 +448,7 @@ package {
     private function checkHoldActions():void {
       switch (currentAction) {
         case FLY: fly(); break;
-        case JUMP: if (touchingBottom) { vel.y -= 20; C.jumpSound.play(); } break;
+        case JUMP: if (touchingBottom && vel.y > -5) { vel.y -= 20; C.jumpSound.play(); } break;
       }
     }
 
