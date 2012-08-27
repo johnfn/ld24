@@ -1,5 +1,7 @@
 package {
   public class C {
+    import flash.media.Sound;
+
     public static var size:int = 25;
     public static var DEBUG:Boolean = true;
 
@@ -11,6 +13,18 @@ package {
 
     [Embed(source = "../data/bg.png")] static public var BGClass1:Class;
     [Embed(source = "../data/bgstars.png")] static public var BGClass2:Class;
+
+    // Sounds.
+
+    [Embed(source = "../data/Hit_Hurt.mp3")] static public var HitSndClass:Class;
+    [Embed(source = "../data/Jump.mp3")] static public var JumpSndClass:Class;
+    [Embed(source = "../data/Laser_Shoot6.mp3")] static public var ShootSndClass:Class;
+    [Embed(source = "../data/Powerup.mp3")] static public var ItemSndClass:Class;
+
+    public static var hitSound:Sound     = new HitSndClass();
+    public static var jumpSound:Sound    = new JumpSndClass();
+    public static var shootSound:Sound   = new ShootSndClass();
+    public static var powerupSound:Sound = new ItemSndClass();
 
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.

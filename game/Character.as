@@ -230,6 +230,10 @@ package {
         flyingPower = 60;
       }
 
+      if (touchingTop) {
+        C.hitSound.play();
+      }
+
       // Stopped holding up?
       //if (vel.y < 0 && Util.movementVector().y >= 0) {
       //  vel.y = 0;
