@@ -31,14 +31,14 @@ package {
     private var isFreezing:Boolean = false;
     private var usedDblJump:Boolean = false;
 
-    private var lastOnGround = 0;
+    private var lastOnGround:int = 0;
 
     public var currentAction:int = NOTHING;
 
     function Character(x:int, y:int, base:Class, mapRef:Map, i:Inventory) {
       //todo; wiggle room
       super(x, y, C.size, C.size);
-      fromExternalMC(base, false, [0, 0], true);
+      fromExternalMC(base, [0, 0], true);
       setMCOffset(12, 0);
 
       this.mapRef = mapRef;
@@ -102,7 +102,7 @@ package {
         blackFader.graphics.drawRect(0, 0, 1000,1000);
         blackFader.graphics.endFill();
 
-        Fathom.container.mc.addChild(blackFader);
+        Fathom.container.addChild(blackFader);
       }
 
       blackFader.alpha = Math.min(blackFadeCount / 100, 1);
@@ -116,9 +116,9 @@ package {
 
     private function endGame():void {
       Fathom.camera.stopAllEvents();
-      Fathom.currentMode = 4; // nonexistent mode. or does its use here mean that it actually exists..? Philosophy with 13h to go on LD. And no sleep.
+      Fathom.stop();
 
-      Fathom.container.mc.addEventListener(Event.ENTER_FRAME, fadeToBlack);
+      Fathom.container.addEventListener(Event.ENTER_FRAME, fadeToBlack);
     }
 
     private var everSeenIceB4:Boolean = false;
@@ -134,7 +134,7 @@ package {
           currentAction = FREEZE;
 
           if (!everSeenIceB4) {
-            //new DialogText(["Ice! This might make blocks slippery and easier to push."])
+            new DialogText(["Ice! This might make blocks slippery and easier to push."])
             everSeenIceB4 = true;
           }
         }
@@ -196,7 +196,7 @@ package {
     }
 
     private function setCameraFocus():void {
-      var focus:Vec = this.clone();
+      var focus:Vec = this.rect();
       if (this.scaleX > 0) {
         focus.x += 50;
       } else {
@@ -424,8 +424,8 @@ package {
       var b:Bolt = new Bolt();
       var dir:int = scaleX * -1;
 
-      b.fromExternalMC(C.SpritesheetClass, false, [4, 4]);
-      b.set(this).add(new Vec(-25 * dir, -5));
+      b.fromExternalMC(C.SpritesheetClass, [4, 4]);
+      b.setPos(this).add(new Vec(-25 * dir, -5));
       b.vel = new Vec(-9 * dir, 0);
       addChild(b);
 

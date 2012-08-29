@@ -15,11 +15,11 @@ package {
     }
 
     public function rememberLoc():void {
-      startingLoc = this.clone();
+      startingLoc = this.rect();
     }
 
     public function resetLoc():void {
-      this.set(startingLoc);
+      this.setPos(startingLoc);
     }
 
     private function handleProfsComp():void {

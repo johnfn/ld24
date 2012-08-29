@@ -34,6 +34,7 @@ package {
     }
 
     private function scroll(e:Event):void {
+      /*
       if (m.getTopLeftCorner().y == 0) {
         scrollBG.move(.3, 0);
         scrollBG.x = -Fathom.camera.x * 15/20;
@@ -47,10 +48,11 @@ package {
         scrollBG.visible = false;
         scrollBG2.visible = true;
       }
+      */
     }
 
     public function showEndGameScreen():void {
-      var eg = new C.EndGameClass();
+      var eg:MovieClip = new C.EndGameClass();
       var c:MovieClip = new MovieClip();
       c.addChild(eg);
       c.scaleX = 2;
@@ -88,13 +90,8 @@ package {
     }
 
     public function main():void {
-      addBG();
+      //addBG();
       MainObj = this;
-
-      var container:MovieClip = new MovieClip();
-      container.x = 0;
-      container.y = 0;
-      stage.addChild(container);
 
       m = new Map(25, 25, C.size).fromImage(MapClass, {
         (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesheetClass, spritesheet: [1, 2], fixedSize: true, roundOutEdges: true },
@@ -110,7 +107,7 @@ package {
         (new Color(102, 102, 102).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: [6, 4], fixedSize: true }
       }).startingCorner(new Vec(0, 0));
 
-      Fathom.initialize(container, m);
+      Fathom.initialize(stage, m);
 
       Fathom.camera.setEaseSpeed(3);
 

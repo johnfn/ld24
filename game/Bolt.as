@@ -3,7 +3,7 @@ package {
     private var type:int;
     private const SIZE:int = C.size;
 
-    var grps:Array;
+    private var grps:Array;
 
     function Bolt(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);

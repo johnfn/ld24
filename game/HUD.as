@@ -9,17 +9,17 @@ package {
 
     function HUD(c:Character) {
     	super(0, 0, 150, 50);
-    	fromExternalMC(C.SpritesheetClass, false, [5, 3]);
+    	fromExternalMC(C.SpritesheetClass, [5, 3]);
 
-    	set(new Vec(20, 20));
+    	setPos(new Vec(20, 20));
     	t = new Text(20 + 28, 20, "Do stuff", 200);
     	t.addGroups("no-camera");
     	t.textColor = 0xffffff;
 
     	this.c = c;
 
-        xButton = new Entity().fromExternalMC(C.SpritesheetClass, false, [8, 3]);
-        xButton.set(this.clone().add(new Vec(0, 30)));
+        xButton = new Entity().fromExternalMC(C.SpritesheetClass, [8, 3]);
+        xButton.setPos(this.rect().add(new Vec(0, 30)));
         xButton.addGroups("no-camera");
         xButton.ignoreCollisions();
 
@@ -32,11 +32,6 @@ package {
         arrowKeys.textColor = 0xffffff;
 
         arrowKeys.visible = false;
-
-        //TODO Uber Hack!
-        Fathom.container.addChild(xText);
-        Fathom.container.addChild(t);
-        Fathom.container.addChild(arrowKeys);
     }
 
     override public function update(e:EntityList):void {
@@ -76,7 +71,7 @@ package {
         }
     }
 
-    override public function depth():int {
+    override public function get depth():int {
         return 5000;
     }
 

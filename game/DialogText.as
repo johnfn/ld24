@@ -1,7 +1,8 @@
 package {
   public class DialogText extends Entity {
+    import flash.filters.DropShadowFilter;
+
     private var text:Text;
-    private var prev_mode:int;
     private var dialogsLeft:Array;
 
     private var profPic:Entity;
@@ -16,24 +17,21 @@ package {
       args = args.slice(); //clone array so we dont destroy it.
 
       super(0, 0, 50, 50);
-      profPic = new Entity().fromExternalMC(PortraitsClass, false, [2, 0]);
+      fromExternalMC(DialogClass);
 
-      addChild(profPic);
+      profPic = new Entity().fromExternalMC(PortraitsClass, [2, 0]);
+
       visible = true;
 
-      fromExternalMC(DialogClass);
-      addDropShadow();
+      filters = [new DropShadowFilter()];
 
       // Stick it right under the inventory box so they don't overlap.
-      set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2 + 25));
-      profPic.set(this.clone().add(new Vec(10, 20)));
+      setPos(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2 + 25));
+      profPic.setPos(new Vec(10, 20));
 
-      text = new Text(x + 45, y + 8, "", BOX_WIDTH - 40);
+      text = new Text(45, 8, "", BOX_WIDTH - 40);
       text.textColor = 0xffffff;
-      addChild(text);
-
-      prev_mode = Fathom.currentMode;
-      Fathom.currentMode = C.MODE_TEXT;
+      Fathom.pushMode(C.MODE_TEXT);
 
       dialogsLeft = args;
 
@@ -41,28 +39,31 @@ package {
       profPic.addGroups("no-camera");
 
       nextDialog();
+
+      addChild(profPic);
+      addChild(text);
     }
 
     private function nextDialog():void {
       var nextText:String = dialogsLeft.shift();
 
       if (nextText.indexOf("YOU") != -1) {
-        profPic.updateExternalMC(PortraitsClass, false, [2, 0]);
+        profPic.updateExternalMC(PortraitsClass, [2, 0]);
         nextText = nextText.split("YOU ").join("");
       }
 
       if (nextText.indexOf("PROF") != -1) {
-        profPic.updateExternalMC(PortraitsClass, false, [0, 0]);
+        profPic.updateExternalMC(PortraitsClass, [0, 0]);
         nextText = nextText.split("PROF ").join("");
       }
 
       if (nextText.indexOf("STARZ") != -1) {
-        profPic.updateExternalMC(PortraitsClass, false, [1, 0]);
+        profPic.updateExternalMC(PortraitsClass, [1, 0]);
         nextText = nextText.split("STARZ ").join("");
       }
 
       if (nextText.indexOf("ZILLA") != -1) {
-        profPic.updateExternalMC(PortraitsClass, false, [3, 0]);
+        profPic.updateExternalMC(PortraitsClass, [3, 0]);
         nextText = nextText.split("ZILLA ").join("");
       }
 
@@ -78,14 +79,14 @@ package {
         if (dialogsLeft.length == 0) {
           this.destroy();
 
-          Fathom.currentMode = prev_mode;
+          Fathom.popMode();
         } else {
           nextDialog();
         }
       }
     }
 
-    override public function depth():int {
+    override public function get depth():int {
       return 300;
     }
 

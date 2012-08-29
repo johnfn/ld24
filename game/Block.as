@@ -11,8 +11,8 @@ package {
     }
 
     public function freezeOver():void {
-    	if (!isFrozen && mySpritesheet[1] == 1) {
-	    	updateExternalMC(C.SpritesheetClass, false, [mySpritesheet[0], mySpritesheet[1] + 3]);
+    	if (!isFrozen && spritesheet[1] == 1) {
+	    	updateExternalMC(C.SpritesheetClass, [spritesheet[0], spritesheet[1] + 3]);
 	    	isFrozen = true;
 	    }
     }

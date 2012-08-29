@@ -1,5 +1,6 @@
 package {
   import Util;
+  import flash.filters.DropShadowFilter;
 
   public class Inventory extends Entity {
 
@@ -21,10 +22,10 @@ package {
     function Inventory() {
       super(0, 0, 150, 50);
       fromExternalMC(InventoryClass);
-      addDropShadow();
+      filters = [new DropShadowFilter()];
 
       // stick in middle, assuming w==h==50.
-      set(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2));
+      setPos(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2));
 
       this.visible = false;
     }
@@ -70,21 +71,31 @@ package {
 
     // Called immediately when inventory + items are displayed.
     private function prepareToShow():void {
+      var i:int;
+
       Util.assert(items.length <= 6);
 
       this.raiseToTop();
 
-      for (var i:int = 0; i < items.length; i++) {
+      for (i = 0; i < items.length; i++) {
         var xLoc:int = this.x + 10 + i * C.size;
         var yLoc:int = this.y + 17;
 
-        items[i].set(new Vec(xLoc, yLoc));
+        items[i].setPos(new Vec(xLoc, yLoc));
         items[i].visible = true;
         items[i].raiseToTop();
       }
 
       if (items.length > 0) {
         selection = 0;
+      }
+
+      for (i = 0; i < items.length; i++) {
+        if (selection == i) {
+          items[i].select();
+        } else {
+          items[i].deselect();
+        }
       }
     }
 
@@ -118,15 +129,15 @@ package {
           }
         }
 
-        hasAccess = hasAccess || ch.currentlyTouching("Professor").length;
+        hasAccess = hasAccess || (ch.currentlyTouching("Professor").length && ch.canEvol);
 
         if (hasAccess) {
           if (Fathom.currentMode == C.MODE_NORMAL) {
-            Fathom.currentMode = C.MODE_INVENTORY;
+            Fathom.pushMode(C.MODE_INVENTORY);
 
             prepareToShow();
           } else {
-            Fathom.currentMode = C.MODE_NORMAL;
+            Fathom.popMode();
 
             prepareToHide();
           }
@@ -234,7 +245,7 @@ class InventoryItem extends Entity {
   function InventoryItem(itemType:int) {
     super(0, 0, C.size, C.size);
 
-    fromExternalMC(C.SpritesheetClass, false, [itemType, 0]);
+    fromExternalMC(C.SpritesheetClass, [itemType, 0]);
 
     this.visible = false;
     this.itemType = itemType;
@@ -252,7 +263,7 @@ class InventoryItem extends Entity {
     _activated = !_activated;
 
     if (_activated) {
-      updateExternalMC(C.SpritesheetClass, false, [itemType, 2]);
+      updateExternalMC(C.SpritesheetClass, [itemType, 2]);
     } else {
       if (selected) {
         select();
@@ -264,15 +275,15 @@ class InventoryItem extends Entity {
 
   public function select():void {
     this.selected = true;
-    updateExternalMC(C.SpritesheetClass, false, [itemType, 1]);
+    updateExternalMC(C.SpritesheetClass, [itemType, 1]);
   }
 
   public function deselect():void {
     this.selected = false;
     if (_activated) {
-      updateExternalMC(C.SpritesheetClass, false, [itemType, 2]);
+      updateExternalMC(C.SpritesheetClass, [itemType, 2]);
     } else {
-      updateExternalMC(C.SpritesheetClass, false, [itemType, 0]);
+      updateExternalMC(C.SpritesheetClass, [itemType, 0]);
     }
   }
 
