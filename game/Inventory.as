@@ -263,7 +263,7 @@ class InventoryItem extends Entity {
     _activated = !_activated;
 
     if (_activated) {
-      updateExternalMC(C.SpritesheetClass, [itemType, 2]);
+      updateExternalMC([itemType, 2]);
     } else {
       if (selected) {
         select();
@@ -275,15 +275,15 @@ class InventoryItem extends Entity {
 
   public function select():void {
     this.selected = true;
-    updateExternalMC(C.SpritesheetClass, [itemType, 1]);
+    updateExternalMC([itemType, 1]);
   }
 
   public function deselect():void {
     this.selected = false;
     if (_activated) {
-      updateExternalMC(C.SpritesheetClass, [itemType, 2]);
+      updateExternalMC([itemType, 2]);
     } else {
-      updateExternalMC(C.SpritesheetClass, [itemType, 0]);
+      updateExternalMC([itemType, 0]);
     }
   }
 

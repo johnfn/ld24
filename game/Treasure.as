@@ -38,7 +38,7 @@ package {
 
             if (whichMap.equals(new Vec(25, 0))) {
                 new DialogText(C.nothingThere);
-                updateExternalMC(C.SpritesheetClass, [3, 0]);
+                updateExternalMC([3, 0]);
                 gone = true;
 
                 // Exit early so we don't give him anything. trolololol
@@ -53,7 +53,7 @@ package {
             (Fathom.entities.one("Inventory") as Inventory).addItem(itemType);
 
             // Make opened treasure chest.
-    		updateExternalMC(C.SpritesheetClass, [3, 0]);
+    		updateExternalMC([3, 0]);
             new DialogText(response);
 
             gone = true;

@@ -48,22 +48,22 @@ package {
       var nextText:String = dialogsLeft.shift();
 
       if (nextText.indexOf("YOU") != -1) {
-        profPic.updateExternalMC(PortraitsClass, [2, 0]);
+        profPic.updateExternalMC([2, 0]);
         nextText = nextText.split("YOU ").join("");
       }
 
       if (nextText.indexOf("PROF") != -1) {
-        profPic.updateExternalMC(PortraitsClass, [0, 0]);
+        profPic.updateExternalMC([0, 0]);
         nextText = nextText.split("PROF ").join("");
       }
 
       if (nextText.indexOf("STARZ") != -1) {
-        profPic.updateExternalMC(PortraitsClass, [1, 0]);
+        profPic.updateExternalMC([1, 0]);
         nextText = nextText.split("STARZ ").join("");
       }
 
       if (nextText.indexOf("ZILLA") != -1) {
-        profPic.updateExternalMC(PortraitsClass, [3, 0]);
+        profPic.updateExternalMC([3, 0]);
         nextText = nextText.split("ZILLA ").join("");
       }
 
