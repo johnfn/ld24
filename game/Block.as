@@ -12,7 +12,7 @@ package {
 
     public function freezeOver():void {
     	if (!isFrozen && spritesheet[1] == 1) {
-	    	updateExternalMC([spritesheet[0], spritesheet[1] + 3]);
+	    	setTile(spritesheet[0], spritesheet[1] + 3);
 	    	isFrozen = true;
 	    }
     }

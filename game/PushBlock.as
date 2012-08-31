@@ -10,8 +10,6 @@ package {
       super(x, y, SIZE, SIZE);
 
       on("pre-update", Hooks.decel());
-      on("pre-update", Hooks.platformerLike(this));
-      on("post-update", Hooks.resolveCollisions());
     }
 
     public function rememberLoc():void {

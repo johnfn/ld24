@@ -93,27 +93,31 @@ package {
       //addBG();
       MainObj = this;
 
+      Fathom.initialize(stage);
+
       m = new Map(25, 25, C.size).fromImage(MapClass, {
-        (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesheetClass, spritesheet: [1, 2], fixedSize: true, roundOutEdges: true },
-        (new Color(0, 0, 255).toString()) : { type: Treasure, gfx: C.SpritesheetClass, spritesheet: [2, 0], fixedSize: true },
-        (new Color(0, 255, 0).toString()) : { type: Professor, gfx: C.SpritesheetClass, spritesheet: [6, 3], fixedSize: true },
-        (new Color(255, 0, 0).toString()) : { type: PushBlock, gfx: C.SpritesheetClass, spritesheet: [0, 5], fixedSize: true },
-        (new Color(255, 0, 255).toString()) : { type: EasterEgg, gfx: C.SpritesheetClass, spritesheet: [7, 1], fixedSize: true },
-        (new Color(0, 255, 255).toString()) : { type: SmashBlock, gfx: C.SpritesheetClass, spritesheet: [1, 0], fixedSize: true },
-        (new Color(0, 0, 200).toString()) : { type: Gate, gfx: C.SpritesheetClass, spritesheet: [3, 4], fixedSize: true },
-        (new Color(0, 0, 101).toString()) : { type: Telephone, gfx: C.SpritesheetClass, spritesheet: [4, 3], fixedSize: true },
-        (new Color(100, 100, 100).toString()) : { type: Terminal, gfx: C.SpritesheetClass, spritesheet: [3, 3], fixedSize: true },
-        (new Color(101, 101, 101).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: [5, 4], fixedSize: true },
-        (new Color(102, 102, 102).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: [6, 4], fixedSize: true }
-      }).startingCorner(new Vec(0, 0));
+        (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesheetClass, spritesheet: new Vec(1, 2), fixedSize: true, roundOutEdges: true },
+        (new Color(0, 0, 255).toString()) : { type: Treasure, gfx: C.SpritesheetClass, spritesheet: new Vec(2, 0), fixedSize: true },
+        (new Color(0, 255, 0).toString()) : { type: Professor, gfx: C.SpritesheetClass, spritesheet: new Vec(6, 3), fixedSize: true },
+        (new Color(255, 0, 0).toString()) : { type: PushBlock, gfx: C.SpritesheetClass, spritesheet: new Vec(0, 5), fixedSize: true },
+        (new Color(255, 0, 255).toString()) : { type: EasterEgg, gfx: C.SpritesheetClass, spritesheet: new Vec(7, 1), fixedSize: true },
+        (new Color(0, 255, 255).toString()) : { type: SmashBlock, gfx: C.SpritesheetClass, spritesheet: new Vec(1, 0), fixedSize: true },
+        (new Color(0, 0, 200).toString()) : { type: Gate, gfx: C.SpritesheetClass, spritesheet: new Vec(3, 4), fixedSize: true },
+        (new Color(0, 0, 101).toString()) : { type: Telephone, gfx: C.SpritesheetClass, spritesheet: new Vec(4, 3), fixedSize: true },
+        (new Color(100, 100, 100).toString()) : { type: Terminal, gfx: C.SpritesheetClass, spritesheet: new Vec(3, 3), fixedSize: true },
+        (new Color(101, 101, 101).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: new Vec(5, 4), fixedSize: true },
+        (new Color(102, 102, 102).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: new Vec(6, 4), fixedSize: true }
+      }).startingCorner(new Vec(0, 0)).loadNewMap(new Vec(0, 0));
 
-      Fathom.initialize(stage, m);
-
-      Fathom.camera.setEaseSpeed(3);
+      Fathom.mapRef = m;
 
       var i:Inventory = new Inventory();
       var c:Character = new Character(2 * 25 + 2, 5 * 25, C.CharacterClass, m, i);
       var h:HUD       = new HUD(c);
+
+      Fathom._camera = new Camera(stage).scaleBy(1).beBoundedBy(m).setEaseSpeed(3);
+
+      Fathom.start();
     }
   }
 }

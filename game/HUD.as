@@ -9,7 +9,7 @@ package {
 
     function HUD(c:Character) {
     	super(0, 0, 150, 50);
-    	fromExternalMC(C.SpritesheetClass, [5, 3]);
+    	loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(5, 3));
 
     	setPos(new Vec(20, 20));
     	t = new Text(20 + 28, 20, "Do stuff", 200);
@@ -18,7 +18,7 @@ package {
 
     	this.c = c;
 
-        xButton = new Entity().fromExternalMC(C.SpritesheetClass, [8, 3]);
+        xButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(8, 3));
         xButton.setPos(this.rect().add(new Vec(0, 30)));
         xButton.addGroups("no-camera");
         xButton.ignoreCollisions();

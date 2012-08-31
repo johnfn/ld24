@@ -19,13 +19,13 @@ package {
 
     public function activate():void {
     	if (!isActivated && !totallyDead) {
-	    	updateExternalMC([3, 2]);
+	    	setTile(3, 2);
 	    	isActivated = true;
 	    }
     }
 
     public function useGate():void {
-    	updateExternalMC([3, 3]);
+    	setTile(3, 3);
     	totallyDead = true;
 
     	var gates:EntityList = Fathom.entities.get("Gate");

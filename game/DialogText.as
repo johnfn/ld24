@@ -17,9 +17,9 @@ package {
       args = args.slice(); //clone array so we dont destroy it.
 
       super(0, 0, 50, 50);
-      fromExternalMC(DialogClass);
+      loadSpritesheet(DialogClass);
 
-      profPic = new Entity().fromExternalMC(PortraitsClass, [2, 0]);
+      profPic = new Entity().loadSpritesheet(PortraitsClass, C.dim, new Vec(2, 0));
 
       visible = true;
 
@@ -48,22 +48,22 @@ package {
       var nextText:String = dialogsLeft.shift();
 
       if (nextText.indexOf("YOU") != -1) {
-        profPic.updateExternalMC([2, 0]);
+        profPic.setTile(2, 0);
         nextText = nextText.split("YOU ").join("");
       }
 
       if (nextText.indexOf("PROF") != -1) {
-        profPic.updateExternalMC([0, 0]);
+        profPic.setTile(0, 0);
         nextText = nextText.split("PROF ").join("");
       }
 
       if (nextText.indexOf("STARZ") != -1) {
-        profPic.updateExternalMC([1, 0]);
+        profPic.setTile(1, 0);
         nextText = nextText.split("STARZ ").join("");
       }
 
       if (nextText.indexOf("ZILLA") != -1) {
-        profPic.updateExternalMC([3, 0]);
+        profPic.setTile(3, 0);
         nextText = nextText.split("ZILLA ").join("");
       }
 

@@ -15,13 +15,13 @@ package {
 
     private var selection:int = 0;
     private var activated:int = 0;
-    private var activated_max:int = C.DEBUG ? 2 : 1;
+    private var activated_max:int = 1;
 
-    public var items:Array = C.DEBUG ? [new InventoryItem(Inventory.BOLT), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.ICE)] : [];//new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR)] ;
+    public var items:Array = false ? [new InventoryItem(Inventory.BOLT), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.ICE)] : [];//new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR)] ;
 
     function Inventory() {
       super(0, 0, 150, 50);
-      fromExternalMC(InventoryClass);
+      loadImage(InventoryClass);
       filters = [new DropShadowFilter()];
 
       // stick in middle, assuming w==h==50.
@@ -228,7 +228,7 @@ package {
     }
 
     override public function groups():Array {
-      return super.groups().concat("no-camera");
+      return super.groups().concat("no-camera", "nonblocking");
     }
   }
 }
@@ -245,7 +245,7 @@ class InventoryItem extends Entity {
   function InventoryItem(itemType:int) {
     super(0, 0, C.size, C.size);
 
-    fromExternalMC(C.SpritesheetClass, [itemType, 0]);
+    loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(itemType, 0));
 
     this.visible = false;
     this.itemType = itemType;
@@ -263,7 +263,7 @@ class InventoryItem extends Entity {
     _activated = !_activated;
 
     if (_activated) {
-      updateExternalMC([itemType, 2]);
+      setTile(itemType, 2);
     } else {
       if (selected) {
         select();
@@ -275,20 +275,20 @@ class InventoryItem extends Entity {
 
   public function select():void {
     this.selected = true;
-    updateExternalMC([itemType, 1]);
+    setTile(itemType, 1);
   }
 
   public function deselect():void {
     this.selected = false;
     if (_activated) {
-      updateExternalMC([itemType, 2]);
+      setTile(itemType, 2);
     } else {
-      updateExternalMC([itemType, 0]);
+      setTile(itemType, 0);
     }
   }
 
   override public function groups():Array {
-    return super.groups().concat("no-camera");
+    return super.groups().concat("no-camera", "nonblocking");
   }
 
   override public function collides(e:Entity):Boolean {

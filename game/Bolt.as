@@ -8,9 +8,9 @@ package {
     function Bolt(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);
 
-      on("pre-update", Hooks.platformerLike(this));
+      //on("pre-update", Hooks.platformerLike(this));
 
-      on("post-update", Hooks.resolveCollisions());
+      //on("post-update", Hooks.resolveCollisions());
 
       grps = super.groups()
       grps.remove("persistent")

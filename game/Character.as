@@ -13,7 +13,7 @@ package {
     public var xAction:String = "";
 
     public var fixedProfsComp:Boolean = C.DEBUG;
-    public var hasJumper:Boolean = C.DEBUG;
+    public var hasJumper:Boolean = true;
     public var canEvol:Boolean = C.DEBUG;
 
     public static var NOTHING:int = 0;
@@ -38,14 +38,13 @@ package {
     function Character(x:int, y:int, base:Class, mapRef:Map, i:Inventory) {
       //todo; wiggle room
       super(x, y, C.size, C.size);
-      fromExternalMC(base, [0, 0], true);
-      setMCOffset(12, 0);
+      loadSpritesheet(base, C.dim, new Vec(0, 0));
+      setRotationOrigin(width / 2, 0);
 
       this.mapRef = mapRef;
 
-      on("pre-update", Hooks.platformerLike(this));
-
-      on("post-update", Hooks.resolveCollisions());
+      this.width -= 2;
+      this.height -= 2;
 
       this.inventory = i;
     }
@@ -244,13 +243,13 @@ package {
       landSnd();
 
       vel.x = Util.movementVector().x * 8;
-      vel.y += GRAVITY;
-
-      pushBlocks();
-
       if (touchingBottom || touchingTop) {
         vel.y = 0;
       }
+
+      vel.y += GRAVITY;
+
+      pushBlocks();
 
       if (touchingBottom) {
         flyingPower = 60;
@@ -424,7 +423,7 @@ package {
       var b:Bolt = new Bolt();
       var dir:int = scaleX * -1;
 
-      b.fromExternalMC(C.SpritesheetClass, [4, 4]);
+      b.loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(4, 4));
       b.setPos(this).add(new Vec(-25 * dir, -5));
       b.vel = new Vec(-9 * dir, 0);
       addChild(b);
