@@ -8,8 +8,6 @@ package {
 
     function PushBlock(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);
-
-      on("pre-update", Hooks.decel());
     }
 
     public function rememberLoc():void {
@@ -21,8 +19,8 @@ package {
     }
 
     private function handleProfsComp():void {
-      for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
-        currentlyTouching("Terminal")[i].activate();
+      for each (var t:Terminal in touchingSet("Terminal")) {
+        t.activate();
       }
 
       // Hacks? Where we're going, we don't need hacks.
@@ -37,13 +35,13 @@ package {
       return super.groups().concat("remember-loc");
     }
 
-    override public function update(e:EntityList):void {
+    override public function update(e:EntitySet):void {
       this.vel.x *= 0.9;
-      this.vel.y = 6;
+      this.vel.y = 4;
 
-      if (this.vel.x < 0.1 || this.vel.x > -0.1) this.vel.x = 0;
+      if (Math.abs(this.vel.x) < 0.1) this.vel.x = 0;
 
-      if (this.currentlyTouching("Terminal").length && !PushBlock.crushedConsole) {
+      if (this.isTouching("Terminal") && !PushBlock.crushedConsole) {
         if (Fathom.mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
           PushBlock.crushedConsole = true;
           handleProfsComp();
@@ -52,13 +50,13 @@ package {
 
         var didSomething:Boolean = false;
 
-        for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
-          if (currentlyTouching("Terminal")[i].notDead()) {
+        for each (var t:Terminal in touchingSet("Terminal")) {
+          if (t.notDead()) {
             didSomething = true;
           }
 
-          currentlyTouching("Terminal")[i].activate();
-          currentlyTouching("Terminal")[i].useGate();
+          t.activate();
+          t.useGate();
         }
 
         if (didSomething) {

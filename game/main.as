@@ -18,6 +18,8 @@ package {
     [Embed(source = "../data/map.png")] static public var MapClass:Class;
 
     public static var MainObj:main;
+    public static var c:Character;
+
     private var m:Map;
 
     private var scrollBG:ScrollingBackground;
@@ -107,13 +109,17 @@ package {
         (new Color(100, 100, 100).toString()) : { type: Terminal, gfx: C.SpritesheetClass, spritesheet: new Vec(3, 3), fixedSize: true },
         (new Color(101, 101, 101).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: new Vec(5, 4), fixedSize: true },
         (new Color(102, 102, 102).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: new Vec(6, 4), fixedSize: true }
-      }).startingCorner(new Vec(0, 0)).loadNewMap(new Vec(0, 0));
+      }).loadNewMap(new Vec(4, 1));
 
       Fathom.mapRef = m;
 
       var i:Inventory = new Inventory();
-      var c:Character = new Character(2 * 25 + 2, 5 * 25, C.CharacterClass, m, i);
+      var c:Character = new Character(5 * 25 + 2, 5 * 25, C.CharacterClass, m, i);
       var h:HUD       = new HUD(c);
+
+      main.c = c;
+
+      //(new Entity(185, 100, 50, 75)).debugDraw();
 
       Fathom._camera = new Camera(stage).scaleBy(1).beBoundedBy(m).setEaseSpeed(3);
 

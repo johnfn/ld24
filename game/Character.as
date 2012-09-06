@@ -39,7 +39,7 @@ package {
       //todo; wiggle room
       super(x, y, C.size, C.size);
       loadSpritesheet(base, C.dim, new Vec(0, 0));
-      setRotationOrigin(width / 2, 0);
+      //setRotationOrigin(width / 2, 0);
 
       this.mapRef = mapRef;
 
@@ -68,12 +68,12 @@ package {
     }
 
     public function setXAction():void {
-      if (canEvol && currentlyTouching("Professor").length) {
+      if (canEvol && isTouching("Professor")) {
         xAction = "Ask Prof. to evolve you.";
         return;
       }
 
-      if (currentlyTouching("Telephone").length) {
+      if (isTouching("Telephone")) {
         if (canEvol) {
           xAction = "Call Prof. and Evolve!"
         } else {
@@ -142,7 +142,7 @@ package {
           currentAction = JUMP;
         }
 
-        if (evolutions.contains(Inventory.BOLT) && currentlyTouching("Terminal").length) {
+        if (evolutions.contains(Inventory.BOLT) && isTouching("Terminal")) {
           currentAction = ENERGIZE;
         }
       }
@@ -167,12 +167,12 @@ package {
 
       // Context-specific
 
-      if (currentlyTouching("Professor").length) {
+      if (isTouching("Professor")) {
         currentAction = TALK_PROF;
       }
 
-      if (currentlyTouching("Terminal").length) {
-        if (currentlyTouching("Terminal")[0].isActivated) {
+      if (isTouching("Terminal")) {
+        if ((touchingSet("Terminal").one() as Terminal).isActivated) {
           currentAction = USE_TERMINAL;
         } else if (currentAction != ENERGIZE) {
           currentAction = EXAMINE_TERMINAL;
@@ -206,17 +206,14 @@ package {
     }
 
     private function pushBlocks():void {
-      var blox:EntityList = currentlyTouching("PushBlock");
-
-      for (var i:int = 0; isFreezing && i < blox.length; i++) {
-        blox[i].vel.x = vel.x;
+      for each (var blox:PushBlock in touchingSet("PushBlock")) {
+        blox.vel.x = vel.x;
       }
     }
 
     private function killEasterEggs():void {
-      if (currentlyTouching("EasterEgg").length) {
-        var egg:EasterEgg = currentlyTouching("EasterEgg")[0];
-        egg.destroy();
+      if (isTouching("EasterEgg")) {
+        touchingSet("EasterEgg").one().destroy();
 
         new DialogText(C.eggy);
       }
@@ -234,7 +231,7 @@ package {
       }
     }
 
-    override public function update(e:EntityList):void {
+    override public function update(e:EntitySet):void {
       setCameraFocus();
       setXAction();
       killEasterEggs();
@@ -243,11 +240,10 @@ package {
       landSnd();
 
       vel.x = Util.movementVector().x * 8;
+
       if (touchingBottom || touchingTop) {
         vel.y = 0;
       }
-
-      vel.y += GRAVITY;
 
       pushBlocks();
 
@@ -268,14 +264,16 @@ package {
         vel.y = 0;
       }
 
+      vel.y += GRAVITY;
+
       if (hasJumper && Util.keyIsDown(Util.Key.X) && touchingBottom && vel.y > -5) {
         vel.y -= 15;
         C.jumpSound.play();
         usedDblJump = false;
       }
 
-      if (Util.movementVector().x > 0) this.scaleX = 1;
-      if (Util.movementVector().x < 0) this.scaleX = -1;
+      //if (Util.movementVector().x > 0) this.scaleX = 1;
+      //if (Util.movementVector().x < 0) this.scaleX = -1;
 
       Hooks.onLeaveMap(this, mapRef, leftMap);
 
@@ -287,8 +285,14 @@ package {
         checkHoldActions();
       }
 
-      for (var i:int = 0; isFreezing && i < currentlyTouching("Block").length; i++) {
-        currentlyTouching("Block")[i].freezeOver();
+      if (isFreezing) {
+        freezeBlocks();
+      }
+    }
+
+    private function freezeBlocks():void {
+      for each (var e:Block in touchingSet("Block")) {
+        e.freezeOver();
       }
     }
 
@@ -351,14 +355,15 @@ package {
 
     private function energize():void {
       var used:Boolean = false;
+      var i:int;
 
       // Prof's comp is a special case.
       if (mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
-        if (currentlyTouching("Terminal").length) {
+        if (isTouching("Terminal")) {
           if (!energizedTheProfsComp) {
-            var gates:EntityList = Fathom.entities.get("Gate");
+            var gates:EntitySet = Fathom.entities.get("Gate");
 
-            for (var i:int = 0; i < gates.length; i++) {
+            for (i = 0; i < gates.length; i++) {
               gates[i].destroy();
             }
 
@@ -372,8 +377,8 @@ package {
         return;
       }
 
-      for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
-        currentlyTouching("Terminal")[i].activate();
+      for each (var t:Terminal in touchingSet("Terminal")) {
+        t.activate();
         used = true;
       }
 
@@ -409,8 +414,8 @@ package {
         return; //dont kill his comp :p
       }
 
-      for (var i:int = 0; i < currentlyTouching("Terminal").length; i++) {
-        currentlyTouching("Terminal")[i].useGate();
+      for each (var t:Terminal in touchingSet("Terminal")) {
+        t.useGate();
       }
 
       if (used) {
@@ -432,7 +437,7 @@ package {
     }
 
     private function doSmash():void {
-      var blox:EntityList = Fathom.entities.get("SmashBlock");
+      var blox:EntitySet = Fathom.entities.get("SmashBlock");
 
       for (var i:int = 0; i < blox.length; i++) {
         var dist:int = Math.abs(blox[i].x - this.x) + Math.abs(blox[i].y - this.y);

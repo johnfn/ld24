@@ -15,9 +15,9 @@ package {
 
     private var selection:int = 0;
     private var activated:int = 0;
-    private var activated_max:int = 1;
+    private var activated_max:int = 2;
 
-    public var items:Array = false ? [new InventoryItem(Inventory.BOLT), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.ICE)] : [];//new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR)] ;
+    public var items:Array = true ? [new InventoryItem(Inventory.BOLT), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.ICE)] : [];//new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR)] ;
 
     function Inventory() {
       super(0, 0, 150, 50);
@@ -105,7 +105,7 @@ package {
       }
     }
 
-    override public function update(e:EntityList):void {
+    override public function update(e:EntitySet):void {
 
       // Toggle inventory.
 
@@ -116,7 +116,7 @@ package {
 
         var ch:Character = (Fathom.entities.one("Character") as Character);
 
-        if (ch.currentlyTouching("Telephone").length) {
+        if (ch.isTouching("Telephone")) {
           if (ch.canEvol) {
             hasAccess = true;
           } else {
@@ -129,7 +129,7 @@ package {
           }
         }
 
-        hasAccess = hasAccess || (ch.currentlyTouching("Professor").length && ch.canEvol);
+        hasAccess = hasAccess || (ch.isTouching("Professor") && ch.canEvol);
 
         if (hasAccess) {
           if (Fathom.currentMode == C.MODE_NORMAL) {

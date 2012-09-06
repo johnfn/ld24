@@ -28,7 +28,7 @@ package {
     	setTile(3, 3);
     	totallyDead = true;
 
-    	var gates:EntityList = Fathom.entities.get("Gate");
+    	var gates:EntitySet = Fathom.entities.get("Gate");
 
     	for (var i:int = 0; i < gates.length; i++) {
     		gates[i].destroy();

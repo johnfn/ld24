@@ -8,7 +8,7 @@ package {
     private var arrowKeys:Text;
 
     function HUD(c:Character) {
-    	super(0, 0, 150, 50);
+    	super(0, 0, 25, 25);
     	loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(5, 3));
 
     	setPos(new Vec(20, 20));
@@ -34,7 +34,7 @@ package {
         arrowKeys.visible = false;
     }
 
-    override public function update(e:EntityList):void {
+    override public function update(e:EntitySet):void {
         var inv:Inventory = Fathom.entities.one("Inventory") as Inventory;
 
     	t.text = c.getActionString();

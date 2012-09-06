@@ -8,33 +8,22 @@ package {
     function Bolt(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);
 
-      //on("pre-update", Hooks.platformerLike(this));
-
-      //on("post-update", Hooks.resolveCollisions());
-
       grps = super.groups()
       grps.remove("persistent")
       grps = grps.concat("non-blocking");
-
     }
 
-    override public function update(e:EntityList):void {
-    	if (currentlyBlocking().length) {
+    override public function update(e:EntitySet):void {
+    	if (isBlocked()) {
     		this.destroy();
     	}
 
-    	if (currentlyTouching("Terminal").length) {
-    		var terms:EntityList = currentlyTouching("Terminal");
+      for each (var t:Terminal in touchingSet("Terminal")) {
+        t.activate();
+        t.useGate();
 
-    		if (terms.length == 0) return;
-
-    		for (var i:int = 0; i < terms.length; i++) {
-    			terms[i].activate();
-    			terms[i].useGate();
-    		}
-
-    		this.destroy();
-    	}
+        this.destroy();
+      }
 
       if (Hooks.hasLeftMap(this, Fathom.mapRef)) {
         this.destroy();

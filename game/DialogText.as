@@ -74,7 +74,7 @@ package {
       return super.groups().concat("no-camera");
     }
 
-    override public function update(e:EntityList):void {
+    override public function update(e:EntitySet):void {
       if (Util.keyRecentlyDown(Util.Key.Z)) {
         if (dialogsLeft.length == 0) {
           this.destroy();
