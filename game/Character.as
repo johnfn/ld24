@@ -288,6 +288,36 @@ package {
       if (isFreezing) {
         freezeBlocks();
       }
+
+      checkToggleInventory();
+    }
+
+    private function checkToggleInventory():void {
+      var hasAccess:Boolean = false;
+
+      if (Util.keyRecentlyDown(Util.Key.X) || (Util.keyRecentlyDown(Util.Key.C) && C.DEBUG)) {
+
+        hasAccess = hasAccess || (C.DEBUG && Util.keyRecentlyDown(Util.Key.C));
+
+        if (isTouching("Telephone")) {
+          if (canEvol) {
+            hasAccess = true;
+          } else {
+            if (hasJumper) {
+              new DialogText(C.whatNow);
+            } else {
+              new DialogText(C.whosThat);
+            }
+
+            hasAccess = false;
+          }
+        }
+
+        hasAccess = hasAccess || (isTouching("Professor") && canEvol);
+
+      }
+
+      inventory.setActivated(hasAccess);
     }
 
     private function freezeBlocks():void {

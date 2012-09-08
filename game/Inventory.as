@@ -105,48 +105,29 @@ package {
       }
     }
 
-    override public function update(e:EntitySet):void {
-
-      // Toggle inventory.
-
-      if (Util.keyRecentlyDown(Util.Key.X) || (Util.keyRecentlyDown(Util.Key.C) && C.DEBUG)) {
-        var hasAccess:Boolean = false;
-
-        hasAccess = hasAccess || (C.DEBUG && Util.keyRecentlyDown(Util.Key.C));
-
-        var ch:Character = (Fathom.entities.one("Character") as Character);
-
-        if (ch.isTouching("Telephone")) {
-          if (ch.canEvol) {
-            hasAccess = true;
-          } else {
-            if (ch.hasJumper) {
-              new DialogText(C.whatNow);
-            } else {
-              new DialogText(C.whosThat);
-            }
-            hasAccess = false;
-          }
-        }
-
-        hasAccess = hasAccess || (ch.isTouching("Professor") && ch.canEvol);
-
-        if (hasAccess) {
-          if (Fathom.currentMode == C.MODE_NORMAL) {
-            Fathom.pushMode(C.MODE_INVENTORY);
-
-            prepareToShow();
-          } else {
-            Fathom.popMode();
-
-            prepareToHide();
-          }
-
-          this.visible = Fathom.currentMode == C.MODE_INVENTORY;
-        }
+    public function setActivated(b:Boolean):void {
+      if (b == this.visible) {
+        return;
       }
 
+      if (b) {
+        this.visible = true;
+        Fathom.pushMode(C.MODE_INVENTORY);
+        prepareToShow();
+      } else {
+        this.visible = false;
+        Fathom.popMode();
+        prepareToHide();
+      }
+    }
+
+    override public function update(e:EntitySet):void {
       if (Fathom.currentMode != C.MODE_INVENTORY) return;
+
+      if (Util.keyRecentlyDown(Util.Key.X)) {
+        setActivated(false);
+        return;
+      }
 
       // Rotate selection.
       if (Util.keyRecentlyDown(Util.Key.Right) || Util.keyRecentlyDown(Util.Key.Left)) {
