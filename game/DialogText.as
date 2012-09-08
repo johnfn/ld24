@@ -29,8 +29,11 @@ package {
       setPos(new Vec(250 - BOX_WIDTH/2, 250 - BOX_HEIGHT/2 + 25));
       profPic.setPos(new Vec(10, 20));
 
-      text = new Text(45, 8, "", BOX_WIDTH - 40);
-      text.textColor = 0xffffff;
+      text = new Text("", C.fontName);
+      text.setPos(new Vec(45, 8));
+      text.width = BOX_WIDTH - 40;
+
+      text.color = 0xffffff;
       Fathom.pushMode(C.MODE_TEXT);
 
       dialogsLeft = args;

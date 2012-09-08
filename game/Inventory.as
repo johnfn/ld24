@@ -228,7 +228,7 @@ package {
     }
 
     override public function groups():Array {
-      return super.groups().concat("no-camera", "nonblocking");
+      return super.groups().concat("no-camera", "non-blocking");
     }
   }
 }
@@ -288,7 +288,7 @@ class InventoryItem extends Entity {
   }
 
   override public function groups():Array {
-    return super.groups().concat("no-camera", "nonblocking");
+    return super.groups().concat("no-camera", "non-blocking");
   }
 
   override public function collides(e:Entity):Boolean {

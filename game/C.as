@@ -7,6 +7,14 @@ package {
 
     public static var DEBUG:Boolean = true;
 
+    // Text.
+
+
+    // embedAsCCF MUST be set to false if you want anything to show up at all.
+    [Embed(source="../data/04b03.ttf", embedAsCFF="false", fontFamily="BittyFont", mimeType="application/x-font")]
+    public static var fontClass:String;
+    public static var fontName:String = "BittyFont";
+
     // Graphics.
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
 

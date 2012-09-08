@@ -1,49 +1,67 @@
 package {
   public class HUD extends Entity {
-    private var t:Text;
     private var c:Character;
 
-    private var xButton:Entity;
     private var xText:Text;
+    private var xButton:Entity;
+
+    private var zText:Text;
+    private var zButton:Entity;
+
     private var arrowKeys:Text;
 
     function HUD(c:Character) {
     	super(0, 0, 25, 25);
-    	loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(5, 3));
 
-    	setPos(new Vec(20, 20));
-    	t = new Text(20 + 28, 20, "Do stuff", 200);
-    	t.addGroups("no-camera");
-    	t.textColor = 0xffffff;
+        zButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(5, 3));
+        zButton.setPos(new Vec(20, 40));
+        zButton.addGroups("no-camera");
+        zButton.ignoreCollisions();
+
+    	zText = new Text("Do stuff", C.fontName);
+        zText.setPos(new Vec(50, 42))
+        zText.width = 200;
+    	zText.addGroups("no-camera");
+    	zText.color = 0xffffff;
 
     	this.c = c;
 
         xButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(8, 3));
-        xButton.setPos(this.rect().add(new Vec(0, 30)));
+        xButton.setPos(new Vec(20, 10));
         xButton.addGroups("no-camera");
         xButton.ignoreCollisions();
 
-        xText = new Text(xButton.x + 28, xButton.y, "Do stuff", 200);
+        xText = new Text("Do stuff", C.fontName);
+        xText.setPos(new Vec(50, 12));
+        xText.width = 200;
         xText.addGroups("no-camera");
-        xText.textColor = 0xffffff;
+        xText.color = 0xffffff;
 
-        arrowKeys = new Text(xButton.x, xButton.y + 30, "Arrow keys to cycle back/forth.", 200);
-        arrowKeys.addGroups("no-camera");
-        arrowKeys.textColor = 0xffffff;
+        arrowKeys = new Text("Arrow keys to cycle back/forth.");
+        arrowKeys.setPos(new Vec(0, 30));
+        arrowKeys.width = 200;
 
+        arrowKeys.addGroups("no-camera", C.fontName);
+        arrowKeys.color = 0xffffff;
         arrowKeys.visible = false;
+
+        addChild(zText);
+        addChild(zButton);
+        addChild(xText);
+        addChild(xButton);
+        addChild(arrowKeys);
     }
 
     override public function update(e:EntitySet):void {
         var inv:Inventory = Fathom.entities.one("Inventory") as Inventory;
 
-    	t.text = c.getActionString();
+    	zText.text = c.getActionString();
 
         if (Fathom.currentMode == C.MODE_INVENTORY) {
             if (inv.currentCardSelected()) {
-                t.text = "Deselect this card.";
+                zText.text = "Deselect this card.";
             } else {
-                t.text = "Select this card.";
+                zText.text = "Select this card.";
             }
         }
 
@@ -56,11 +74,6 @@ package {
         } else {
             xText.text = c.xAction;
         }
-
-        xButton.raiseToTop();
-        xText.raiseToTop();
-        t.raiseToTop();
-        arrowKeys.raiseToTop();
 
         if (xText.text == "") {
             xText.visible = false;

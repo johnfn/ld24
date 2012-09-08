@@ -36,7 +36,6 @@ package {
     }
 
     private function scroll(e:Event):void {
-      /*
       if (m.getTopLeftCorner().y == 0) {
         scrollBG.move(.3, 0);
         scrollBG.x = -Fathom.camera.x * 15/20;
@@ -50,7 +49,6 @@ package {
         scrollBG.visible = false;
         scrollBG2.visible = true;
       }
-      */
     }
 
     public function showEndGameScreen():void {
@@ -92,7 +90,7 @@ package {
     }
 
     public function main():void {
-      //addBG();
+      addBG();
       MainObj = this;
 
       Fathom.initialize(stage);
@@ -109,7 +107,7 @@ package {
         (new Color(100, 100, 100).toString()) : { type: Terminal, gfx: C.SpritesheetClass, spritesheet: new Vec(3, 3), fixedSize: true },
         (new Color(101, 101, 101).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: new Vec(5, 4), fixedSize: true },
         (new Color(102, 102, 102).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: new Vec(6, 4), fixedSize: true }
-      }).loadNewMap(new Vec(4, 1));
+      }).loadNewMap(new Vec(0, 0));
 
       Fathom.mapRef = m;
 
@@ -118,8 +116,6 @@ package {
       var h:HUD       = new HUD(c);
 
       main.c = c;
-
-      //(new Entity(185, 100, 50, 75)).debugDraw();
 
       Fathom._camera = new Camera(stage).scaleBy(1).beBoundedBy(m).setEaseSpeed(3);
 
