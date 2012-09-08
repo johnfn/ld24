@@ -15,33 +15,31 @@ package {
 
         zButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(5, 3));
         zButton.setPos(new Vec(20, 40));
-        zButton.addGroups("no-camera");
-        zButton.ignoreCollisions();
+        zButton.addGroups("no-camera", "non-blocking");
 
     	zText = new Text("Do stuff", C.fontName);
         zText.setPos(new Vec(50, 42))
         zText.width = 200;
-    	zText.addGroups("no-camera");
+    	zText.addGroups("no-camera", "non-blocking");
     	zText.color = 0xffffff;
 
     	this.c = c;
 
         xButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(8, 3));
         xButton.setPos(new Vec(20, 10));
-        xButton.addGroups("no-camera");
-        xButton.ignoreCollisions();
+        xButton.addGroups("no-camera", "non-blocking");
 
         xText = new Text("Do stuff", C.fontName);
         xText.setPos(new Vec(50, 12));
         xText.width = 200;
-        xText.addGroups("no-camera");
+        xText.addGroups("no-camera", "non-blocking");
         xText.color = 0xffffff;
 
-        arrowKeys = new Text("Arrow keys to cycle back/forth.");
+        arrowKeys = new Text("Arrow keys to cycle back/forth.", C.fontName);
         arrowKeys.setPos(new Vec(0, 30));
         arrowKeys.width = 200;
 
-        arrowKeys.addGroups("no-camera", C.fontName);
+        arrowKeys.addGroups("no-camera", "non-blocking");
         arrowKeys.color = 0xffffff;
         arrowKeys.visible = false;
 
@@ -88,12 +86,8 @@ package {
         return 5000;
     }
 
-    override public function collides(e:Entity):Boolean {
-    	return false;
-    }
-
     override public function groups():Array {
-      return super.groups().concat("no-camera");
+      return super.groups().concat("no-camera").concat("non-blocking");
     }
 
 	override public function modes():Array {

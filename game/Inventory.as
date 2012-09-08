@@ -105,6 +105,8 @@ package {
       }
     }
 
+    private var justActivated:Boolean = false;
+
     public function setActivated(b:Boolean):void {
       if (b == this.visible) {
         return;
@@ -114,6 +116,7 @@ package {
         this.visible = true;
         Fathom.pushMode(C.MODE_INVENTORY);
         prepareToShow();
+        justActivated = true;
       } else {
         this.visible = false;
         Fathom.popMode();
@@ -124,10 +127,12 @@ package {
     override public function update(e:EntitySet):void {
       if (Fathom.currentMode != C.MODE_INVENTORY) return;
 
-      if (Util.keyRecentlyDown(Util.Key.X)) {
+      if (!justActivated && Util.keyRecentlyDown(Util.Key.X)) {
         setActivated(false);
         return;
       }
+
+      justActivated = false;
 
       // Rotate selection.
       if (Util.keyRecentlyDown(Util.Key.Right) || Util.keyRecentlyDown(Util.Key.Left)) {
@@ -204,10 +209,6 @@ package {
       return [C.MODE_NORMAL, C.MODE_INVENTORY];
     }
 
-    override public function collides(e:Entity):Boolean {
-      return false;
-    }
-
     override public function groups():Array {
       return super.groups().concat("no-camera", "non-blocking");
     }
@@ -270,9 +271,5 @@ class InventoryItem extends Entity {
 
   override public function groups():Array {
     return super.groups().concat("no-camera", "non-blocking");
-  }
-
-  override public function collides(e:Entity):Boolean {
-    return false;
   }
 }

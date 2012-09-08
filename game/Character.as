@@ -35,10 +35,9 @@ package {
 
     public var currentAction:int = NOTHING;
 
-    function Character(x:int, y:int, base:Class, mapRef:Map, i:Inventory) {
-      //todo; wiggle room
+    function Character(x:int, y:int, mapRef:Map, i:Inventory) {
       super(x, y, C.size, C.size);
-      loadSpritesheet(base, C.dim, new Vec(0, 0));
+      loadSpritesheet(C.CharacterClass, C.dim, new Vec(0, 0));
       //setRotationOrigin(width / 2, 0);
 
       this.mapRef = mapRef;
@@ -272,8 +271,7 @@ package {
         usedDblJump = false;
       }
 
-      //if (Util.movementVector().x > 0) this.scaleX = 1;
-      //if (Util.movementVector().x < 0) this.scaleX = -1;
+      face(Util.movementVector().x);
 
       Hooks.onLeaveMap(this, mapRef, leftMap);
 
