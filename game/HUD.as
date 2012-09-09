@@ -20,7 +20,6 @@ package {
     	zText = new Text("Do stuff", C.fontName);
         zText.setPos(new Vec(40, 42))
         zText.width = 200;
-    	zText.addGroups("no-camera", "non-blocking");
     	zText.color = 0xffffff;
 
     	this.c = c;
@@ -32,13 +31,11 @@ package {
         xText = new Text("Do stuff", C.fontName);
         xText.setPos(new Vec(40, 12));
         xText.width = 200;
-        xText.addGroups("no-camera", "non-blocking");
         xText.color = 0xffffff;
 
         arrowKeys = new Text("Arrow keys to cycle back/forth.", C.fontName);
         arrowKeys.centerOnScreen();
         arrowKeys.y = 300;
-        arrowKeys.addGroups("no-camera", "non-blocking");
         arrowKeys.color = 0xffffff;
 
         addChild(arrowKeys);
