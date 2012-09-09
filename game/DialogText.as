@@ -73,7 +73,7 @@ package {
       text.text = nextText;
     }
 
-    override public function groups():Array {
+    override public function groups():Set {
       return super.groups().concat("no-camera");
     }
 

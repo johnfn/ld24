@@ -7,7 +7,7 @@ package {
       super(x, y, SIZE, SIZE);
     }
 
-    public override function groups():Array {
+    public override function groups():Set {
         return super.groups().concat("non-blocking");
     }
   }

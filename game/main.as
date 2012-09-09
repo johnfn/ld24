@@ -113,7 +113,7 @@ package {
 
       var i:Inventory = new Inventory();
       var c:Character = new Character(5 * 25 + 2, 5 * 25, m, i);
-      var h:HUD       = new HUD(c);
+                        new HUD(c);
 
       main.c = c;
 

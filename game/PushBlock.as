@@ -31,7 +31,7 @@ package {
       new DialogText(C.profConCrush);
     }
 
-    override public function groups():Array {
+    override public function groups():Set {
       return super.groups().concat("remember-loc");
     }
 

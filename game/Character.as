@@ -288,6 +288,14 @@ package {
       }
 
       checkToggleInventory();
+
+      checkOpenChest();
+    }
+
+    private function checkOpenChest():void {
+      if (isTouching("Treasure")) {
+        (touchingSet("Treasure").one() as Treasure).open();
+      }
     }
 
     private function checkToggleInventory():void {

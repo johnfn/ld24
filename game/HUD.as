@@ -14,11 +14,11 @@ package {
     	super(0, 0, 25, 25);
 
         zButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(5, 3));
-        zButton.setPos(new Vec(20, 40));
+        zButton.setPos(new Vec(10, 40));
         zButton.addGroups("no-camera", "non-blocking");
 
     	zText = new Text("Do stuff", C.fontName);
-        zText.setPos(new Vec(50, 42))
+        zText.setPos(new Vec(40, 42))
         zText.width = 200;
     	zText.addGroups("no-camera", "non-blocking");
     	zText.color = 0xffffff;
@@ -26,28 +26,26 @@ package {
     	this.c = c;
 
         xButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(8, 3));
-        xButton.setPos(new Vec(20, 10));
+        xButton.setPos(new Vec(10, 10));
         xButton.addGroups("no-camera", "non-blocking");
 
         xText = new Text("Do stuff", C.fontName);
-        xText.setPos(new Vec(50, 12));
+        xText.setPos(new Vec(40, 12));
         xText.width = 200;
         xText.addGroups("no-camera", "non-blocking");
         xText.color = 0xffffff;
 
         arrowKeys = new Text("Arrow keys to cycle back/forth.", C.fontName);
-        arrowKeys.setPos(new Vec(0, 30));
-        arrowKeys.width = 200;
-
+        arrowKeys.centerOnScreen();
+        arrowKeys.y = 300;
         arrowKeys.addGroups("no-camera", "non-blocking");
         arrowKeys.color = 0xffffff;
-        arrowKeys.visible = false;
 
+        addChild(arrowKeys);
         addChild(zText);
         addChild(zButton);
         addChild(xText);
         addChild(xButton);
-        addChild(arrowKeys);
     }
 
     override public function update(e:EntitySet):void {
@@ -86,8 +84,8 @@ package {
         return 5000;
     }
 
-    override public function groups():Array {
-      return super.groups().concat("no-camera").concat("non-blocking");
+    override public function groups():Set {
+      return super.groups().concat("no-camera", "non-blocking");
     }
 
 	override public function modes():Array {

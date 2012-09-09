@@ -3,7 +3,7 @@ package {
     private var type:int;
     private const SIZE:int = C.size;
 
-    private var grps:Array;
+    private var grps:Set;
 
     function Bolt(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);
@@ -30,7 +30,7 @@ package {
       }
     }
 
-    override public function groups():Array {
+    override public function groups():Set {
       return grps;
     }
   }

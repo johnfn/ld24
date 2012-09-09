@@ -10,8 +10,8 @@ package {
       super(x, y, SIZE, SIZE);
     }
 
-    public override function collides(e:Entity):Boolean {
-    	if (e.groups().contains("Character") && super.collides(e) && !gone) {
+    public function open():void {
+    	if (!gone) {
             var whichMap:Vec = Fathom.mapRef.getTopLeftCorner();
 
             C.powerupSound.play();
@@ -42,7 +42,7 @@ package {
                 gone = true;
 
                 // Exit early so we don't give him anything. trolololol
-                return false;
+                return;
             }
 
             if (whichMap.equals(new Vec(175, 0))) {
@@ -57,10 +57,10 @@ package {
             new DialogText(response);
 
             gone = true;
-    		return false;
+    		return;
     	}
 
-    	return false;
+    	return;
     }
   }
 }

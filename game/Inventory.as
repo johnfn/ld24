@@ -209,7 +209,7 @@ package {
       return [C.MODE_NORMAL, C.MODE_INVENTORY];
     }
 
-    override public function groups():Array {
+    override public function groups():Set {
       return super.groups().concat("no-camera", "non-blocking");
     }
   }
@@ -269,7 +269,7 @@ class InventoryItem extends Entity {
     }
   }
 
-  override public function groups():Array {
+  override public function groups():Set {
     return super.groups().concat("no-camera", "non-blocking");
   }
 }
