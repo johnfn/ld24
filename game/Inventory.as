@@ -125,14 +125,15 @@ package {
     }
 
     override public function update(e:EntitySet):void {
-      if (Fathom.currentMode != C.MODE_INVENTORY) return;
-
-      if (!justActivated && Util.keyRecentlyDown(Util.Key.X)) {
-        setActivated(false);
+      if (justActivated) {
+        justActivated = false;
         return;
       }
 
-      justActivated = false;
+      if (Util.keyRecentlyDown(Util.Key.X)) {
+        setActivated(false);
+        return;
+      }
 
       // Rotate selection.
       if (Util.keyRecentlyDown(Util.Key.Right) || Util.keyRecentlyDown(Util.Key.Left)) {
@@ -206,7 +207,7 @@ package {
     }
 
     override public function modes():Array {
-      return [C.MODE_NORMAL, C.MODE_INVENTORY];
+      return [C.MODE_INVENTORY];
     }
 
     override public function groups():Set {

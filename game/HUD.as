@@ -64,6 +64,7 @@ package {
             xText.text = "Done."
         } else if (Fathom.currentMode == C.MODE_TEXT) {
             xText.text = "";
+            zText.text = "Talk";
         } else {
             xText.text = c.xAction;
         }
