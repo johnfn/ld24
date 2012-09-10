@@ -242,32 +242,43 @@ class InventoryItem extends Entity {
     _itemType = v;
   }
 
+  private function updateCardGraphics():void {
+
+    if (_activated) {
+      if (selected) {
+        setTile(itemType + 4, 1);
+      } else {
+        setTile(itemType + 4, 0);
+      }
+    } else {
+      if (selected) {
+        setTile(itemType, 1);
+      } else {
+        setTile(itemType, 0);
+      }
+    }
+  }
+
   public function toggleActivation():void {
     _activated = !_activated;
 
-    if (_activated) {
-      setTile(itemType, 2);
+    if (selected) {
+      select();
     } else {
-      if (selected) {
-        select();
-      } else {
-        deselect();
-      }
+      deselect();
     }
   }
 
   public function select():void {
     this.selected = true;
-    setTile(itemType, 1);
+
+    updateCardGraphics();
   }
 
   public function deselect():void {
     this.selected = false;
-    if (_activated) {
-      setTile(itemType, 2);
-    } else {
-      setTile(itemType, 0);
-    }
+
+    updateCardGraphics();
   }
 
   override public function groups():Set {
