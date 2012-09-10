@@ -7,7 +7,7 @@ package {
 
     public static var DEBUG:Boolean = true;
 
-    // Text.
+    // Fonts.
 
 
     // embedAsCCF MUST be set to false if you want anything to show up at all.
@@ -46,6 +46,10 @@ package {
 				                           , "YOU But I don't know how to use them."
 				                           , "YOU I'll hold onto it just in case."];*/
 
+
+  public static var whosComp:Array = [ "YOU A terminal. It looks broken."]
+  public static var profsComp:Array = [ "YOU The Professor's own terminal. It looks broken."]
+
 	public static var firstIceEv:Array =   [ "YOU Hmm, this card looks like ice."
     	    		                           , "YOU I wonder what it does?"
       				                           , "YOU Too bad the prof isn't nearby."
@@ -57,9 +61,12 @@ package {
                                  , "STARZ Screenshot this and show it to your friends!"
                                  ];
 
-  public static var normalTerminal:Array  = [ "YOU An unpowered terminal."
-                                            , "YOU I hope no one drops a crate on it."
-                                            ];
+  public static var unpoweredTerminal:Array  = [ "YOU An unpowered terminal."
+                                               , "YOU I hope no one drops a crate on it."
+                                               ];
+
+  public static var usedTerminal:Array       = [ "YOU I already used this terminal."
+                                               ];
 
   public static var theTerminalWorks:Array = [ "YOU The Prof's computer is back in working order."
                                              , "YOU I wonder if he has anything embarrassing on here."

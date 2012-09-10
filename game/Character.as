@@ -13,7 +13,7 @@ package {
     public var xAction:String = "";
 
     public var fixedProfsComp:Boolean = C.DEBUG;
-    public var hasJumper:Boolean = true;
+    public var hasJumper:Boolean = C.DEBUG;
     public var canEvol:Boolean = C.DEBUG;
 
     public static var NOTHING:int = 0;
@@ -206,6 +206,8 @@ package {
 
     private function pushBlocks():void {
       for each (var blox:PushBlock in touchingSet("PushBlock")) {
+        trace("setting!");
+
         blox.vel.x = vel.x;
       }
     }
@@ -425,11 +427,19 @@ package {
 
     private var examinedItBefore:Boolean = false;
 
-    private function examineTerminal():void {
+    private function examineTerminal(t:Terminal):void {
       if (mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
-        new DialogText(["YOU The Professor's own computer."])
+        if (!hasJumper) {
+          new DialogText(C.whosComp);
+        } else {
+          new DialogText(C.profsComp);
+        }
       } else {
-        new DialogText(C.normalTerminal);
+        if (t.notDead()) {
+          new DialogText(C.unpoweredTerminal);
+        } else {
+          new DialogText(C.usedTerminal);
+        }
       }
     }
 
@@ -503,7 +513,7 @@ package {
         case FLY: break;
         case TALK_PROF: dispatchProfDialog(mapRef.getTopLeftCorner()); break;
         case USE_TERMINAL: useTerminal(); break;
-        case EXAMINE_TERMINAL: examineTerminal(); break;
+        case EXAMINE_TERMINAL: examineTerminal(touchingSet("Terminal").one() as Terminal); break;
         default: trace("o krap"); break;
       }
     }
