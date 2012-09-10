@@ -436,7 +436,11 @@ package {
         if (t.notDead()) {
           new DialogText(C.unpoweredTerminal);
         } else {
-          new DialogText(C.usedTerminal);
+          if (t.wasCrushed()) {
+            new DialogText(C.crushedTerminal);
+          } else {
+            new DialogText(C.usedTerminal);
+          }
         }
       }
     }

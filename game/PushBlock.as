@@ -55,8 +55,7 @@ package {
             didSomething = true;
           }
 
-          t.activate();
-          t.useGate();
+          t.crush();
         }
 
         if (didSomething) {

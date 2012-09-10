@@ -4,6 +4,7 @@ package {
     private const SIZE:int = C.size;
     private var _isActivated:Boolean = false;
     private var totallyDead:Boolean = false;
+    private var crushed:Boolean = false;
 
     public function get isActivated():Boolean {
     	return _isActivated;
@@ -24,13 +25,26 @@ package {
 	    }
     }
 
+    public function crush():void {
+        activate();
+        useGate();
+
+        crushed = true;
+    }
+
     public function useGate():void {
     	setTile(3, 3);
+
+        isActivated = false;
     	totallyDead = true;
 
         for each (var gate:Entity in Fathom.entities.get("Gate")) {
             gate.destroy();
         }
+    }
+
+    public function wasCrushed():Boolean {
+        return crushed;
     }
 
     public function notDead():Boolean {

@@ -65,6 +65,11 @@ package {
                                                , "YOU I hope no one drops a crate on it."
                                                ];
 
+  public static var crushedTerminal:Array       = [ "YOU Some jerk crushed this poor, innocent ter..."
+                                                  , "YOU Wait, that was me."
+                                                  , "YOU derp."
+                                                  ];
+
   public static var usedTerminal:Array       = [ "YOU I already used this terminal."
                                                ];
 
