@@ -205,9 +205,7 @@ package {
     }
 
     private function pushBlocks():void {
-      for each (var blox:PushBlock in touchingSet("PushBlock")) {
-        trace("setting!");
-
+      for each (var blox:PushBlock in xColl.get("PushBlock")) {
         blox.vel.x = vel.x;
       }
     }
