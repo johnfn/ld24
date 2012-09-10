@@ -28,11 +28,9 @@ package {
     	setTile(3, 3);
     	totallyDead = true;
 
-    	var gates:EntitySet = Fathom.entities.get("Gate");
-
-    	for (var i:int = 0; i < gates.length; i++) {
-    		gates[i].destroy();
-    	}
+        for each (var gate:Entity in Fathom.entities.get("Gate")) {
+            gate.destroy();
+        }
     }
 
     public function notDead():Boolean {
