@@ -327,8 +327,19 @@ package {
     }
 
     private function freezeBlocks():void {
+      var froze:Boolean = false;
+
+      trace("freezing!");
+
       for each (var e:Block in touchingSet("Block")) {
-        e.freezeOver();
+        if (!e.frozen()) {
+          e.freezeOver();
+          froze = true;
+        }
+      }
+
+      if (froze) {
+        C.iceSound.play();
       }
     }
 
@@ -397,12 +408,12 @@ package {
       if (mapRef.getTopLeftCorner().equals(new Vec(3 * 25, 1 * 25))) {
         if (isTouching("Terminal")) {
           if (!energizedTheProfsComp) {
-            var gates:EntitySet = Fathom.entities.get("Gate");
 
-            for (i = 0; i < gates.length; i++) {
-              gates[i].destroy();
+            for each (var g:Gate in Fathom.entities.get("Gate")) {
+              g.destroy();
             }
 
+            C.energySound.play();
             new DialogText(["That did something!", "It seems about halfway there. It needs something else though!", "Looks like it got rid of some locks.", "And there's a crate up there, not that that could be helpful in any way."]);
 
             energizedTheProfsComp = true;
@@ -419,6 +430,7 @@ package {
       }
 
       if (used) {
+        C.energySound.play();
         new DialogText(["The terminal turned on!"]);
       }
     }
@@ -486,13 +498,19 @@ package {
 
     private function doSmash():void {
       var blox:EntitySet = Fathom.entities.get("SmashBlock");
+      var destroyed:Boolean = false;
 
       for (var i:int = 0; i < blox.length; i++) {
         var dist:int = Math.abs(blox[i].x - this.x) + Math.abs(blox[i].y - this.y);
 
-         if (dist < 40) {
+        if (dist < 40) {
           blox[i].destroy();
-         }
+          destroyed = true;
+        }
+      }
+
+      if (destroyed) {
+        C.smashSound.play();
       }
     }
 

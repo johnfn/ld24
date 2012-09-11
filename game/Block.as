@@ -11,8 +11,8 @@ package {
     }
 
     public function freezeOver():void {
-    	if (!isFrozen && spritesheet[1] == 1) {
-	    	setTile(spritesheet[0], spritesheet[1] + 3);
+    	if (!isFrozen && spriteY == 1) {
+	    	setTile(spriteX, spriteY + 3);
 	    	isFrozen = true;
 	    }
     }

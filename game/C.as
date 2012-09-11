@@ -26,15 +26,21 @@ package {
 
     // Sounds.
 
-    [Embed(source = "../data/Hit_Hurt.mp3")] static public var HitSndClass:Class;
-    [Embed(source = "../data/Jump.mp3")] static public var JumpSndClass:Class;
-    [Embed(source = "../data/Laser_Shoot6.mp3")] static public var ShootSndClass:Class;
-    [Embed(source = "../data/Powerup.mp3")] static public var ItemSndClass:Class;
+    [Embed(source = "../data/Hit_Hurt.mp3")] static private var HitSndClass:Class;
+    [Embed(source = "../data/Jump.mp3")] static private var JumpSndClass:Class;
+    [Embed(source = "../data/Laser_Shoot6.mp3")] static private var ShootSndClass:Class;
+    [Embed(source = "../data/Powerup.mp3")] static private var ItemSndClass:Class;
+    [Embed(source = "../data/Ice.mp3")] static private var IceSndClass:Class;
+    [Embed(source = "../data/UseTerminal.mp3")] static private var EnergySndClass:Class;
+    [Embed(source = "../data/Smash.mp3")] static private var SmashSndClass:Class;
 
-    public static var hitSound:Sound     = new HitSndClass();
-    public static var jumpSound:Sound    = new JumpSndClass();
-    public static var shootSound:Sound   = new ShootSndClass();
-    public static var powerupSound:Sound = new ItemSndClass();
+    public static var hitSound:Sound       = new HitSndClass();
+    public static var jumpSound:Sound      = new JumpSndClass();
+    public static var shootSound:Sound     = new ShootSndClass();
+    public static var powerupSound:Sound   = new ItemSndClass();
+    public static var iceSound:Sound       = new IceSndClass();
+    public static var energySound:Sound    = new EnergySndClass();
+    public static var smashSound:Sound     = new SmashSndClass();
 
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.
