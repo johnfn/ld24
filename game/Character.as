@@ -238,7 +238,7 @@ package {
       raiseToTop();
       landSnd();
 
-      vel.x = Util.movementVector().x * 8;
+      vel.x = Util.movementVector().x * 5;
 
       if (touchingBottom || touchingTop) {
         vel.y = 0;
