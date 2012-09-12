@@ -32,6 +32,7 @@ package {
     private var usedDblJump:Boolean = false;
 
     private var lastOnGround:int = 0;
+    private var facingDirection:int = 1;
 
     public var currentAction:int = NOTHING;
 
@@ -273,6 +274,9 @@ package {
 
       face(Util.movementVector().x);
 
+      var val:int = Util.sign(Util.movementVector().x);
+      facingDirection = (val == 0 ? facingDirection : val);
+
       Hooks.onLeaveMap(this, mapRef, leftMap);
 
       if (Util.KeyJustDown.Z) {
@@ -484,12 +488,10 @@ package {
     // Not the harry potter item.
     private function fireBolt():void {
       var b:Bolt = new Bolt();
-      var dir:int = scaleX * -1;
 
       b.loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(4, 4));
-      b.setPos(new Vec(-25 * dir, -5));
-      b.vel = new Vec(-9 * dir, 0);
-      addChild(b);
+      b.setPos(this.vec().add(new Vec(25 * facingDirection, -5)));
+      b.vel = new Vec(9 * facingDirection, 0);
 
       C.shootSound.play();
     }
