@@ -76,6 +76,14 @@ package {
             xText.visible = true;
             xButton.visible = true;
         }
+
+        if (zText.text == "Nothing") {
+            zText.visible = false;
+            zButton.visible = false;
+        } else {
+            zText.visible = true;
+            zButton.visible = true;
+        }
     }
 
     override public function get depth():int {

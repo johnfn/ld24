@@ -540,5 +540,7 @@ package {
       Hooks.loadNewMap(this, mapRef)();
       Fathom.camera.snapTo(this);
     }
+
+    override public function modes():Array { return [0]; }
   }
 }
