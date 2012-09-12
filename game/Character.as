@@ -260,7 +260,7 @@ package {
       //  vel.y = 0;
       //}
 
-      if (vel.y < 0 && !(Util.KeyDown.X) || Util.KeyDown.Z) {
+      if (vel.y < 0 && !(Util.KeyDown.X || Util.KeyDown.Z)) {
         vel.y = 0;
       }
 
