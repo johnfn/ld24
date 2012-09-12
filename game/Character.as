@@ -265,7 +265,7 @@ package {
 
       vel.y += GRAVITY;
 
-      if (hasJumper && Util.KeyDown.X && touchingBottom && vel.y > -5 && !isTouching("Telephone")) {
+      if (hasJumper && Util.KeyJustDown.X && touchingBottom && vel.y > -5 && !isTouching("Telephone")) {
         vel.y -= 15;
         C.jumpSound.play();
         usedDblJump = false;
