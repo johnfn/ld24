@@ -42,6 +42,10 @@ package {
     public static var energySound:Sound    = new EnergySndClass();
     public static var smashSound:Sound     = new SmashSndClass();
 
+    // Physics.
+
+    public static var GRAVITY:int = 1;
+
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.
     public static var MODE_INVENTORY:int = 1;
@@ -52,6 +56,8 @@ package {
 				                           , "YOU But I don't know how to use them."
 				                           , "YOU I'll hold onto it just in case."];*/
 
+
+  // Dialog
 
   public static var whosComp:Array = [ "YOU A terminal. It looks broken."]
   public static var profsComp:Array = [ "YOU The Professor's own terminal. It looks broken."]

@@ -112,7 +112,7 @@ package {
       Fathom.mapRef = m;
 
       var i:Inventory = new Inventory();
-      var c:Character = new Character(5 * 25 + 2, 5 * 25, m, i);
+      var c:Character = new Character(15 * 25 + 2, 3 * 25, m, i);
                         new HUD(c);
 
       main.c = c;

@@ -37,7 +37,11 @@ package {
 
     override public function update(e:EntitySet):void {
       this.vel.x *= 0.9;
-      this.vel.y = 4;
+      this.vel.y += C.GRAVITY;
+
+      if (touchingBottom) {
+        this.vel.y = 0;
+      }
 
       if (Math.abs(this.vel.x) < 0.1) this.vel.x = 0;
 

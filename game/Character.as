@@ -5,8 +5,6 @@ package {
   import flash.display.Shape;
 
   public class Character extends MovingEntity {
-    public static var GRAVITY:int = 1;
-
     private var mapRef:Map;
     private var inventory:Inventory;
 
@@ -39,7 +37,10 @@ package {
     function Character(x:int, y:int, mapRef:Map, i:Inventory) {
       super(x, y, C.size, C.size);
       loadSpritesheet(C.CharacterClass, C.dim, new Vec(0, 0));
-      //setRotationOrigin(width / 2, 0);
+
+      animations.addAnimations({
+        "walk": { startPos: [0, 0], numFrames: 4 }
+      });
 
       this.mapRef = mapRef;
 
@@ -232,6 +233,8 @@ package {
     }
 
     override public function update(e:EntitySet):void {
+      super.update(e);
+
       setCameraFocus();
       setXAction();
       killEasterEggs();
@@ -255,16 +258,19 @@ package {
         C.hitSound.play();
       }
 
-      // Stopped holding up?
-      //if (vel.y < 0 && Util.movementVector().y >= 0) {
-      //  vel.y = 0;
-      //}
+      setTile(1, 1);
+
+      /*if (vel.x != 0) {
+        animations.setAnimation("walk");
+      } else {
+        animations.setAnimation("default");
+      }*/
 
       if (vel.y < 0 && !(Util.KeyDown.X || Util.KeyDown.Z)) {
         vel.y = 0;
       }
 
-      vel.y += GRAVITY;
+      vel.y += C.GRAVITY;
 
       if (hasJumper && Util.KeyJustDown.X && touchingBottom && vel.y > -5 && !isTouching("Telephone")) {
         vel.y -= 15;
