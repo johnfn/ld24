@@ -130,20 +130,20 @@ package {
         return;
       }
 
-      if (Util.keyRecentlyDown(Util.Key.X)) {
+      if (Util.KeyJustDown.X) {
         setActivated(false);
         return;
       }
 
       // Rotate selection.
-      if (Util.keyRecentlyDown(Util.Key.Right) || Util.keyRecentlyDown(Util.Key.Left)) {
+      if (Util.KeyJustDown.Right || Util.KeyJustDown.Left) {
         items[selection].deselect();
 
-        if (Util.keyRecentlyDown(Util.Key.Right)) {
+        if (Util.KeyJustDown.Right) {
           selection = (selection + 1) % items.length;
         }
 
-        if (Util.keyRecentlyDown(Util.Key.Left)) {
+        if (Util.KeyJustDown.Left) {
           if (selection == 0) {
             selection = items.length - 1;
           } else {
@@ -154,7 +154,7 @@ package {
         items[selection].select();
       }
 
-      if (Util.keyRecentlyDown(Util.Key.Z)) {
+      if (Util.KeyJustDown.Z) {
         if (items[selection].activated == true || (items[selection].activated == false && activated < activated_max)) {
           items[selection].toggleActivation();
 

@@ -259,13 +259,13 @@ package {
       //  vel.y = 0;
       //}
 
-      if (vel.y < 0 && !(Util.keyIsDown(Util.Key.X) || Util.keyIsDown(Util.Key.Z))) {
+      if (vel.y < 0 && !(Util.KeyDown.X) || Util.KeyDown.Z) {
         vel.y = 0;
       }
 
       vel.y += GRAVITY;
 
-      if (hasJumper && Util.keyIsDown(Util.Key.X) && touchingBottom && vel.y > -5 && !isTouching("Telephone")) {
+      if (hasJumper && Util.KeyDown.X && touchingBottom && vel.y > -5 && !isTouching("Telephone")) {
         vel.y -= 15;
         C.jumpSound.play();
         usedDblJump = false;
@@ -275,11 +275,11 @@ package {
 
       Hooks.onLeaveMap(this, mapRef, leftMap);
 
-      if (Util.keyRecentlyDown(Util.Key.Z)) {
+      if (Util.KeyJustDown.Z) {
         doAction();
       }
 
-      if (Util.keyIsDown(Util.Key.Z)) {
+      if (Util.KeyDown.Z) {
         checkHoldActions();
       }
 
@@ -301,9 +301,9 @@ package {
     private function checkToggleInventory():void {
       var hasAccess:Boolean = false;
 
-      if (Util.keyRecentlyDown(Util.Key.X) || (Util.keyRecentlyDown(Util.Key.C) && C.DEBUG)) {
+      if (Util.KeyJustDown.X || (Util.KeyJustDown.C && C.DEBUG)) {
 
-        hasAccess = hasAccess || (C.DEBUG && Util.keyRecentlyDown(Util.Key.C));
+        hasAccess = hasAccess || (C.DEBUG && Util.KeyJustDown.C);
 
         if (isTouching("Telephone")) {
           if (canEvol) {
@@ -328,8 +328,6 @@ package {
 
     private function freezeBlocks():void {
       var froze:Boolean = false;
-
-      trace("freezing!");
 
       for each (var e:Block in touchingSet("Block")) {
         if (!e.frozen()) {
@@ -489,7 +487,7 @@ package {
       var dir:int = scaleX * -1;
 
       b.loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(4, 4));
-      b.setPos(this).add(new Vec(-25 * dir, -5));
+      b.setPos(new Vec(-25 * dir, -5));
       b.vel = new Vec(-9 * dir, 0);
       addChild(b);
 

@@ -78,7 +78,7 @@ package {
     }
 
     override public function update(e:EntitySet):void {
-      if (Util.keyRecentlyDown(Util.Key.Z)) {
+      if (Util.KeyJustDown.Z) {
         if (dialogsLeft.length == 0) {
           this.destroy();
 
