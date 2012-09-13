@@ -258,13 +258,11 @@ package {
         C.hitSound.play();
       }
 
-      setTile(1, 1);
-
-      /*if (vel.x != 0) {
-        animations.setAnimation("walk");
+      if (vel.x != 0) {
+        animations.play("walk");
       } else {
-        animations.setAnimation("default");
-      }*/
+        animations.play("default");
+      }
 
       if (vel.y < 0 && !(Util.KeyDown.X || Util.KeyDown.Z)) {
         vel.y = 0;
@@ -418,7 +416,7 @@ package {
           if (!energizedTheProfsComp) {
 
             for each (var g:Gate in Fathom.entities.get("Gate")) {
-              g.destroy();
+              g.open();
             }
 
             C.energySound.play();

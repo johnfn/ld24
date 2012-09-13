@@ -38,8 +38,8 @@ package {
         isActivated = false;
     	totallyDead = true;
 
-        for each (var gate:Entity in Fathom.entities.get("Gate")) {
-            gate.destroy();
+        for each (var gate:Gate in Fathom.entities.get("Gate")) {
+            gate.open();
         }
     }
 
