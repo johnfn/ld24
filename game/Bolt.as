@@ -15,7 +15,7 @@ package {
 
     override public function update(e:EntitySet):void {
     	if (isBlocked()) {
-    		this.destroy();
+    		//this.destroy();
     	}
 
       for each (var t:Terminal in touchingSet("Terminal")) {

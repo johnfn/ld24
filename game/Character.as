@@ -48,6 +48,8 @@ package {
       this.height -= 2;
 
       this.inventory = i;
+
+      //var p:Particles = new Particles(C.ParticleClass);
     }
 
     public function getEvolutions():Array {
@@ -255,6 +257,8 @@ package {
       }
 
       if (touchingTop) {
+        new Particles(C.ParticleClass).spawnAt(this.x, this.y, this.width, 2).withVelY(-.1, -2).withLifetime(10, 20).thatFlicker().spawnParticles(3).andThenStop();
+
         C.hitSound.play();
       }
 
@@ -270,7 +274,7 @@ package {
 
       vel.y += C.GRAVITY;
 
-      if (hasJumper && Util.KeyJustDown.X && touchingBottom && vel.y > -5 && !isTouching("Telephone")) {
+      if (hasJumper && Util.KeyDown.X && touchingBottom && vel.y > -5 && !isTouching("Telephone")) {
         vel.y -= 15;
         C.jumpSound.play();
         usedDblJump = false;
@@ -490,14 +494,16 @@ package {
     }
 
     // Not the harry potter item.
-    private function fireBolt():void {
+    public function fireBolt():void {
       var b:Bolt = new Bolt();
 
       b.loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(4, 4));
       b.setPos(this.vec().add(new Vec(25 * facingDirection, -5)));
       b.vel = new Vec(9 * facingDirection, 0);
 
-      C.shootSound.play();
+      if (!C.DEBUG) {
+        C.shootSound.play();
+      }
     }
 
     private function doSmash():void {

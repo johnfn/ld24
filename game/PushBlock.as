@@ -3,6 +3,7 @@ package {
     private var type:int;
     private const SIZE:int = C.size;
     private var startingLoc:Vec;
+    private var lastOnGround:int = 0;
 
     private static var crushedConsole:Boolean = false;
 
@@ -35,9 +36,23 @@ package {
       return super.groups().concat("remember-loc");
     }
 
+    private function landSnd():void {
+      if (touchingBottom) {
+        if (lastOnGround > 5) {
+          C.hitSound.play();
+        }
+
+        lastOnGround = 0;
+      } else {
+        lastOnGround++;
+      }
+    }
+
     override public function update(e:EntitySet):void {
       this.vel.x *= 0.9;
       this.vel.y += C.GRAVITY;
+
+      landSnd();
 
       if (touchingBottom) {
         this.vel.y = 0;

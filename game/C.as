@@ -24,6 +24,8 @@ package {
     [Embed(source = "../data/bg.png")] static public var BGClass1:Class;
     [Embed(source = "../data/bgstars.png")] static public var BGClass2:Class;
 
+    [Embed(source = "../data/particle.png")] static public var ParticleClass:Class;
+
     // Sounds.
 
     [Embed(source = "../data/Hit_Hurt.mp3")] static private var HitSndClass:Class;
