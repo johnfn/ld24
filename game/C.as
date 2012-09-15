@@ -64,9 +64,13 @@ package {
   public static var whosComp:Array = [ "YOU A terminal. It looks broken."]
   public static var profsComp:Array = [ "YOU The Professor's own terminal. It looks broken."]
 
-	public static var firstIceEv:Array =   [ "YOU Hmm, this card looks like ice."
-    	    		                           , "YOU I wonder what it does?"
-      				                           , "YOU Too bad the prof isn't nearby."
+	public static var firstIceEv:Array =   [ "YOU Hmm, it's a card."
+                                         , "YOU It has an inscription of ice on it."
+                                         , "YOU ..."
+                                         , "YOU Why would someone put a card in a treasure chest?"
+                                         , "YOU ..."
+                                         , "YOU I'm sure it has no relevance at all to the task at hand."
+      				                           , "YOU But the prof could probably tell me more."
       				                           ];
 
   public static var eggy:Array = [ "ZILLA Wow, you found it!"

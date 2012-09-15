@@ -199,10 +199,10 @@ package {
 
     private function setCameraFocus():void {
       var focus:Vec = this.rect();
-      if (this.scaleX > 0) {
-        focus.x += 50;
+      if (facing > 0) {
+        focus.x += 100;
       } else {
-        focus.x -= 50;
+        focus.x -= 100;
       }
 
       Fathom.camera.follow(focus);
