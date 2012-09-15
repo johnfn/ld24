@@ -39,6 +39,10 @@ package {
     private function landSnd():void {
       if (touchingBottom) {
         if (lastOnGround > 5) {
+          new Particles(C.CloudParticleClass).spawnAt(this.x, this.y + this.height, this.width, 2)
+          .withVelY(-.1, -2).withLifetime(10, 20).thatFade().withScale(2)
+          .spawnParticles(9).andThenStop();
+
           C.hitSound.play();
         }
 
@@ -49,6 +53,10 @@ package {
     }
 
     override public function update(e:EntitySet):void {
+      super.update(e);
+
+      this.scaleX = 0.5;
+
       this.vel.x *= 0.9;
       this.vel.y += C.GRAVITY;
 

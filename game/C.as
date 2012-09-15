@@ -25,6 +25,7 @@ package {
     [Embed(source = "../data/bgstars.png")] static public var BGClass2:Class;
 
     [Embed(source = "../data/particle.png")] static public var ParticleClass:Class;
+    [Embed(source = "../data/cloud-particle.png")] static public var CloudParticleClass:Class;
 
     // Sounds.
 
@@ -110,11 +111,11 @@ package {
                                          , "YOU This was hidden behind a console machine I needed to turn on."
                                          , "YOU How did they get it back there in the first place??"
                                          , "YOU I"
-                                         , "YOU N"
-                                         , "YOU C"
-                                         , "YOU E"
-                                         , "YOU P"
-                                         , "YOU T"
+                                         , "YOU I N"
+                                         , "YOU I N C"
+                                         , "YOU I N C E"
+                                         , "YOU I N C E P"
+                                         , "YOU I N C E P T"
                                          , "YOU Wait this is stupid."]
 
     public static var firstAirEv:Array = [ "YOU Hey, an Air card!"
