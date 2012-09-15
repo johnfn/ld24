@@ -9,4 +9,4 @@ MAIN = game/main.as
 SWF = main.swf
 
 $(SWF) : ./**/*.as
-	$(MXMLC) -source-path=game/ -static-link-runtime-shared-libraries=true -debug=true -sp $(TWEENER) $(FATHOM) -o $(SWF) -- $(MAIN)
+	$(MXMLC) -source-path=game/ -static-link-runtime-shared-libraries=true -debug=true -sp . $(FATHOM) -o $(SWF) -- $(MAIN)

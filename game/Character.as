@@ -227,7 +227,7 @@ package {
         if (lastOnGround > 5) {
           C.hitSound.play();
 
-          new Particles(C.CloudParticleClass).spawnAt(this.x, this.y + this.height, this.width, 2)
+          new Particles(C.CloudParticleClass).spawnAt(this.x, this.y + this.height - 5, this.width, 5)
           .withVelY(-.1, -1).withLifetime(10, 20).thatFade().withScale(2)
           .spawnParticles(9).andThenStop();
 

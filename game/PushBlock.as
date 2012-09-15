@@ -1,4 +1,6 @@
 package {
+  import caurina.transitions.*;
+
   public class PushBlock extends MovingEntity {
     private var type:int;
     private const SIZE:int = C.size;
@@ -43,6 +45,10 @@ package {
           .withVelY(-.1, -2).withLifetime(10, 20).thatFade().withScale(2)
           .spawnParticles(9).andThenStop();
 
+
+          this.scaleX = 1.2;
+          Tweener.addTween(this, {scaleX: 1.0, time:0.5});
+
           C.hitSound.play();
         }
 
@@ -54,8 +60,6 @@ package {
 
     override public function update(e:EntitySet):void {
       super.update(e);
-
-      this.scaleX = 0.5;
 
       this.vel.x *= 0.9;
       this.vel.y += C.GRAVITY;
