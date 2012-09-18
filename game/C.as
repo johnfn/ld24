@@ -36,6 +36,7 @@ package {
     [Embed(source = "../data/Ice.mp3")] static private var IceSndClass:Class;
     [Embed(source = "../data/UseTerminal.mp3")] static private var EnergySndClass:Class;
     [Embed(source = "../data/Smash.mp3")] static private var SmashSndClass:Class;
+    [Embed(source = "../data/Boulder Push.mp3")] static private var BoulderPushSndClass:Class;
 
     public static var hitSound:Sound       = new HitSndClass();
     public static var jumpSound:Sound      = new JumpSndClass();
@@ -44,10 +45,11 @@ package {
     public static var iceSound:Sound       = new IceSndClass();
     public static var energySound:Sound    = new EnergySndClass();
     public static var smashSound:Sound     = new SmashSndClass();
+    public static var pushSound:Sound      = new BoulderPushSndClass();
 
     // Physics.
 
-    public static var GRAVITY:int = 1;
+    public static var GRAVITY:Number = 1;
 
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.

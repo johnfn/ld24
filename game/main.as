@@ -109,6 +109,8 @@ package {
         (new Color(102, 102, 102).toString()) : { type: AlmostStatic, gfx: C.SpritesheetClass, spritesheet: new Vec(6, 4), fixedSize: true }
       }).loadNewMap(new Vec(6, 1));
 
+      Fathom._camera.beBoundedBy(m);
+
       Fathom.mapRef = m;
 
       var i:Inventory = new Inventory();
@@ -116,8 +118,6 @@ package {
                         new HUD(c);
 
       main.c = c;
-
-      Fathom._camera = new Camera(stage).scaleBy(1).beBoundedBy(m).setEaseSpeed(3);
 
       Fathom.start();
     }

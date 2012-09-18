@@ -19,7 +19,8 @@ package {
       super(0, 0, 50, 50);
       loadSpritesheet(DialogClass);
 
-      profPic = new Entity().loadSpritesheet(PortraitsClass, C.dim, new Vec(2, 0));
+      profPic = new Entity()
+      profPic.loadSpritesheet(PortraitsClass, C.dim, new Vec(2, 0));
 
       visible = true;
 
@@ -87,10 +88,6 @@ package {
           nextDialog();
         }
       }
-    }
-
-    override public function get depth():int {
-      return 300;
     }
 
     // Should be active in all modes.

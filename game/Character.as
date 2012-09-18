@@ -229,7 +229,7 @@ package {
 
           new Particles(C.CloudParticleClass).spawnAt(this.x, this.y + this.height - 5, this.width, 5)
           .withVelY(-.1, -1).withLifetime(10, 20).thatFade().withScale(2)
-          .spawnParticles(9).andThenStop();
+          .animateFromSpritesheet().spawnParticles(9).andThenStop();
 
         }
 
@@ -239,6 +239,15 @@ package {
       }
     }
 
+    private function movement():void {
+      vel.x = Util.movementVector().x * 5;
+
+      if (touchingBottom || touchingTop) {
+        vel.y = 0;
+      }
+
+    }
+
     override public function update(e:EntitySet):void {
       super.update(e);
 
@@ -246,16 +255,11 @@ package {
       setXAction();
       killEasterEggs();
 
-      raiseToTop();
       landSnd();
 
-      vel.x = Util.movementVector().x * 5;
-
-      if (touchingBottom || touchingTop) {
-        vel.y = 0;
-      }
-
       pushBlocks();
+
+      movement();
 
       if (touchingBottom) {
         flyingPower = 60;

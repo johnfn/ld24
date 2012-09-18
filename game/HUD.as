@@ -13,7 +13,8 @@ package {
     function HUD(c:Character) {
     	super(0, 0, 25, 25);
 
-        zButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(5, 3));
+        zButton = new Entity();
+        zButton.loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(5, 3));
         zButton.setPos(new Vec(10, 40));
         zButton.addGroups("no-camera", "non-blocking");
 
@@ -24,7 +25,8 @@ package {
 
     	this.c = c;
 
-        xButton = new Entity().loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(8, 3));
+        xButton = new Entity()
+        xButton.loadSpritesheet(C.SpritesheetClass, C.dim, new Vec(8, 3));
         xButton.setPos(new Vec(10, 10));
         xButton.addGroups("no-camera", "non-blocking");
 
