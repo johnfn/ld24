@@ -19,6 +19,7 @@ package {
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
 
     [Embed(source = "../data/Character.png")] static public var CharacterClass:Class;
+    [Embed(source = "../data/professor.png")] static public var ProfessorClass:Class;
     [Embed(source = "../data/ROAR.png")] static public var EndGameClass:Class;
 
     [Embed(source = "../data/bg2.png")] static public var BGClass1:Class;
