@@ -21,7 +21,7 @@ package {
     [Embed(source = "../data/Character.png")] static public var CharacterClass:Class;
     [Embed(source = "../data/ROAR.png")] static public var EndGameClass:Class;
 
-    [Embed(source = "../data/bg.png")] static public var BGClass1:Class;
+    [Embed(source = "../data/bg2.png")] static public var BGClass1:Class;
     [Embed(source = "../data/bgstars.png")] static public var BGClass2:Class;
 
     [Embed(source = "../data/particle.png")] static public var ParticleClass:Class;

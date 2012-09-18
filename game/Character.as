@@ -38,8 +38,8 @@ package {
       super(x, y, C.size, C.size);
       loadSpritesheet(C.CharacterClass, C.dim, new Vec(0, 0));
 
-      animations.addAnimations({
-        "walk": { startPos: [0, 0], numFrames: 4 }
+      animations.addAnimations({ "walk": { startPos: [0, 0], numFrames: 4 }
+                               , "idle": { startPos: [0, 1], numFrames: 5 }
       });
 
       this.mapRef = mapRef;
@@ -48,8 +48,6 @@ package {
       this.height -= 2;
 
       this.inventory = i;
-
-      //var p:Particles = new Particles(C.ParticleClass);
     }
 
     public function getEvolutions():Array {
@@ -288,7 +286,7 @@ package {
       if (vel.x != 0) {
         animations.play("walk");
       } else {
-        animations.play("default");
+        animations.play("idle");
       }
 
       if (vel.y < 0 && !(Util.KeyDown.X || Util.KeyDown.Z)) {
