@@ -213,13 +213,13 @@ package {
     private function pushBlocks():void {
       var pushed:Boolean = false;
 
+      lastPlayed++;
+
       for each (var blox:PushBlock in xColl.get("PushBlock")) {
         blox.vel.x = vel.x;
 
         pushed = true;
       }
-
-      lastPlayed++;
 
       if (pushed && lastPlayed > 30) {
         C.pushSound.play();

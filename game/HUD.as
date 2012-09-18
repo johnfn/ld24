@@ -36,9 +36,10 @@ package {
         xText.color = 0xffffff;
 
         arrowKeys = new Text("Arrow keys to cycle back/forth.", C.fontName);
-        arrowKeys.centerOnScreen();
-        arrowKeys.y = 300;
+        arrowKeys.setPos(new Vec(40, 70));
         arrowKeys.color = 0xffffff;
+
+        arrowKeys.x -= 20;
 
         addChild(arrowKeys);
         addChild(zText);
