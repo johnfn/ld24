@@ -97,6 +97,7 @@ package {
 
       m = new Map(25, 25, C.size).fromImage(MapClass, {
         (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesheetClass, spritesheet: new Vec(1, 2), fixedSize: true, roundOutEdges: true },
+        (new Color(200, 100, 0).toString()) : { type: BGBlock, gfx: C.SpritesheetClass, spritesheet: new Vec(1, 7), fixedSize: true, roundOutEdges: true },
         (new Color(0, 0, 255).toString()) : { type: Treasure, gfx: C.SpritesheetClass, spritesheet: new Vec(2, 0), fixedSize: true },
         (new Color(0, 255, 0).toString()) : { type: Professor, gfx: C.ProfessorClass, spritesheet: new Vec(0, 0), fixedSize: true },
         (new Color(255, 0, 0).toString()) : { type: PushBlock, gfx: C.SpritesheetClass, spritesheet: new Vec(0, 5), fixedSize: true },
