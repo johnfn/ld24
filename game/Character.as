@@ -38,8 +38,8 @@ package {
       super(x, y, C.size, C.size);
       loadSpritesheet(C.CharacterClass, C.dim, new Vec(0, 0));
 
-      animations.addAnimations({ "walk": { startPos: [0, 0], numFrames: 4 }
-                               , "idle": { startPos: [0, 1], numFrames: 5 }
+      animations.addAnimations({ "walk": { startPos: [0, 0], numFrames: 7 }
+                               , "idle": { startPos: [0, 0], numFrames: 1 }
       });
 
       this.mapRef = mapRef;
@@ -240,7 +240,7 @@ package {
           C.hitSound.play();
 
           new Particles(C.CloudParticleClass).spawnAt(this.x, this.y + this.height - 5, this.width, 5)
-          .withVelY(-.1, -1).withLifetime(10, 20).thatFade().withScale(2)
+          .withVelY(-.1, -1).withScale(2)
           .animateFromSpritesheet().spawnParticles(9).andThenStop();
 
         }
@@ -252,7 +252,32 @@ package {
     }
 
     private function movement():void {
-      vel.x = Util.movementVector().x * 5;
+      var mv:int = Util.movementVector().x;
+      var accel:int = 1;
+
+      if (touchingBottom) {
+        if (mv > 0 && vel.x < 0) {
+          vel.x = 0;
+        } else if (mv > 0 && vel.x >= 0) {
+          vel.x += accel;
+
+          if (vel.x > 5) vel.x = 5;
+        } else if (mv < 0 && vel.x > 0) {
+          vel.x = 0;
+        } else if (mv < 0 && vel.x <= 0) {
+          vel.x -= accel;
+
+          if (vel.x < -5) vel.x = -5;
+        } else {
+          vel.x -= Util.sign(vel.x);
+        }
+      } else {
+        if (mv != 0) {
+          vel.x = mv * 5;
+        } else {
+          vel.x -= Util.sign(vel.x) * 0.3;
+        }
+      }
 
       if (touchingBottom || touchingTop) {
         vel.y = 0;
@@ -296,7 +321,7 @@ package {
       vel.y += C.GRAVITY;
 
       if (hasJumper && Util.KeyDown.X && touchingBottom && vel.y > -5 && !isTouching("Telephone")) {
-        vel.y -= 15;
+        vel.y -= 10;
         C.jumpSound.play();
         usedDblJump = false;
       }

@@ -18,7 +18,7 @@ package {
     // Graphics.
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
 
-    [Embed(source = "../data/Character.png")] static public var CharacterClass:Class;
+    [Embed(source = "../data/character2.png")] static public var CharacterClass:Class;
     [Embed(source = "../data/professor.png")] static public var ProfessorClass:Class;
     [Embed(source = "../data/ROAR.png")] static public var EndGameClass:Class;
 
@@ -50,7 +50,7 @@ package {
 
     // Physics.
 
-    public static var GRAVITY:Number = 1;
+    public static var GRAVITY:Number = 0.4;
 
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.
