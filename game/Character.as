@@ -1,3 +1,4 @@
+
 package {
   import Util;
   import flash.events.Event;
@@ -41,6 +42,8 @@ package {
       animations.addAnimations({ "walk": { startPos: [0, 0], numFrames: 7 }
                                , "idle": { startPos: [0, 0], numFrames: 1 }
       });
+
+      animations.ticksPerFrame = 3;
 
       this.mapRef = mapRef;
 
@@ -253,23 +256,20 @@ package {
 
     private function movement():void {
       var mv:int = Util.movementVector().x;
-      var accel:int = 1;
+      var accel:Number = 1;
 
       if (touchingBottom) {
-        if (mv > 0 && vel.x < 0) {
-          vel.x = 0;
-        } else if (mv > 0 && vel.x >= 0) {
+       if (mv > 0 && vel.x >= 0) {
           vel.x += accel;
 
           if (vel.x > 5) vel.x = 5;
-        } else if (mv < 0 && vel.x > 0) {
-          vel.x = 0;
         } else if (mv < 0 && vel.x <= 0) {
           vel.x -= accel;
 
           if (vel.x < -5) vel.x = -5;
         } else {
-          vel.x -= Util.sign(vel.x);
+          if (Math.abs(vel.x) < 2) vel.x = 0;
+          vel.x -= Util.sign(vel.x) * 2;
         }
       } else {
         if (mv != 0) {
