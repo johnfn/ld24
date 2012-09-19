@@ -279,10 +279,11 @@ package {
         }
       }
 
+      if (Math.abs(vel.x) < 0.4) vel.x = 0;
+
       if (touchingBottom || touchingTop) {
         vel.y = 0;
       }
-
     }
 
     override public function update(e:EntitySet):void {
