@@ -243,8 +243,8 @@ package {
           C.hitSound.play();
 
           new Particles(C.CloudParticleClass).spawnAt(this.x, this.y + this.height - 5, this.width, 5)
-          .withVelY(-.1, -1).withScale(2)
-          .animateFromSpritesheet().spawnParticles(9).andThenStop();
+          .withVelY(-.1, -.5).withVelX(-1, 1).withScale(2)
+          .animateFromSpritesheet().spawnParticles(3).andThenStop();
 
         }
 
