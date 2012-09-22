@@ -217,7 +217,17 @@ package {
       lastPlayed++;
 
       for each (var blox:PushBlock in xColl.get("PushBlock")) {
-        blox.vel.x = vel.x;
+        var canPush:Boolean = false;
+
+        for each (var b:Block in blox.touchingSet("Block")) {
+          if (b.frozen()) {
+            canPush = true;
+          }
+        }
+
+        if (canPush || !blox.touchingBottom) {
+          blox.vel.x = vel.x;
+        }
 
         pushed = true;
       }
@@ -269,11 +279,15 @@ package {
           if (vel.x < -5) vel.x = -5;
         } else {
           if (Math.abs(vel.x) < 2) vel.x = 0;
-          vel.x -= Util.sign(vel.x) * 2;
+          vel.x -= Util.sign(vel.x);
         }
       } else {
         if (mv != 0) {
-          vel.x = mv * 5;
+          vel.x += Util.sign(mv);
+
+          if (Math.abs(vel.x) > 5) {
+            vel.x = Util.bind(vel.x, -5, 5);
+          }
         } else {
           vel.x -= Util.sign(vel.x) * 0.3;
         }
@@ -388,9 +402,11 @@ package {
     private function freezeBlocks():void {
       var froze:Boolean = false;
 
-      for each (var e:Block in touchingSet("Block")) {
-        if (!e.frozen()) {
-          e.freezeOver();
+      for each (var b:Block in Fathom.entities.get("Block")) {
+        var dist:int = Math.abs(b.x - this.x) + Math.abs(b.y - this.y);
+
+        if (dist < 50 && !b.frozen()) {
+          b.freezeOver();
           froze = true;
         }
       }
@@ -557,11 +573,11 @@ package {
       var blox:EntitySet = Fathom.entities.get("SmashBlock");
       var destroyed:Boolean = false;
 
-      for (var i:int = 0; i < blox.length; i++) {
-        var dist:int = Math.abs(blox[i].x - this.x) + Math.abs(blox[i].y - this.y);
+      for each (var b:SmashBlock in blox) {
+        var dist:int = Math.abs(b.x - this.x) + Math.abs(b.y - this.y);
 
         if (dist < 40) {
-          blox[i].destroy();
+          b.destroy();
           destroyed = true;
         }
       }
@@ -575,14 +591,24 @@ package {
     private function checkHoldActions():void {
       switch (currentAction) {
         case FLY: fly(); break;
-        case JUMP: if (touchingBottom && vel.y > -5) { vel.y -= 20; C.jumpSound.play(); } break;
+        case JUMP: if (touchingBottom && vel.y > -5) { vel.y -= 13; C.jumpSound.play(); } break;
+      }
+    }
+
+    private function freezeStart():void {
+      isFreezing = !isFreezing;
+
+      if (isFreezing) {
+        main.weather.setImage(C.SnowWeatherParticleClass);
+      } else {
+        main.weather.setImage(C.WeatherParticleClass);
       }
     }
 
     private function doAction():void {
       switch(currentAction) {
         case NOTHING: trace("You do nothing!"); break;
-        case FREEZE: isFreezing = !isFreezing; break;
+        case FREEZE: freezeStart(); break;
         case JUMP: break;
         case ENERGIZE: energize(); break;
         case SMASH: doSmash(); break;
@@ -598,6 +624,8 @@ package {
     private function leftMap():void {
       Hooks.loadNewMap(this, mapRef)();
       Fathom.camera.snapTo(this);
+
+      raiseToTop();
     }
 
     override public function modes():Array { return [0]; }

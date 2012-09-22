@@ -18,6 +18,7 @@ package {
 
       super(0, 0, 50, 50);
       loadSpritesheet(DialogClass);
+      centerOnScreen();
 
       profPic = new Entity()
       profPic.loadSpritesheet(PortraitsClass, C.dim, new Vec(2, 0));
@@ -32,7 +33,9 @@ package {
 
       text = new Text("", C.fontName);
       text.setPos(new Vec(45, 8));
-      text.width = BOX_WIDTH - 40;
+      text.width = BOX_WIDTH - 60;
+
+      text.size = 14;
 
       text.color = 0xffffff;
       Fathom.pushMode(C.MODE_TEXT);
@@ -46,6 +49,8 @@ package {
 
       addChild(profPic);
       addChild(text);
+
+      trace(this.x);
     }
 
     private function nextDialog():void {
@@ -88,6 +93,8 @@ package {
           nextDialog();
         }
       }
+
+      trace(this.x);
     }
 
     // Should be active in all modes.

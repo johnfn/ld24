@@ -36,7 +36,7 @@ package {
                 itemType = Inventory.AIR;
             }
 
-            if (whichMap.equals(new Vec(25, 0))) {
+            if (whichMap.equals(new Vec(50, 0))) {
                 new DialogText(C.nothingThere);
                 setTile(3, 0);
                 gone = true;

@@ -13,8 +13,9 @@ package {
     public function freezeOver():void {
     	if (!isFrozen && spriteY == 1) {
 	    	setTile(spriteX, spriteY + 3);
-	    	isFrozen = true;
 	    }
+
+      isFrozen = true;
     }
 
     public function frozen():Boolean {

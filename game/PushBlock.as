@@ -61,6 +61,8 @@ package {
     override public function update(e:EntitySet):void {
       super.update(e);
 
+      raiseToTop();
+
       this.vel.x *= 0.9;
       this.vel.y += C.GRAVITY;
 
@@ -68,6 +70,18 @@ package {
 
       if (touchingBottom) {
         this.vel.y = 0;
+      }
+
+      var canSlide:Boolean = false;
+
+      for each (var b:Block in touchingSet("Block")) {
+        if (b.frozen()) {
+          canSlide = true;
+        }
+      }
+
+      if (!canSlide) {
+        this.vel.x = 0;
       }
 
       if (Math.abs(this.vel.x) < 0.1) this.vel.x = 0;

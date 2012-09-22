@@ -9,13 +9,15 @@ package {
 
     // Fonts.
 
-
     // embedAsCCF MUST be set to false if you want anything to show up at all.
     [Embed(source="../data/04b03.ttf", embedAsCFF="false", fontFamily="BittyFont", mimeType="application/x-font")]
     public static var fontClass:String;
     public static var fontName:String = "BittyFont";
 
     // Graphics.
+    [Embed(source = "../data/title.jpg")] static public var TitleClass:Class;
+    [Embed(source = "../data/title-2.jpg")] static public var TitleFlashClass:Class;
+
     [Embed(source = "../data/spritesheet.png")] static public var SpritesheetClass:Class;
 
     [Embed(source = "../data/character2.png")] static public var CharacterClass:Class;
@@ -24,13 +26,16 @@ package {
 
     [Embed(source = "../data/bg2.png")] static public var BGClass1:Class;
     [Embed(source = "../data/bgstars.png")] static public var BGClass2:Class;
+    [Embed(source = "../data/bgstars-overlay.png")] static public var BGClass3:Class;
 
     [Embed(source = "../data/particle.png")] static public var ParticleClass:Class;
     [Embed(source = "../data/cloud-particle.png")] static public var CloudParticleClass:Class;
+    [Embed(source = "../data/particle-yellow.png")] static public var WeatherParticleClass:Class;
+    [Embed(source = "../data/snow-particle.png")] static public var SnowWeatherParticleClass:Class;
 
     // Sounds.
 
-    [Embed(source = "../data/Hit_Hurt.mp3")] static private var HitSndClass:Class;
+    [Embed(source = "../data/Hit_Hurt.mp3")] static public var HitSndClass:Class;
     [Embed(source = "../data/Jump.mp3")] static private var JumpSndClass:Class;
     [Embed(source = "../data/Laser_Shoot6.mp3")] static private var ShootSndClass:Class;
     [Embed(source = "../data/Powerup.mp3")] static private var ItemSndClass:Class;
@@ -39,14 +44,23 @@ package {
     [Embed(source = "../data/Smash.mp3")] static private var SmashSndClass:Class;
     [Embed(source = "../data/Boulder Push.mp3")] static private var BoulderPushSndClass:Class;
 
-    public static var hitSound:Sound       = new HitSndClass();
-    public static var jumpSound:Sound      = new JumpSndClass();
-    public static var shootSound:Sound     = new ShootSndClass();
-    public static var powerupSound:Sound   = new ItemSndClass();
-    public static var iceSound:Sound       = new IceSndClass();
-    public static var energySound:Sound    = new EnergySndClass();
-    public static var smashSound:Sound     = new SmashSndClass();
-    public static var pushSound:Sound      = new BoulderPushSndClass();
+    public static var hitSound:FSound       = new FSound(HitSndClass).withVolume(0.5);
+    public static var jumpSound:FSound      = new FSound(JumpSndClass).withVolume(0.2);
+    public static var shootSound:FSound     = new FSound(ShootSndClass).withVolume(0.5);
+    public static var powerupSound:FSound   = new FSound(ItemSndClass).withVolume(0.5);
+    public static var iceSound:FSound       = new FSound(IceSndClass).withVolume(0.5);
+    public static var energySound:FSound    = new FSound(EnergySndClass).withVolume(0.5);
+    public static var smashSound:FSound     = new FSound(SmashSndClass).withVolume(0.3);
+    public static var pushSound:FSound      = new FSound(BoulderPushSndClass).withVolume(0.5);
+
+    // Music.
+
+    [Embed(source = "../data/title-soundtrack.mp3")] static private var TitleSoundtrackClass:Class;
+    [Embed(source = "../data/background.mp3")] static private var BackgroundSoundtrackClass:Class;
+
+    public static var titleMusic:FSound     = new FSound(TitleSoundtrackClass).withVolume(0.6);
+    public static var bgMusic:FSound        = new FSound(BackgroundSoundtrackClass).withVolume(0.6);
+
 
     // Physics.
 
@@ -56,6 +70,7 @@ package {
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.
     public static var MODE_INVENTORY:int = 1;
     public static var MODE_TEXT:int      = 2;
+    public static var MODE_TITLE:int     = 3;
 
     /*public static var firstAirEv:Array = [   "YOU Oh cool, an air ... evolution ... thing ..?"
 	    		                           , "YOU I heard about these on TV!"
@@ -150,7 +165,7 @@ package {
 				                           , "PROF Here, let me help you out."
 				                           , "STARZ Got the *jumper*!"
 				                           , "PROF That'll allow you to jump with the X key."
-				                           , "YOU What the heck is a X key?."
+				                           , "YOU What the heck is a X key?"
 				                           , "PROF Never mind."
 				                           , "PROF Come back if you need more help."
 				                           ];

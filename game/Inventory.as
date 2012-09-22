@@ -15,9 +15,9 @@ package {
 
     private var selection:int = 0;
     private var activated:int = 0;
-    private var activated_max:int = 2;
+    private var activated_max:int = C.DEBUG ? 2 : 1;
 
-    public var items:Array = true ? [new InventoryItem(Inventory.BOLT), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.ICE)] : [];//new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR)] ;
+    public var items:Array = C.DEBUG ? [new InventoryItem(Inventory.BOLT), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.ICE)] : [];//new InventoryItem(Inventory.AIR), new InventoryItem(Inventory.AIR)] ;
 
     function Inventory() {
       super(0, 0, 150, 50);
